@@ -1,0 +1,240 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="calculator.css" />
+    <script src="calculator.js"></script>
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+
+    <title>Ca-Mg-ATP-EGTA -TS</title>
+  </head>
+  <body onLoad="setup()" link="#0000ff" vlink="#800080">
+    <b
+      >Ca/Mg/ATP/EGTA Calculator v1 constants from Theo Schoenmakers'
+      Chelator</b
+    >
+    <form name="WMXC2">
+      <table cellpadding="2" cellspacing="2" width="700">
+        <tbody>
+          <tr>
+            <td colspan="4">
+              <input
+                name="TYPECALC"
+                value="F"
+                onClick="tftoggle()"
+                type="radio"
+                checked="checked"
+                type="radio"
+                id="free_metals"
+              />
+              <label for="free_metals">FIND FREE METAL(S) </label>
+              <input
+                name="TYPECALC"
+                type="radio"
+                value="T"
+                onClick="tftoggle()"
+                type="radio"
+                id="total_metals"
+              />
+              <label for="total_metals">FIND TOTAL METAL(S)</label>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4">
+              Temperature =
+              <input name="TM" value="37" size="5" maxlength="5" type="text" />
+              C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pH =
+              <input name="PH" value="7.0" size="5" maxlength="5" type="text" />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ionic =
+              <input
+                name="IO"
+                value="0.165"
+                size="5"
+                maxlength="5"
+                type="text"
+              />
+              N
+            </td>
+          </tr>
+          <tr>
+            <td rowspan="2" width="124">
+              THE ARRAY:<br />
+              <textarea
+                name="thearray"
+                rows="6"
+                cols="14"
+                disabled="disabled"
+              ></textarea>
+            </td>
+            <td>
+              chelators<br />
+              <input
+                name="CH1"
+                size="7"
+                maxlength="7"
+                disabled="disabled"
+                type="text"
+              />
+              <input
+                name="AC1"
+                size="10"
+                maxlength="10"
+                value="0"
+                type="text"
+              />
+              M<br />
+              <input
+                name="CH2"
+                size="7"
+                maxlength="7"
+                disabled="disabled"
+                type="text"
+              />
+              <input
+                name="AC2"
+                size="10"
+                maxlength="10"
+                value="0"
+                type="text"
+              />
+              M<br />
+            </td>
+            <td>
+              total metals<br />
+              <input
+                name="MT1"
+                size="3"
+                maxlength="3"
+                disabled="disabled"
+                type="text"
+              />
+              <input
+                name="AMT1"
+                size="10"
+                maxlength="10"
+                value="0"
+                type="text"
+                id="AMT1"
+              />
+              M<br />
+              <input
+                name="MT2"
+                size="3"
+                maxlength="3"
+                disabled="disabled"
+                type="text"
+              />
+              <input
+                name="AMT2"
+                size="10"
+                maxlength="10"
+                value="0"
+                type="text"
+                id="AMT2"
+              />
+              M
+            </td>
+            <td>
+              free metals<br />
+              <input
+                name="MF1"
+                size="3"
+                maxlength="3"
+                disabled="disabled"
+                type="text"
+                id="MF1"
+              />
+              <input
+                name="AMF1"
+                size="10"
+                maxlength="10"
+                value="0"
+                type="text"
+                id="AMF1"
+              />
+              M<br />
+              <input
+                name="MF2"
+                size="3"
+                maxlength="3"
+                disabled="disabled"
+                type="text"
+                id="MF2"
+              />
+              <input
+                name="AMF2"
+                size="10"
+                maxlength="10"
+                value="0"
+                type="text"
+                id="AMF2"
+              />
+              M
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <div>
+                Do not edit chelator or metal names, or the Array. <br />
+                "A" = available. "T" = temperature comp. <br />
+                You may use scientific notation, i.e. 1E-3 for 0.001 M.
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4">
+              <input
+                value="Calculate"
+                name="processit"
+                onClick="docalc()"
+                type="button"
+              />
+              <input
+                value="Download"
+                name="download"
+                onClick="downloadOutput()"
+                type="button"
+              />
+              Results will appear below and in appropriate boxes above:
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <label></label>
+              <br />
+              <div id="outputDiv"></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+    <!-- <p>
+      Schoenmakers, Visser, Flik and Theuvenet, BioTechniques v12, #6 (1992)
+      870-879, CHELATOR: An Improved Method for Computing Metal Ion
+      Concentrations in Physiological Solutions. [see
+      <a href="downloads.htm">downloads</a> to retrieve a copy of this program]
+    </p>
+    <p>
+      <strong
+        >NOTE: The stability constants and deltaH values &amp; method are the
+        same as in Theo's paper, but the Ionic correction is not.
+      </strong>
+    </p>
+    <p>
+      <strong
+        >Gives slightly different results than Theo's Chelator program.</strong
+      >
+    </p>
+    <p>
+      Back to the
+      <a
+        href="https://somapp.ucdmc.ucdavis.edu/pharmacology/bers/maxchelator/index.html"
+        >Maxchelator</a
+      >
+      home page or the <a href="downloads.htm">Downloads</a> page.
+    </p>
+    <p>
+      You can save the source for this page, edit and use it to do different
+      calculations. See comments in source.
+    </p>
+    <p>
+      Calculations above the buffer range of a metal/chelator can result in a
+      convergence error in Find Free mode.
+    </p> -->
+  </body>
+</html>

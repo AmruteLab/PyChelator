@@ -27,7 +27,9 @@
 
   <h2>Compatibility:</h2>
   <p>maxchelator.js is designed to work with modern web browsers and supports JavaScript-based web applications. It is versatile and can be integrated into various web projects related to metal-chelator interactions.</p>
-
+ <h2>Run the Script:</h2>
+  <p>Try out the maxchelator.js script on Google Colab: <a href="https://colab.research.google.com/drive/11u4w6PD4U_Y3j8kLM70c_TW6IkRYz5OF?usp=sharing" target="_blank">Open in Google Colab</a></p>
+  
   <h2>Disclaimer:</h2>
   <p>While maxchelator.js aims to provide accurate and useful data, users are advised to validate the results obtained from the code with experimental data and consult domain experts for critical applications.</p>
 </body>

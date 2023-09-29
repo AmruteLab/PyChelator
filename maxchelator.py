@@ -26,20 +26,20 @@ VaM = [2, 2]
 chelatornames = ['ATP', 'EGTA']
 metalnames = ['Ca2', 'Mg2']
 conavailable = ['T T|', 'T T|']
-freechelatoramount = [1]
-freemetalamount = [1]
+freechelatoramount = [0,0]
+freemetalamount = [0,0]
 bound = [1,1]
 pbound = [1,1]
 cbound = [1,1]
 cpbound = [1,1]
 totalchelatoramount = [1]
 totalmetalamount = [1]
-pH = 7.0
-temperature = 37
-ionic = 0.165
+pH = 7.4
+temperature = 23
+ionic = 0.047
 Et = 37
 Ei = 0.165
-ioncont = None
+ioncont = 0
 
 # Initialize the lists used in the getconstants() function
 
@@ -70,9 +70,51 @@ IC = [[1, 1, 1, 1], [1, 1, 1, 1]]
 KML = [[1 for x in range(2)] for y in range(2)]
 KHML = [[1 for x in range(2)] for y in range(2)]
 
+
+def download_output():
+    global result_array
+    workbook = Workbook()
+    worksheet = workbook.active
+
+    for result in result_array:
+       # Add an empty row before each set of data
+        worksheet.append([])
+
+        # Add the header row
+        worksheet.append(
+            ["pH", "", "temperature", "ionic", "Ionic contribution [ABS]"]
+        )
+        general_info = result["general_info"]
+        row = [str(general_info["pH"]), "", str(general_info["temperature"]), str(general_info["ionic"]), str(general_info["Ionic contribution [ABS]"])]
+        worksheet.append(row)
+
+        metal_chelator_data = result["metal_and_chelator"]
+        for data in metal_chelator_data:
+            row = [data["name"], str(data["totalamount"]), str(data["freeamount"]), str(data["bound"]), str(data["pbound"])]
+            worksheet.append(row)
+
+        worksheet.append([])
+
+        chelator_amount_component_data = result["totalchelatoramount_component"]
+        for data in chelator_amount_component_data:
+            row = [data["name"], str(data["Kd"]), str(data["Low Limit"]), str(data["High Limit"])]
+            worksheet.append(row)
+
+    # Adjust column widths
+    for col_idx, column in enumerate(worksheet.columns, 1):
+        max_length = max(len(str(cell.value)) for cell in column)
+        adjusted_width = (max_length + 2) * 1.2
+        worksheet.column_dimensions[chr(64 + col_idx)].width = adjusted_width
+
+    # Save Excel file
+    file_path = "records.xlsx"
+    workbook.save(file_path)
+
+    # Download the file to local machine
+    files.download(file_path)
+
 def getconstants():
     global h1, h2, h3, h4, dh1, dh2, dh3, dh4, mc, mhc, dmc, dmhc
-
     for i in range(0, 2):
         num = (i) * 3 + 7
         s = mcd[num][9:16]
@@ -192,7 +234,6 @@ def makekon():
         Tcon2 = math.exp(h2[x] * math.log(10))
         Tcon3 = math.exp(h3[x] * math.log(10))
         Tcon4 = math.exp(h4[x] * math.log(10))
-
         IC[x][0] = 0
         IC[x][1] = 0
         IC[x][2] = 0
@@ -296,12 +337,10 @@ def calcioniccontrib():
     cmcomplex1_copy = [[0 for _ in range(2)] for _ in range(2)]
     cmcomplex2_copy = [[0 for _ in range(2)] for _ in range(2)]
     T = 0
-
     for x in range(2):
         for y in range(2):
             cmcomplex1_copy[y][x] = (cmcomplex1[y][x] * freemetalamount[y] * totalchelatoramount[x]) / D[x]
             cmcomplex2_copy[y][x] = (cmcomplex2[y][x] * freemetalamount[y] * totalchelatoramount[x]) / D[x]
-
     for a in range(2):
         QC = freechelatoramount[a]
         VD = VaC[a]
@@ -314,10 +353,8 @@ def calcioniccontrib():
             VG = VF - 1
 
         T += IC[a][0] * QC * 2 * VD + IC[a][1] * QC * 2 * VE + IC[a][2] * QC * 2 * VF + IC[a][3] * QC * 2 * VG
-
     for a in range(2):
         T += 2 * freemetalamount[a] * VaM[a]
-
     for a in range(2):
         VC = VaC[a]
         for b in range(2):
@@ -328,10 +365,12 @@ def calcioniccontrib():
 
     if T < 0:
         T = 0
-
     ioncont = T / 2
 
+
+
 def makekd():
+    # Check list lengths here to ensure they match the loop ranges
     for x in range(2):
         for y in range(2):
             KML[y][x] = 0
@@ -370,13 +409,18 @@ def cleanfloat(s):
 # Call the function to extract constants
 metal_names_string = []
 
-def docalculations():
+def docalculations(find_free_metals = False):
+  global result_array
   getvalences()
   getconstants()
   conadjust()
   calcH()
   makekon()
-  docalcfree()
+  if find_free_metals:
+    docalcfree()
+  else:
+    docalctotal()
+
   for i in range (0,2):
     bound[i] = totalmetalamount[i] - freemetalamount[i];
     pbound[i] = (bound[i] / totalmetalamount[i]) * 100;
@@ -403,7 +447,6 @@ def docalculations():
           })
 
   makekd()
-
   totalchelatoramount_component = []
   totalchelatoramount_component.append({
       "name": "Complex",
@@ -423,7 +466,6 @@ def docalculations():
                       "Low Limit": cleanfloat(Kd[y][x] / S10),
                       "High Limit": cleanfloat(Kd[y][x] * S10),
                   })
-
   result_array.append({
       "general_info": {
           "pH": pH,
@@ -435,12 +477,35 @@ def docalculations():
       "totalchelatoramount_component": totalchelatoramount_component,
   })
   print(result_array)
-  #download_output()
+
+
 def main():
-  find_free_metals = True
-  find_total_metals = True
-  totalchelatoramount = [1,2]
-  totalmetalamount = [3, 4]
-  freechelatoramount = [0,0]
-  freemetalamount = [0,0]
-  docalculations()
+    global totalchelatoramount, totalmetalamount, freechelatoramount, freemetalamount
+    totalchelatoramount_values = [[0.002, 0.001]]
+    totalmetalamount_values = [[0.0011218, 0.006]]
+    freechelatoramount_values = [[0, 0]]
+    freemetalamount_values = [[0, 0]]
+    find_free_metals_values = [True]
+    # Update the ph, co temperature and ion if necessary
+
+    # Check if all arrays have the same length
+    if len(totalchelatoramount) != len(totalmetalamount) != len(freechelatoramount) != len(freemetalamount):
+        print("Error: All arrays must have the same length.")
+        return
+
+    # Loop through each combination of values
+    for i in range(len(totalchelatoramount_values)):
+        # Set the global variables to the current combination
+        totalchelatoramount = totalchelatoramount_values[i]
+        totalmetalamount = totalmetalamount_values[i]
+        freechelatoramount = freechelatoramount_values[i]
+        freemetalamount = freemetalamount_values[i]
+        getconstants()
+        # Call the docalculations method with the current combination
+        find_free_metals = find_free_metals_values[i]  # If find_free_metals is not passed or is set to False, it will default to calculating total metals
+        getvalences()
+        docalculations(find_free_metals)
+
+    download_output()
+
+main()

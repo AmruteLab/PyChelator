@@ -13,6 +13,21 @@ var mcd = new Array(
   "#Ca2, 10.340,  5.100,-33.200,  0.000, TS",
   "#Mg2,  5.090,  3.130, 21.000,  0.000, TS"
 );
+
+var mcd_nist = new Array(
+  "%THE NEW FORMAT FOR THE FILES OF CONSTANTS IN MAXCHELATOR",
+  "%Chelator lines start with ! and name must be 7 characters and/or spaces.",
+  "%Values are separated with a comma.",
+  "%!C-NAME, H1, H2, H3, H4, dH1, dH2, dH3, dH4",
+  "%Metals start with a # are 2 characters followed by valence.",
+  "%#Mt2, ML, MHL, dML, dMHL, comments",
+  "%The same metals in the same order are required for each chelator",
+  "!ATP    ,  6.480,  3.990,  1.900,  0.000,  0.500, -3.600,  2.300,  0.000,",
+  "#Ca2,  3.860,  2.160,  3.200,  1.900, NIST",
+  "#Mg2,  4.190,  2.320,  4.400,  2.300, NIST",
+  "!EGTA   ,  9.400,  8.790,  2.700,  0.000, -5.600, -5.600, -2.600,  0.000,",
+  "#Ca2, 10.860,  5.307, -7.900,  0.000, NIST",
+  "#Mg2,  5.280,  3.470,  5.500,  0.000, NIST");
 //spacing is critical in above array. make sure commas and such all line up if you change values.
 //deltaH are in kJ
 
@@ -91,6 +106,36 @@ KML[1] = new Array(1);
 var KHML = new Array(1);
 KHML[0] = new Array(1);
 KHML[1] = new Array(1);
+unit_used = "M";
+
+
+function convertToUnit(value, selectedUnit) {
+  switch (selectedUnit) {
+    case "M":
+      return value; // Already in M
+    case "mM":
+      return value * 1000; // Convert to mM
+    case "uM":
+      return value * 1000000; // Convert to uM
+    case "nM":
+      return value * 1000000000; // Convert to nM
+    default:
+      return value; // Default to M
+  }
+}
+
+function updateUnit(fieldName) {
+  // Get the selected unit
+  var selectedUnit = document.forms["WMXC2"]["unit_" + fieldName].value;
+
+  // Update the unit displayed next to the input field
+  var unitElements = document.getElementsByClassName("unit");
+  for (var i = 0; i < unitElements.length; i++) {
+      unitElements[i].innerText = selectedUnit;
+  }
+  unit_used = selectedUnit
+}
+
 
 function conadjust() {
   /* adjusts constants for temp. and ionic strength */
@@ -461,6 +506,10 @@ function makekd() {
   }
 }
 
+function updateDatabase(){
+  mcd = mcd_schoenmakers
+}
+
 function setup() {
   getcnames();
   getmnames();
@@ -545,6 +594,25 @@ function collectvalues() {
       totalmetalamount[i] = 0;
     }
   }
+  totalchelatoramount = convertToM(totalchelatoramount, unit_used);
+  freemetalamount = convertToM(freemetalamount, unit_used);
+}
+
+function convertToM(values, selectedUnit) {
+  var conversionFactor = 1.0; // Default to M
+
+  if (selectedUnit === "mM") {
+    conversionFactor = 1.0e-3; // Convert mM to M
+  } else if (selectedUnit === "uM") {
+    conversionFactor = 1.0e-6; // Convert uM to M
+  } else if (selectedUnit === "nM") {
+    conversionFactor = 1.0e-9; // Convert nM to M
+  }
+
+  // Convert each value in the array to M
+  return values.map(function (value) {
+    return value * conversionFactor;
+  });
 }
 
 function docalcfree() {
@@ -738,8 +806,8 @@ function docalc() {
     name: "Name",
     totalamount: "Total",
     freeamount: "Free",
-    bound: "Bound",
-    pbound: "%Bound",
+    bound: "-log10 (Free) ",
+    // pbound: "%Bound",
   });
 
   if (document.WMXC2.TYPECALC[0].checked) {
@@ -750,12 +818,13 @@ function docalc() {
       if (totalmetalamount[i] > 0) {
         bound[i] = totalmetalamount[i] - freemetalamount[i];
         pbound[i] = (bound[i] / totalmetalamount[i]) * 100;
+        free_amount = convertToUnit(cleanfloat(freemetalamount[i]))
         metal_names_string.push({
           name: metalnames[i],
           totalamount: cleanfloat(totalmetalamount[i]),
-          freeamount: cleanfloat(freemetalamount[i]),
-          bound: cleanfloat(bound[i]),
-          pbound: cleanfloat(pbound[i]),
+          freeamount: free_amount,
+          bound: -Math.log10(free_amount)
+          // pbound: cleanfloat(pbound[i]),
         });
       }
     }
@@ -769,12 +838,13 @@ function docalc() {
       if (freemetalamount[i] > 0) {
         bound[i] = totalmetalamount[i] - freemetalamount[i];
         pbound[i] = (bound[i] / totalmetalamount[i]) * 100;
+        free_amount = convertToUnit(cleanfloat(freemetalamount[i]))
         metal_names_string.push({
           name: metalnames[i],
           totalamount: cleanfloat(totalmetalamount[i]),
-          freeamount: cleanfloat(freemetalamount[i]),
-          bound: cleanfloat(bound[i]),
-          pbound: cleanfloat(pbound[i]),
+          freeamount: free_amount,
+          bound: -Math.log10(free_amount)
+          // pbound: cleanfloat(pbound[i]),
         });
       }
     }
@@ -786,12 +856,13 @@ function docalc() {
     if (totalchelatoramount[i] > 0) {
       cbound[i] = totalchelatoramount[i] - freechelatoramount[i];
       cpbound[i] = (cbound[i] / totalchelatoramount[i]) * 100;
+      free_amount = convertToUnit(cleanfloat(freechelatoramount[i]))
       t.push({
         name: chelatornames[i],
         totalamount: cleanfloat(totalchelatoramount[i]),
-        freeamount: cleanfloat(freechelatoramount[i]),
-        bound: cleanfloat(cbound[i]),
-        pbound: cleanfloat(cpbound[i]),
+        freeamount: free_amount,
+        bound: -Math.log10(free_amount)
+        // pbound: cleanfloat(cpbound[i]),
       });
     }
   }
@@ -847,36 +918,38 @@ function docalc() {
       divElement.appendChild(wrapper);
       var valueElement = document.createElement("div");
       valueElement.className = "output-value";
+      if ( key !== "totalchelatoramount_component") {
+        if (
+          key === "metal_and_chelator"
 
-      if (
-        key === "metal_and_chelator" ||
-        key === "totalchelatoramount_component"
-      ) {
-        var components = result[key];
+        ) {
+          var components = result[key];
 
-        for (var j = 0; j < components.length; j++) {
+          for (var j = 0; j < components.length; j++) {
+            var componentValueElement = document.createElement("div");
+            for (const key in components[j]) {
+              var componentValueNode = document.createElement("span");
+              componentValueNode.textContent = components[j][key];
+              componentValueElement.appendChild(componentValueNode);
+            }
+            valueElement.appendChild(componentValueElement);
+          }
+        } else {
           var componentValueElement = document.createElement("div");
-          for (const key in components[j]) {
+          for (const keyi in result[key]) {
             var componentValueNode = document.createElement("span");
-            componentValueNode.textContent = components[j][key];
+            componentValueNode.className = "first-row";
+            var content = "";
+            if (keyi === "pH" || keyi === "Ionic contribution [ABS]") {
+              content = keyi + ": ";
+            }
+            componentValueNode.textContent = content + result[key][keyi];
             componentValueElement.appendChild(componentValueNode);
           }
           valueElement.appendChild(componentValueElement);
         }
-      } else {
-        var componentValueElement = document.createElement("div");
-        for (const keyi in result[key]) {
-          var componentValueNode = document.createElement("span");
-          componentValueNode.className = "first-row";
-          var content = "";
-          if (keyi === "pH" || keyi === "Ionic contribution [ABS]") {
-            content = keyi + ": ";
-          }
-          componentValueNode.textContent = content + result[key][keyi];
-          componentValueElement.appendChild(componentValueNode);
-        }
-        valueElement.appendChild(componentValueElement);
       }
+
       wrapper.appendChild(section);
       wrapper.appendChild(valueElement);
     }
@@ -947,7 +1020,11 @@ function downloadOutput() {
 
   /* Generate Excel file */
   var excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
-  saveAsExcelFile(excelBuffer, "records.xlsx");
+  var today = new Date();
+  var formattedDate = today.toISOString().slice(0, 10);
+  var fileName = "records_" + formattedDate + ".xlsx"; // Include date in file name
+
+  saveAsExcelFile(excelBuffer, fileName);
 }
 
 /* Function to save the Excel file */

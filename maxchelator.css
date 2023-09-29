@@ -18,6 +18,13 @@ body {
   border-radius: 0.5rem;
 }
 
+select {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-left: 5px;
+}
+
 .output-div {
   border: 1px solid #ccc;
   padding: 10px;

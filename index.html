@@ -3,14 +3,12 @@
     <link rel="stylesheet" type="text/css" href="maxchelator.css" />
     <script src="maxchelator.js"></script>
     <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
     <title>Ca-Mg-ATP-EGTA -TS</title>
   </head>
   <body onLoad="setup()" link="#0000ff" vlink="#800080">
-    <b
-      >Ca/Mg/ATP/EGTA Calculator v1 constants from Theo Schoenmakers'
-      Chelator</b
-    >
     <form name="WMXC2">
       <table cellpadding="2" cellspacing="2" width="700">
         <tbody>
@@ -38,9 +36,9 @@
             </td>
           </tr>
           <tr>
-            <td colspan="2">
+            <td colspan="4">
               Use constants from:
-              <select name="constantsSource" onchange="updateDatabase()">
+              <select name="constantsSource" id="constantsSource" onchange="updateConstants()">
                 <option value="NIST"> NIST database #46 v8</option>
                 <option value="Schoenmakers" selected>Theo Schoenmakers' Chelator</option>
                 <option value="Custom">Or, write your own constants (see also:)</option>
@@ -68,15 +66,87 @@
             </td>
           </tr>
           <tr>
-            <td rowspan="2" width="124">
-              THE ARRAY:<br />
-              <textarea
-                name="thearray"
-                rows="6"
-                cols="14"
-                disabled="disabled"
-              ></textarea>
-            </td>
+               <td class="constants" id="constants" colspan="4" style="width: 100%;">
+                <div class="custom-field">
+                  <label for="customEt">Et:</label>
+                  <input type="text" id="customEt" placeholder="Et">
+                </div>
+
+                <div class="custom-field">
+                  <label for="customEi">Et:</label>
+                  <input type="text" id="customEi" placeholder="Et">
+                </div>
+
+                <div class="custom-field">
+                  <label for="hydrogen1">First hydrogen:</label>
+                  <input type="text" id="hydrogen1" placeholder="first hydrogen constant for the chelators">
+                </div>
+
+                <div class="custom-field">
+                  <label for="hydrogen2">Second hydrogen:</label>
+                  <input type="text" id="hydrogen2" placeholder="second hydrogen constant for the chelators">
+                </div>
+
+                <div class="custom-field">
+                  <label for="hydrogen3">Third hydrogen:</label>
+                  <input type="text" id="hydrogen3" placeholder="third hydrogen constant for the chelators">
+                </div>
+
+                <div class="custom-field">
+                  <label for="hydrogen4">Fourth hydrogen:</label>
+                  <input type="text" id="hydrogen4" placeholder="fourth hydrogen constant for the chelators">
+                </div>
+
+                <div class="custom-field">
+                  <label for="deltaH1">Delta H constant for H1:</label>
+                  <input type="text" id="deltaH1" placeholder="delta H constant for H1">
+                </div>
+
+                <div class="custom-field">
+                  <label for="deltaH2">Delta H constant for H2:</label>
+                  <input type="text" id="deltaH2" placeholder="delta H constant for H2">
+                </div>
+
+                <div class="custom-field">
+                  <label for="deltaH3">Delta H constant for H3:</label>
+                  <input type="text" id="deltaH3" placeholder="delta H constant for H3">
+                </div>
+
+                <div class="custom-field">
+                  <label for="deltaH4">Delta H constant for H4:</label>
+                  <input type="text" id="deltaH4" placeholder="delta H constant for H4">
+                </div>
+
+                <div class="custom-field">
+                  <label for="metal1">Enter four values for first metal-chelator constant:</label>
+                  <input type="text" id="metal1" placeholder="eg., 3.69, 10.34, 4, 5.09">
+                </div>
+
+                <div class="custom-field">
+                  <label for="deltaMetal1">Enter four values for delta metal-chelator constant:</label>
+                  <input type="text" id="deltaMetal1" placeholder="eg., 3.69, 10.34, 4, 5.09">
+                </div>
+
+                <div class="custom-field">
+                  <label for="metalchelator2">Enter four values for second metal-chelator constant:</label>
+                  <input type="text" id="metalchelator2" placeholder="second metal-chelator constant 2.1">
+                </div>
+
+                <div class="custom-field">
+                  <label for="deltaMetalChelator2">Enter four values for second delta metal-chelator constant:</label>
+                  <input type="text" id="deltaMetalChelator2" placeholder="second metal-chelator constant 2.2">
+                </div>
+                <input
+                value="Submit"
+                name="processit"
+                onClick="submitConstants()"
+                type="button"
+              />
+               </td>
+
+
+          </tr>
+          <tr>
             <td>
               chelators<br />
               <input
@@ -205,44 +275,18 @@
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               <label></label>
               <br />
-              <div id="outputDiv"></div>
+              <div id="outputDiv">
+                <div class="output-title">
+                  <span>Name</span>
+                  <span>Total</span>
+                  <span>Free</span>
+                  <span>-log10 (Free) </span>
+                </div>
+              </div>
             </td>
           </tr>
         </tbody>
       </table>
     </form>
-    <!-- <p>
-      Schoenmakers, Visser, Flik and Theuvenet, BioTechniques v12, #6 (1992)
-      870-879, CHELATOR: An Improved Method for Computing Metal Ion
-      Concentrations in Physiological Solutions. [see
-      <a href="downloads.htm">downloads</a> to retrieve a copy of this program]
-    </p>
-    <p>
-      <strong
-        >NOTE: The stability constants and deltaH values &amp; method are the
-        same as in Theo's paper, but the Ionic correction is not.
-      </strong>
-    </p>
-    <p>
-      <strong
-        >Gives slightly different results than Theo's Chelator program.</strong
-      >
-    </p>
-    <p>
-      Back to the
-      <a
-        href="https://somapp.ucdmc.ucdavis.edu/pharmacology/bers/maxchelator/index.html"
-        >Maxchelator</a
-      >
-      home page or the <a href="downloads.htm">Downloads</a> page.
-    </p>
-    <p>
-      You can save the source for this page, edit and use it to do different
-      calculations. See comments in source.
-    </p>
-    <p>
-      Calculations above the buffer range of a metal/chelator can result in a
-      convergence error in Find Free mode.
-    </p> -->
   </body>
 </html>

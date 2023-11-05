@@ -41,8 +41,6 @@ Et = 37
 Ei = 0.165
 ioncont = 0
 
-# Initialize the lists used in the getconstants() function
-
 h1 = [0.0] * 2
 h2 = [0.0] * 2
 h3 = [0.0] * 2

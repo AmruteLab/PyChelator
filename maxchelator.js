@@ -1,41 +1,74 @@
-var mcd = new Array(
-  "%THE NEW FORMAT FOR THE FILES OF CONSTANTS IN MAXCHELATOR",
-  "%Chelator lines start with ! and name must be 7 characters and/or spaces.",
-  "%Values are separated with a comma.",
-  "%!C-NAME, H1, H2, H3, H4, dH1, dH2, dH3, dH4",
-  "%Metals start with a # are 2 characters followed by valence.",
-  "%#Mt2, ML, MHL, dML, dMHL, comments",
-  "%The same metals in the same order are required for each chelator",
-  "!ATP    ,  6.390,  3.800,  1.900,  0.000, -2.100,-17.150,  0.000,  0.000,",
-  "#Ca2,  3.690,  1.940, -3.800,  -1.600, TS",
-  "#Mg2,  4.000,  2.070, 10.900, 14.200, TS",
-  "!EGTA   ,  9.220,  8.650,  2.580,  0.000,-26.500,-20.400,-10.000,  0.000,",
-  "#Ca2, 10.340,  5.100,-33.200,  0.000, TS",
-  "#Mg2,  5.090,  3.130, 21.000,  0.000, TS"
-);
+var chelatornames = ['ATP', 'EGTA']
+var metalnames = ['Ca2', 'Mg2']
+var conavailable = ['T T|', 'T T|']
 
-var mcd_nist = new Array(
-  "%THE NEW FORMAT FOR THE FILES OF CONSTANTS IN MAXCHELATOR",
-  "%Chelator lines start with ! and name must be 7 characters and/or spaces.",
-  "%Values are separated with a comma.",
-  "%!C-NAME, H1, H2, H3, H4, dH1, dH2, dH3, dH4",
-  "%Metals start with a # are 2 characters followed by valence.",
-  "%#Mt2, ML, MHL, dML, dMHL, comments",
-  "%The same metals in the same order are required for each chelator",
-  "!ATP    ,  6.480,  3.990,  1.900,  0.000,  0.500, -3.600,  2.300,  0.000,",
-  "#Ca2,  3.860,  2.160,  3.200,  1.900, NIST",
-  "#Mg2,  4.190,  2.320,  4.400,  2.300, NIST",
-  "!EGTA   ,  9.400,  8.790,  2.700,  0.000, -5.600, -5.600, -2.600,  0.000,",
-  "#Ca2, 10.860,  5.307, -7.900,  0.000, NIST",
-  "#Mg2,  5.280,  3.470,  5.500,  0.000, NIST");
-//spacing is critical in above array. make sure commas and such all line up if you change values.
-//deltaH are in kJ
+var pH = 7.0;
+var temperature = 37; //initially set to constants temperature expected
+var ionic = 0.165; //initially set to constants ionic strength expected
 
-var VaC = new Array(3, 3); //#of non zero hydrogen constants
-var VaM = new Array(2, 2); //3rd character of metal name
-var chelatornames = new Array(1); //gets from above array. also change in HTML code below
-var metalnames = new Array(1); //gets from above array also change in HTML code below
-var conavailable = new Array(1);
+var data = {
+  "NIST": {
+      "Et": 25,
+      "Ei": 0.1,
+      "h1": [6.48, 9.4],
+      "h2": [3.99, 8.79],
+      "h3": [1.9, 2.7],
+      "h4": [0, 0],
+      "dh1": [0.5, -5.6],
+      "dh2": [-3.6, -5.6],
+      "dh3": [2.3, -2.6],
+      "dh4": [0, 0],
+      "mc": [
+          [3.86, 10.86],
+          [4.19, 5.28]
+      ],
+      "dmc": [
+          [3.2, -7.9],
+          [4.4, 5.5]
+      ],
+      "mhc": [
+          [2.16, 5.307],
+          [2.32, 3.47]
+      ],
+      "dmhc": [
+          [1.9, 0],
+          [2.3, 0]
+      ],
+      "VaC": [3, 3],
+      "VaM": [2, 2]
+  },
+  "Schoenmakers": {
+      "Et": 37,
+      "Ei": 0.165,
+      "h1": [6.39, 9.22],
+      "h2": [3.8, 8.65],
+      "h3": [1.9, 2.58],
+      "h4": [0, 0],
+      "dh1": [-2.1, -26.5],
+      "dh2": [-17.15, -20.4],
+      "dh3": [0, -10],
+      "dh4": [0, 0],
+      "mc": [
+          [3.69, 10.34],
+          [4, 5.09]
+      ],
+      "dmc": [
+          [-3.8, -33.2],
+          [10.9, 21]
+      ],
+      "mhc": [
+          [1.94, 5.1],
+          [2.07, 3.13]
+      ],
+      "dmhc": [
+          [-1.6, 0],
+          [14.2, 0]
+      ],
+      "VaC": [3, 3],
+      "VaM": [2, 2]
+  }
+};
+
 var freechelatoramount = new Array(1);
 var freemetalamount = new Array(1);
 var bound = new Array(1);
@@ -44,33 +77,10 @@ var cbound = new Array(1);
 var cpbound = new Array(1);
 var totalchelatoramount = new Array(1);
 var totalmetalamount = new Array(1);
-var pH = 7.0;
-var temperature = 37; //initially set to constants temperature expected
-var ionic = 0.165; //initially set to constants ionic strength expected
-var Et = 37; //temperature constants were done at
-var Ei = 0.165; //ionic strength constants were done at
+
 var ioncont;
-var h1 = new Array(1); //first hydrogen constant for the chelators
-var h2 = new Array(1);
-var h3 = new Array(1);
-var h4 = new Array(1);
-var dh1 = new Array(1); //delta H constant for H1
-var dh2 = new Array(1);
-var dh3 = new Array(1);
-var dh4 = new Array(1);
-var mc = new Array(1); //first metal-chelator constant
-mc[0] = new Array(1);
-mc[1] = new Array(1);
-var dmc = new Array(1); //first delta metal-chelator constant
-dmc[0] = new Array(1);
-dmc[1] = new Array(1);
-var mhc = new Array(1); //second metal-chelator constant
-mhc[0] = new Array(1);
-mhc[1] = new Array(1);
-var dmhc = new Array(1); //second delta metal-chelator constant
+
 var s = "";
-dmhc[0] = new Array(1);
-dmhc[1] = new Array(1);
 result_array = [];
 
 //intermediate calculations stored here:
@@ -107,6 +117,112 @@ var KHML = new Array(1);
 KHML[0] = new Array(1);
 KHML[1] = new Array(1);
 unit_used = "M";
+
+
+function submitConstants(){
+  Et = parseFloat(document.getElementById("customEt").value);
+  Ei = parseFloat(document.getElementById("customEi").value);
+  h1_values = document.getElementById("hydrogen1").value.split(",").map(value => value.trim());
+  h1 = [
+    parseFloat(h1_values[0]), parseFloat(h1_values[1]),
+    parseFloat(h1_values[1]), parseFloat(h1_values[2])
+  ]
+  h2_values = document.getElementById("hydrogen2").value.split(",").map(value => value.trim());
+  h2 = [
+    parseFloat(h2_values[0]), parseFloat(h2_values[1]),
+    parseFloat(h2_values[1]), parseFloat(h2_values[2])
+  ]
+  h3_values = document.getElementById("hydrogen3").value.split(",").map(value => value.trim());
+  h3 = [
+    parseFloat(h3_values[0]), parseFloat(h3_values[1]),
+    parseFloat(h3_values[1]), parseFloat(h3_values[2])
+  ]
+  h4_values = document.getElementById("hydrogen4").value.split(",").map(value => value.trim());
+  h4 = [
+    parseFloat(h4_values[0]), parseFloat(h4_values[1]),
+    parseFloat(h4_values[1]), parseFloat(h4_values[2])
+  ]
+  dh1_values =  document.getElementById("deltaH1").value.split(",").map(value => value.trim());
+  dh1 = [
+    parseFloat(dh1_values[0]), parseFloat(dh1_values[1]),
+    parseFloat(dh1_values[1]), parseFloat(dh1_values[2])
+  ]
+  dh2_values =  document.getElementById("deltaH2").value.split(",").map(value => value.trim());
+  dh2 = [
+    parseFloat(dh2_values[0]), parseFloat(dh2_values[1]),
+    parseFloat(dh2_values[1]), parseFloat(dh2_values[2])
+  ]
+  dh3_values =  document.getElementById("deltaH3").value.split(",").map(value => value.trim());
+  dh3 = [
+    parseFloat(dh3_values[0]), parseFloat(dh3_values[1]),
+    parseFloat(dh3_values[1]), parseFloat(dh3_values[2])
+  ]
+  dh4_values =  document.getElementById("deltaH4").value.split(",").map(value => value.trim());
+  dh4 = [
+    parseFloat(dh4_values[0]), parseFloat(dh4_values[1]),
+    parseFloat(dh4_values[1]), parseFloat(dh4_values[2])
+  ]
+  mc_values = document.getElementById("metal1").value.split(",").map(value => value.trim());
+  mc = [
+    [parseFloat(mc_values[0]), parseFloat(mc_values[1])],
+     [parseFloat(mc_values[2]), parseFloat(mc_values[3])]
+  ]
+  dmc_values = document.getElementById("deltaMetal1").value.split(",").map(value => value.trim());
+  dmc = [
+    [parseFloat(dmc_values[0]), parseFloat(dmc_values[1])],
+      [parseFloat(dmc_values[2]), parseFloat(dmc_values[3])]
+  ]
+
+  mhc_values = document.getElementById("metalchelator2").value.split(",").map(value => value.trim());
+  mhc = [
+    [parseFloat(mhc_values[0]), parseFloat(mhc_values[1])],
+      [parseFloat(mhc_values[2]), parseFloat(mhc_values[3])]
+  ]
+  dmhc_values = document.getElementById("deltaMetalChelator2").value.split(",").map(value =>
+      value.trim());
+  dmhc = [
+    [parseFloat(dmhc_values[0]), parseFloat(dmhc_values[1])],
+      [parseFloat(dmhc_values[2]), parseFloat(dmhc_values[3])]
+  ]
+
+  VaC = [3,3]; //#of non zero hydrogen constants
+  VaM = [2,2]; //3rd character of metal name -> this needs to be calculated based on h1 values
+}
+function updateConstants() {
+  var selectElement = document.getElementById("constantsSource");
+  var selectedOption = selectElement.value;
+
+  // Assuming you have selectedOption defined earlier
+  if (selectedOption === "Custom") {
+    var selectElement = document.getElementById("constants");
+    selectElement.style.display = "block";
+  } else {
+    // Load and parse the JSON file using jQuery
+    if (selectedOption in data) {
+      var selectElement = document.getElementById("constants");
+      selectElement.style.display = "none";
+
+      const constants = data[selectedOption];
+
+      Et = constants.Et;
+      Ei = constants.Ei;
+      h1 = constants.h1;
+      h2 = constants.h2;
+      h3 = constants.h3;
+      h4 = constants.h4;
+      dh1 = constants.dh1;
+      dh2 = constants.dh2;
+      dh3 = constants.dh3;
+      dh4 = constants.dh4;
+      mc = constants.mc;
+      dmc = constants.dmc;
+      mhc = constants.mhc;
+      dmhc = constants.dmhc;
+      VaC = constants.VaC;
+      VaM = constants.VaM;
+  }
+}
+}
 
 
 function convertToUnit(value, selectedUnit) {
@@ -227,161 +343,13 @@ function calcH() {
   Hconc = Math.exp(-pH * Math.LN10) / TH;
 }
 
-function getvalences() {
-  for (i = 0; i < 2; i++) {
-    VaM[i] = parseInt(metalnames[i].substring(2, 3));
-  }
-
-  for (i = 0; i < 2; i++) {
-    VaC[i] = 0;
-  }
-
-  for (i = 0; i < 2; i++) {
-    if (h1[i] != 0) {
-      VaC[i] = 1;
-    }
-    if (h2[i] != 0) {
-      VaC[i] = 2;
-    }
-    if (h3[i] != 0) {
-      VaC[i] = 3;
-    }
-    if (h4[i] != 0) {
-      VaC[i] = 4;
-    }
-  }
-}
-
-function getcnames() {
-  var num;
-  var comma = mcd[7].indexOf(",");
-
-  chelatornames[0] = mcd[7].substring(1, comma);
-  var i = 0;
-  for (i = 1; i < 2; i++) {
-    num = i * 3 + 7;
-    comma = mcd[num].indexOf(",");
-    chelatornames[i] = mcd[num].substring(1, comma);
-  }
-}
-
-function getmnames() {
-  var num;
-  for (i = 0; i < 2; i++) {
-    num = i + 8;
-    metalnames[i] = mcd[num].substring(1, 4);
-  }
-}
-
-function getconavail() {
-  var q, r, s, t, u, v;
-  var i, j, numi, numj, x, y;
-  for (i = 0; i < 2; i++) {
-    numi = i * 3 + 8;
-    t = "";
-    for (j = 0; j < 2; j++) {
-      numj = numi + j;
-      v = mcd[numj].substring(7, 12);
-      x = parseFloat(v);
-      r = mcd[numj].substring(21, 30);
-      y = parseFloat(r);
-      if (x == 0) {
-        u = "  ";
-      } else {
-        if (y == 0) {
-          u = "A ";
-        } else {
-          u = "T ";
-        }
-      }
-      s = t;
-      t = s + u;
-    }
-    conavailable[i] = t.substring(0, t.length - 1) + "|";
-  }
-}
-
-function loadthearray() {
-  var s, t, v;
-  var i, num;
-  t = "        |";
-  for (i = 0; i < 2; i++) {
-    s = t;
-    v = metalnames[i].substring(0, 1) + "|";
-    t = s + v;
-  }
-  s = t + "\n";
-  t = s + "        |";
-  for (i = 0; i < 2; i++) {
-    s = t;
-    v = metalnames[i].substring(1, 2) + "|";
-    t = s + v;
-  }
-  s = t + "\n";
-  t = s + "________|";
-  for (i = 0; i < 2; i++) {
-    s = t;
-    v = metalnames[i].substring(2, 3) + "|";
-    t = s + v;
-  }
-  for (i = 0; i < 2; i++) {
-    s = t + "\n";
-    v = chelatornames[i];
-    t = s + v + " |" + conavailable[i];
-  }
-  s = t;
-  t = s + "\n" + "-------------";
-  document.WMXC2.thearray.value = t;
+function loadnames() {
   document.WMXC2.CH1.value = chelatornames[0];
   document.WMXC2.CH2.value = chelatornames[1];
   document.WMXC2.MT1.value = metalnames[0];
   document.WMXC2.MT2.value = metalnames[1];
   document.WMXC2.MF1.value = metalnames[0];
   document.WMXC2.MF2.value = metalnames[1];
-}
-
-function getconstants() {
-  var i, j, num, numj;
-  var s;
-
-  //hyrdogen constants for the chelators
-  for (i = 0; i < 2; i++) {
-    num = i * 3 + 7;
-    s = mcd[num].substring(9, 16);
-    h1[i] = parseFloat(s);
-    s = mcd[num].substring(17, 24);
-    h2[i] = parseFloat(s);
-    s = mcd[num].substring(25, 32);
-    h3[i] = parseFloat(s);
-    s = mcd[num].substring(33, 40);
-    h4[i] = parseFloat(s);
-
-    //delta-hydrogen constants for the chelators
-
-    s = mcd[num].substring(41, 48);
-    dh1[i] = parseFloat(s);
-    s = mcd[num].substring(49, 56);
-    dh2[i] = parseFloat(s);
-    s = mcd[num].substring(57, 64);
-    dh3[i] = parseFloat(s);
-    s = mcd[num].substring(65, 72);
-    dh4[i] = parseFloat(s);
-  }
-
-  for (i = 0; i < 2; i++) {
-    num = i * 3 + 8;
-    for (j = 0; j < 2; j++) {
-      numj = num + j;
-      s = mcd[numj].substring(5, 12);
-      mc[j][i] = parseFloat(s); //metal#, chelator#
-      s = mcd[numj].substring(13, 20);
-      mhc[j][i] = parseFloat(s);
-      s = mcd[numj].substring(21, 28);
-      dmc[j][i] = parseFloat(s);
-      s = mcd[numj].substring(29, 36);
-      dmhc[j][i] = parseFloat(s);
-    }
-  }
 }
 
 function makekon() {
@@ -506,18 +474,11 @@ function makekd() {
   }
 }
 
-function updateDatabase(){
-  mcd = mcd_schoenmakers
-}
-
 function setup() {
-  getcnames();
-  getmnames();
-  getconavail();
-  loadthearray();
   tftoggle();
-  getconstants();
-  getvalences();
+  updateConstants();
+  loadnames();
+
 }
 
 function resetFields(...fields) {
@@ -797,7 +758,6 @@ function docalc() {
   var S10;
   var metal_names_string = [];
   collectvalues();
-  getconstants();
   conadjust();
   calcH();
   makekon();
@@ -904,6 +864,21 @@ function docalc() {
 
   var outputDiv = document.getElementById("outputDiv");
   outputDiv.replaceChildren();
+  var titleElement = document.createElement("div");
+    titleElement.className = "output-title";
+    text_hey = {
+      name: "Name",
+      totalamount: "Total",
+      freeamount: "Free",
+      bound: "-log10 (Free) ",
+    }
+    for (const key in text_hey) {
+      console.log(key)
+      var valueNode = document.createElement("span");
+      valueNode.textContent = text_hey[key];
+      titleElement.appendChild(valueNode);
+    }
+    outputDiv.appendChild(titleElement);
 
   for (var i = 0; i < result_array.length; i++) {
     var result = result_array[i];
@@ -912,10 +887,8 @@ function docalc() {
     var divElement = document.createElement("div");
     divElement.className = "output-div";
 
+
     for (var key in result) {
-      var wrapper = document.createElement("div");
-      wrapper.className = "wrapper";
-      divElement.appendChild(wrapper);
       var valueElement = document.createElement("div");
       valueElement.className = "output-value";
       if ( key !== "totalchelatoramount_component") {
@@ -925,7 +898,7 @@ function docalc() {
         ) {
           var components = result[key];
 
-          for (var j = 0; j < components.length; j++) {
+          for (var j = 1; j < components.length; j++) {
             var componentValueElement = document.createElement("div");
             for (const key in components[j]) {
               var componentValueNode = document.createElement("span");
@@ -934,24 +907,25 @@ function docalc() {
             }
             valueElement.appendChild(componentValueElement);
           }
-        } else {
-          var componentValueElement = document.createElement("div");
-          for (const keyi in result[key]) {
-            var componentValueNode = document.createElement("span");
-            componentValueNode.className = "first-row";
-            var content = "";
-            if (keyi === "pH" || keyi === "Ionic contribution [ABS]") {
-              content = keyi + ": ";
-            }
-            componentValueNode.textContent = content + result[key][keyi];
-            componentValueElement.appendChild(componentValueNode);
-          }
-          valueElement.appendChild(componentValueElement);
         }
+        // else {
+        //   var componentValueElement = document.createElement("div");
+        //   for (const keyi in result[key]) {
+        //     var componentValueNode = document.createElement("span");
+        //     componentValueNode.className = "first-row";
+        //     var content = "";
+        //     if (keyi === "pH" || keyi === "Ionic contribution [ABS]") {
+        //       content = keyi + ": ";
+        //     }
+        //     componentValueNode.textContent = content + result[key][keyi];
+        //     componentValueElement.appendChild(componentValueNode);
+        //   }
+        //   valueElement.appendChild(componentValueElement);
+        // }
       }
 
-      wrapper.appendChild(section);
-      wrapper.appendChild(valueElement);
+      divElement.appendChild(section);
+      divElement.appendChild(valueElement);
     }
 
     outputDiv.appendChild(divElement);

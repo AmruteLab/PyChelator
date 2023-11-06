@@ -28,6 +28,7 @@ body {
 #outputDiv {
   display: block !important;
   background-color: #5f7277;
+  margin-top: 1em;
 }
 
 .wrapper {
@@ -66,19 +67,22 @@ select {
 }
 
 .output-value span {
-  width: 100px !important;
+  width: 150px !important;
   display: inline-flex;
   margin-right: 10px;
   margin-bottom: 5px;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 .output-title span {
-  width: 100px !important;
+  width: 150px !important;
   display: inline-flex;
   margin-right: 10px;
   margin-bottom: 5px;
   font-weight: 800;
   font-size: large;
+  padding: 1em;
 }
 
 /* Table styles */

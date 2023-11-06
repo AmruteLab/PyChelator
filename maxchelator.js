@@ -202,30 +202,32 @@ function updateConstants() {
       var selectElement = document.getElementById("constants");
       selectElement.style.display = "none";
 
-      const constants = data[selectedOption];
-
-      Et = constants.Et;
-      Ei = constants.Ei;
-      h1 = constants.h1;
-      h2 = constants.h2;
-      h3 = constants.h3;
-      h4 = constants.h4;
-      dh1 = constants.dh1;
-      dh2 = constants.dh2;
-      dh3 = constants.dh3;
-      dh4 = constants.dh4;
-      mc = constants.mc;
-      dmc = constants.dmc;
-      mhc = constants.mhc;
-      dmhc = constants.dmhc;
-      VaC = constants.VaC;
-      VaM = constants.VaM;
+      constants_copy = JSON.parse(JSON.stringify(data[selectedOption]));
+      console.log(constants)
+      console.log(constants_copy)
+      Et = constants_copy.Et;
+      Ei = constants_copy.Ei;
+      h1 = constants_copy.h1;
+      h2 = constants_copy.h2;
+      h3 = constants_copy.h3;
+      h4 = constants_copy.h4;
+      dh1 = constants_copy.dh1;
+      dh2 = constants_copy.dh2;
+      dh3 = constants_copy.dh3;
+      dh4 = constants_copy.dh4;
+      mc = constants_copy.mc;
+      dmc = constants_copy.dmc;
+      mhc = constants_copy.mhc;
+      dmhc = constants_copy.dmhc;
+      VaC = constants_copy.VaC;
+      VaM = constants_copy.VaM;
   }
 }
 }
 
 
 function convertToUnit(value, selectedUnit) {
+  console.log(selectedUnit)
   switch (selectedUnit) {
     case "M":
       return value; // Already in M
@@ -757,6 +759,7 @@ function docalc() {
   var i, j;
   var S10;
   var metal_names_string = [];
+  updateConstants();
   collectvalues();
   conadjust();
   calcH();
@@ -766,7 +769,7 @@ function docalc() {
     name: "Name",
     totalamount: "Total",
     freeamount: "Free",
-    bound: "-log10 (Free) ",
+    bound: "Final pCa (-log10[free])",
     // pbound: "%Bound",
   });
 
@@ -776,14 +779,15 @@ function docalc() {
     document.WMXC2.AMF2.value = cleanfloat(freemetalamount[1]);
     for (i = 0; i < 2; i++) {
       if (totalmetalamount[i] > 0) {
+        console.log(unit_used)
         bound[i] = totalmetalamount[i] - freemetalamount[i];
         pbound[i] = (bound[i] / totalmetalamount[i]) * 100;
-        free_amount = convertToUnit(cleanfloat(freemetalamount[i]))
+        free_amount = convertToUnit(cleanfloat(freemetalamount[i]), unit_used)
         metal_names_string.push({
           name: metalnames[i],
           totalamount: cleanfloat(totalmetalamount[i]),
           freeamount: free_amount,
-          bound: -Math.log10(free_amount)
+          bound: convertToUnit(-Math.log10(free_amount), "M")
           // pbound: cleanfloat(pbound[i]),
         });
       }
@@ -798,12 +802,12 @@ function docalc() {
       if (freemetalamount[i] > 0) {
         bound[i] = totalmetalamount[i] - freemetalamount[i];
         pbound[i] = (bound[i] / totalmetalamount[i]) * 100;
-        free_amount = convertToUnit(cleanfloat(freemetalamount[i]))
+        free_amount = convertToUnit(cleanfloat(freemetalamount[i]), unit_used)
         metal_names_string.push({
           name: metalnames[i],
           totalamount: cleanfloat(totalmetalamount[i]),
           freeamount: free_amount,
-          bound: -Math.log10(free_amount)
+          bound: convertToUnit(-Math.log10(free_amount), "M")
           // pbound: cleanfloat(pbound[i]),
         });
       }
@@ -816,12 +820,12 @@ function docalc() {
     if (totalchelatoramount[i] > 0) {
       cbound[i] = totalchelatoramount[i] - freechelatoramount[i];
       cpbound[i] = (cbound[i] / totalchelatoramount[i]) * 100;
-      free_amount = convertToUnit(cleanfloat(freechelatoramount[i]))
+      free_amount = convertToUnit(cleanfloat(freechelatoramount[i]), unit_used)
       t.push({
         name: chelatornames[i],
-        totalamount: cleanfloat(totalchelatoramount[i]),
+        totalamount: convertToUnit(cleanfloat(totalchelatoramount[i]), unit_used),
         freeamount: free_amount,
-        bound: -Math.log10(free_amount)
+        bound: convertToUnit(-Math.log10(free_amount), "M")
         // pbound: cleanfloat(cpbound[i]),
       });
     }
@@ -851,6 +855,7 @@ function docalc() {
       }
     }
   }
+  console.log(t,totalchelatoramount_component )
   result_array.push({
     general_info: {
       pH: pH,
@@ -866,16 +871,15 @@ function docalc() {
   outputDiv.replaceChildren();
   var titleElement = document.createElement("div");
     titleElement.className = "output-title";
-    text_hey = {
+    titles = {
       name: "Name",
       totalamount: "Total",
       freeamount: "Free",
-      bound: "-log10 (Free) ",
+      bound: "Final pCa (-log10[free])",
     }
-    for (const key in text_hey) {
-      console.log(key)
+    for (const key in titles) {
       var valueNode = document.createElement("span");
-      valueNode.textContent = text_hey[key];
+      valueNode.textContent = titles[key];
       titleElement.appendChild(valueNode);
     }
     outputDiv.appendChild(titleElement);

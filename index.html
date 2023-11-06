@@ -14,6 +14,7 @@
         <tbody>
           <tr>
             <td colspan="4">
+              Find
               <input
                 name="TYPECALC"
                 value="F"
@@ -23,7 +24,7 @@
                 type="radio"
                 id="free_metals"
               />
-              <label for="free_metals">FIND FREE METAL(S) </label>
+              <label for="free_metals"> metal(s) </label>
               <input
                 name="TYPECALC"
                 type="radio"
@@ -32,7 +33,7 @@
                 type="radio"
                 id="total_metals"
               />
-              <label for="total_metals">FIND TOTAL METAL(S)</label>
+              <label for="total_metals"> total metals</label>
             </td>
           </tr>
           <tr>
@@ -41,7 +42,7 @@
               <select name="constantsSource" id="constantsSource" onchange="updateConstants()">
                 <option value="NIST"> NIST database #46 v8</option>
                 <option value="Schoenmakers" selected>Theo Schoenmakers' Chelator</option>
-                <option value="Custom">Or, write your own constants (see also:)</option>
+                <option value="Custom">Write your own constants</option>
               </select>
               <b>Select unit</b>
               <select name="unit_MT1" onchange="updateUnit('MT1')">
@@ -73,8 +74,8 @@
                 </div>
 
                 <div class="custom-field">
-                  <label for="customEi">Et:</label>
-                  <input type="text" id="customEi" placeholder="Et">
+                  <label for="customEi">Ei:</label>
+                  <input type="text" id="customEi" placeholder="Ei">
                 </div>
 
                 <div class="custom-field">
@@ -280,7 +281,7 @@
                   <span>Name</span>
                   <span>Total</span>
                   <span>Free</span>
-                  <span>-log10 (Free) </span>
+                  <span>Final pCa (-log10[free])</span>
                 </div>
               </div>
             </td>

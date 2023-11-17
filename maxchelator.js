@@ -119,7 +119,7 @@ KHML[1] = new Array(1);
 unit_used = "M";
 
 
-function submitConstants(){
+function submitConstants(downloadFile=true){
   Et = parseFloat(document.getElementById("customEt").value);
   Ei = parseFloat(document.getElementById("customEi").value);
   h1_values = document.getElementById("hydrogen1").value.split(",").map(value => value.trim());
@@ -185,26 +185,91 @@ function submitConstants(){
       [parseFloat(dmhc_values[2]), parseFloat(dmhc_values[3])]
   ]
 
-  VaC = [3,3]; //#of non zero hydrogen constants
-  VaM = [2,2]; //3rd character of metal name -> this needs to be calculated based on h1 values
+  VaC = [3,3];
+  VaM = [2,2];
+  if (downloadFile){
+    createAndDownloadConstants()
+
+  }
+  closeModal()
 }
-function updateConstants() {
+function createAndDownloadConstants(){
+  const jsonData = {
+    "CUSTOM": {
+      "Et": Et,
+      "Ei": Ei,
+      "h1": h1,
+      "h2": h2,
+      "h3": h3,
+      "h4": h4,
+      "dh1": dh1,
+      "dh2": dh2,
+      "dh3": dh3,
+      "dh4": dh4,
+      "mc": mc,
+      "dmc": dmc,
+      "mhc": mhc,
+      "dmhc": dmhc,
+      "VaC": VaC,
+      "VaM": VaM
+    }
+  };
+
+  // Convert the JSON object to a string
+  const jsonString = JSON.stringify(jsonData, null, 2);
+
+  // Create a Blob containing the JSON data
+  const blob = new Blob([jsonString], { type: 'application/json' });
+
+  // Create a download link
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'custom_data.json';
+
+  // Append the link to the document and trigger the download
+  document.body.appendChild(a);
+  a.click();
+
+  // Remove the link from the document
+  document.body.removeChild(a);
+}
+
+function openSecondModal() {
+  document.getElementById('modal2').style.display = 'block';
+  document.getElementById('overlay2').style.display = 'block';
+}
+
+function closeSecondModal() {
+  document.getElementById('modal2').style.display = 'none';
+  document.getElementById('overlay2').style.display = 'none';
+  const outputDiv = document.getElementById('output');
+  outputDiv.innerHTML = '';
+}
+
+function updateConstants(openModalBool = true) {
   var selectElement = document.getElementById("constantsSource");
   var selectedOption = selectElement.value;
 
   // Assuming you have selectedOption defined earlier
   if (selectedOption === "Custom") {
-    var selectElement = document.getElementById("constants");
-    selectElement.style.display = "block";
-  } else {
+    if (openModalBool == true){
+      openModal()
+    }
+    else {
+      submitConstants(downloadFile=false)
+    }
+
+  }
+  else if (selectedOption === "Upload"){
+    if(openModalBool){
+      openSecondModal()
+    }
+  }
+
+  else {
     // Load and parse the JSON file using jQuery
     if (selectedOption in data) {
-      var selectElement = document.getElementById("constants");
-      selectElement.style.display = "none";
-
       constants_copy = JSON.parse(JSON.stringify(data[selectedOption]));
-      console.log(constants)
-      console.log(constants_copy)
       Et = constants_copy.Et;
       Ei = constants_copy.Ei;
       h1 = constants_copy.h1;
@@ -225,9 +290,67 @@ function updateConstants() {
 }
 }
 
+function readFile() {
+
+  const fileInput = document.getElementById('fileInput');
+  const outputDiv = document.getElementById('output');
+
+  const file = fileInput.files[0];
+
+  if (file) {
+      const reader = new FileReader();
+
+      reader.onload = function (e) {
+        outputDiv.textContent = e.target.result;
+      };
+      reader.addEventListener("load", function () {console.log("LOADED NOW") }. false)
+
+      reader.onload = function(e) {
+        customData = JSON.parse(e.target.result);
+        console.log(customData)
+
+        // Assuming 'selectedOption' is a variable containing the selected option
+        if (customData && customData["CUSTOM"]) {
+          custom_constants_copy = JSON.parse(JSON.stringify(customData["CUSTOM"]));
+
+          // Assign values
+          Et = custom_constants_copy.Et;
+          Ei = custom_constants_copy.Ei;
+          h1 = custom_constants_copy.h1;
+          h2 = custom_constants_copy.h2;
+          h3 = custom_constants_copy.h3;
+          h4 = custom_constants_copy.h4;
+          dh1 = custom_constants_copy.dh1;
+          dh2 = custom_constants_copy.dh2;
+          dh3 = custom_constants_copy.dh3;
+          dh4 = custom_constants_copy.dh4;
+          mc = custom_constants_copy.mc;
+          dmc = custom_constants_copy.dmc;
+          mhc = custom_constants_copy.mhc;
+          dmhc = custom_constants_copy.dmhc;
+          VaC = custom_constants_copy.VaC;
+          VaM = custom_constants_copy.VaM;
+        closeSecondModal()
+
+
+        }
+        else {
+          outputDiv.textContent = 'Invalid file selected. Please ensure you choose the file downloaded during the creation of your custom constants.';
+        }
+
+
+      };
+
+      file_text = reader.readAsText(file);
+
+  } else {
+    outputDiv.textContent = 'Please select a file.';
+  }
+  console.log('sdfgsdgv')
+}
+
 
 function convertToUnit(value, selectedUnit) {
-  console.log(selectedUnit)
   switch (selectedUnit) {
     case "M":
       return value; // Already in M
@@ -332,6 +455,17 @@ function conadjust() {
     }
   }
 }
+// Function to open the modal
+function openModal() {
+  document.getElementById('modal1').style.display = 'block';
+  document.getElementById('overlay1').style.display = 'block';
+}
+
+// Function to close the modal
+function closeModal() {
+  document.getElementById('modal1').style.display = 'none';
+  document.getElementById('overlay1').style.display = 'none';
+}
 
 function calcH() {
   /* calculates the hydrogen ion concentration */
@@ -346,12 +480,12 @@ function calcH() {
 }
 
 function loadnames() {
-  document.WMXC2.CH1.value = chelatornames[0];
-  document.WMXC2.CH2.value = chelatornames[1];
-  document.WMXC2.MT1.value = metalnames[0];
-  document.WMXC2.MT2.value = metalnames[1];
-  document.WMXC2.MF1.value = metalnames[0];
-  document.WMXC2.MF2.value = metalnames[1];
+  document.getElementsByName("CH1")[0].value = chelatornames[0];
+  document.getElementsByName("CH2")[0].value = chelatornames[1];
+  document.getElementsByName("MT1")[0].value = metalnames[0];
+  document.getElementsByName("MT2")[0].value = metalnames[1];
+  document.getElementsByName("MF1")[0].value = metalnames[0];
+  document.getElementsByName("MF2")[0].value = metalnames[1];
 }
 
 function makekon() {
@@ -476,10 +610,42 @@ function makekd() {
   }
 }
 
+function updateDisplay() {
+  // Get references to the HTML elements
+  const nameElement = document.getElementById('name');
+  const totalElement = document.getElementById('total');
+  const freeElement = document.getElementById('free');
+  const pboundElement = document.getElementById('pbound');
+  const boundElement = document.getElementById('bound');
+  const finalpCaElement = document.getElementById('finalpCa');
+
+  // Get the state of each checkbox
+  const showName = document.getElementById('showName').checked;
+  const showTotal = document.getElementById('showTotal').checked;
+  const showFree = document.getElementById('showFree').checked;
+  const showPBound = document.getElementById('showPBound').checked;
+  const showBound = document.getElementById('showBound').checked;
+  const showFinalpCa = document.getElementById('showFinalpCa').checked;
+
+  // Update display based on checkbox state
+  nameElement.style.display = showName ? 'inline' : 'none';
+  totalElement.style.display = showTotal ? 'inline' : 'none';
+  freeElement.style.display = showFree ? 'inline' : 'none';
+  pboundElement.style.display = showPBound ? 'inline' : 'none';
+  boundElement.style.display = showBound ? 'inline' : 'none';
+  finalpCaElement.style.display = showFinalpCa ? 'inline' : 'none';
+}
+
+
 function setup() {
   tftoggle();
-  updateConstants();
+  updateConstants(openModalBool=false);
   loadnames();
+  updateDisplay();
+  const checkboxes = document.querySelectorAll('input[type=checkbox]');
+    checkboxes.forEach(function (checkbox) {
+        checkbox.addEventListener('change', updateDisplay);
+    });
 
 }
 
@@ -502,15 +668,16 @@ function enableFields(...fields) {
 }
 
 function tftoggle() {
-  const typeCalc = document.WMXC2.TYPECALC;
-  const amt1 = document.WMXC2.AMT1;
-  const amt2 = document.WMXC2.AMT2;
-  const amf1 = document.WMXC2.AMF1;
-  const amf2 = document.WMXC2.AMF2;
-  const ac1 = document.WMXC2.AC1;
-  const ac2 = document.WMXC2.AC2;
+  const freeMetals = document.getElementById("free_metals");
+  const totalMetals = document.getElementById("total_metals")
+  const amt1 = document.getElementById("AMT1");
+  const amt2 = document.getElementById("AMT2");
+  const amf1 = document.getElementById("AMF1");
+  const amf2 = document.getElementById("AMF2");
+  const ac1 = document.getElementById("AC1");
+  const ac2 = document.getElementById("AC2");
 
-  if (typeCalc[0].checked) {
+  if (freeMetals.checked) {
     resetFields(amf1, amf2);
     disableFields(amf1, amf2);
     setDefaultValue(amt1, "0");
@@ -518,7 +685,7 @@ function tftoggle() {
     enableFields(amt1, amt2);
   }
 
-  if (typeCalc[1].checked) {
+  if (totalMetals.checked) {
     resetFields(amt1, amt2);
     disableFields(amt1, amt2);
     setDefaultValue(amf1, "0");
@@ -532,26 +699,26 @@ function tftoggle() {
 
 function collectvalues() {
   var i;
-  pH = parseFloat(document.WMXC2.PH.value);
-  temperature = parseFloat(document.WMXC2.TM.value);
-  ionic = parseFloat(document.WMXC2.IO.value);
+  pH = parseFloat(document.getElementById("PH").value);
+  temperature = parseFloat(document.getElementById("TM").value);
+  ionic = parseFloat(document.getElementById("IO").value);
 
-  if (document.WMXC2.TYPECALC[0].checked) {
-    totalchelatoramount[0] = parseFloat(document.WMXC2.AC1.value);
-    totalchelatoramount[1] = parseFloat(document.WMXC2.AC2.value);
-    totalmetalamount[0] = parseFloat(document.WMXC2.AMT1.value);
-    totalmetalamount[1] = parseFloat(document.WMXC2.AMT2.value);
+  if (document.getElementById("free_metals").checked) {
+    totalchelatoramount[0] = parseFloat(document.getElementById("AC1").value);
+    totalchelatoramount[1] = parseFloat(document.getElementById("AC2").value);
+    totalmetalamount[0] = parseFloat(document.getElementById("AMT1").value);
+    totalmetalamount[1] = parseFloat(document.getElementById("AMT2").value);
     for (i = 0; i < 2; i++) {
       freechelatoramount[i] = 0;
       freemetalamount[i] = 0;
     }
   }
 
-  if (document.WMXC2.TYPECALC[1].checked) {
-    totalchelatoramount[0] = parseFloat(document.WMXC2.AC1.value);
-    totalchelatoramount[1] = parseFloat(document.WMXC2.AC2.value);
-    freemetalamount[0] = parseFloat(document.WMXC2.AMF1.value);
-    freemetalamount[1] = parseFloat(document.WMXC2.AMF2.value);
+  if (document.getElementById("total_metals").checked) {
+    totalchelatoramount[0] = parseFloat(document.getElementById("AC1").value);
+    totalchelatoramount[1] = parseFloat(document.getElementById("AC2").value);
+    freemetalamount[0] = parseFloat(document.getElementById("AMF1").value);
+    freemetalamount[1] = parseFloat(document.getElementById("AMF2").value);
     for (i = 0; i < 2; i++) {
       freechelatoramount[i] = 0;
       totalmetalamount[i] = 0;
@@ -759,7 +926,7 @@ function docalc() {
   var i, j;
   var S10;
   var metal_names_string = [];
-  updateConstants();
+  updateConstants(openModalBool=false);
   collectvalues();
   conadjust();
   calcH();
@@ -769,47 +936,100 @@ function docalc() {
     name: "Name",
     totalamount: "Total",
     freeamount: "Free",
-    bound: "Final pCa (-log10[free])",
-    // pbound: "%Bound",
+    bound: "Bound",
+    pbound: "%Bound",
+    finalpCa: "Final pCa (-log10[free])",
   });
+  const showName = document.getElementById('showName').checked;
+  const showTotal = document.getElementById('showTotal').checked;
+  const showFree = document.getElementById('showFree').checked;
+  const showPBound = document.getElementById('showPBound').checked;
+  const showBound = document.getElementById('showBound').checked;
+  const showFinalpCa = document.getElementById('showFinalpCa').checked;
+  const showKd = document.getElementById('showKd').checked;
+  const showLowLimit = document.getElementById('showLowLimit').checked;
+  const showHighLimit = document.getElementById('showHighLimit').checked;
 
-  if (document.WMXC2.TYPECALC[0].checked) {
+  if (document.getElementById("free_metals").checked) {
     docalcfree();
-    document.WMXC2.AMF1.value = cleanfloat(freemetalamount[0]);
-    document.WMXC2.AMF2.value = cleanfloat(freemetalamount[1]);
+    document.getElementById("AMF1").value = cleanfloat(freemetalamount[0]);
+    document.getElementById("AMF2").value = cleanfloat(freemetalamount[1]);
     for (i = 0; i < 2; i++) {
       if (totalmetalamount[i] > 0) {
-        console.log(unit_used)
         bound[i] = totalmetalamount[i] - freemetalamount[i];
         pbound[i] = (bound[i] / totalmetalamount[i]) * 100;
         free_amount = convertToUnit(cleanfloat(freemetalamount[i]), unit_used)
-        metal_names_string.push({
-          name: metalnames[i],
-          totalamount: cleanfloat(totalmetalamount[i]),
-          freeamount: free_amount,
-          bound: convertToUnit(-Math.log10(free_amount), "M")
-          // pbound: cleanfloat(pbound[i]),
-        });
+        const metalObject = {};
+
+        if (showName) {
+            metalObject.name = metalnames[i];
+        }
+
+        if (showTotal) {
+            metalObject.totalamount = cleanfloat(totalmetalamount[i]);
+        }
+
+        if (showFree) {
+            metalObject.freeamount = free_amount;
+        }
+
+        if (showBound) {
+            metalObject.bound = cleanfloat(bound[i]);
+        }
+
+        if (showPBound) {
+            metalObject.pbound = cleanfloat(pbound[i]);
+        }
+
+        if (showFinalpCa) {
+            metalObject.finalpCa = convertToUnit(-Math.log10(free_amount), "M");
+        }
+
+        if (Object.keys(metalObject).length > 0) {
+            metal_names_string.push(metalObject);
+        }
       }
     }
   }
 
-  if (document.WMXC2.TYPECALC[1].checked) {
+  if (document.getElementById("total_metals").checked) {
     docalctotal();
-    document.WMXC2.AMT1.value = cleanfloat(totalmetalamount[0]);
-    document.WMXC2.AMT2.value = cleanfloat(totalmetalamount[1]);
+    document.getElementById("AMT1").value = cleanfloat(totalmetalamount[0]);
+    document.getElementById("AMT2").value = cleanfloat(totalmetalamount[1]);
     for (i = 0; i < 2; i++) {
       if (freemetalamount[i] > 0) {
         bound[i] = totalmetalamount[i] - freemetalamount[i];
         pbound[i] = (bound[i] / totalmetalamount[i]) * 100;
         free_amount = convertToUnit(cleanfloat(freemetalamount[i]), unit_used)
-        metal_names_string.push({
-          name: metalnames[i],
-          totalamount: cleanfloat(totalmetalamount[i]),
-          freeamount: free_amount,
-          bound: convertToUnit(-Math.log10(free_amount), "M")
-          // pbound: cleanfloat(pbound[i]),
-        });
+        const metalObject = {};
+
+        if (showName) {
+            metalObject.name = metalnames[i];
+        }
+
+        if (showTotal) {
+            metalObject.totalamount = cleanfloat(totalmetalamount[i]);
+        }
+
+        if (showFree) {
+            metalObject.freeamount = free_amount;
+        }
+
+        if (showBound) {
+            metalObject.bound = cleanfloat(bound[i]);
+        }
+
+        if (showPBound) {
+            metalObject.pbound = cleanfloat(pbound[i]);
+        }
+        if (showFinalpCa) {
+          metalObject.finalpCa = convertToUnit(-Math.log10(free_amount), "M");
+      }
+
+        if (Object.keys(metalObject).length > 0) {
+            metal_names_string.push(metalObject);
+        }
+
       }
     }
   }
@@ -821,13 +1041,35 @@ function docalc() {
       cbound[i] = totalchelatoramount[i] - freechelatoramount[i];
       cpbound[i] = (cbound[i] / totalchelatoramount[i]) * 100;
       free_amount = convertToUnit(cleanfloat(freechelatoramount[i]), unit_used)
-      t.push({
-        name: chelatornames[i],
-        totalamount: convertToUnit(cleanfloat(totalchelatoramount[i]), unit_used),
-        freeamount: free_amount,
-        bound: convertToUnit(-Math.log10(free_amount), "M")
-        // pbound: cleanfloat(cpbound[i]),
-      });
+      const chelatorObject = {};
+
+      if (showName) {
+          chelatorObject.name = chelatornames[i];
+      }
+
+      if (showTotal) {
+          chelatorObject.totalamount = convertToUnit(cleanfloat(totalchelatoramount[i]), unit_used);
+      }
+
+      if (showFree) {
+          chelatorObject.freeamount = free_amount;
+      }
+
+      if (showBound) {
+          chelatorObject.bound = cleanfloat(cbound[i])
+      }
+
+      if (showPBound) {
+          chelatorObject.pbound = cleanfloat(cpbound[i]);
+      }
+      if (showFinalpCa) {
+        chelatorObject.finalpCa = convertToUnit(-Math.log10(free_amount), "M");
+    }
+
+      if (Object.keys(chelatorObject).length > 0) {
+          t.push(chelatorObject);
+      }
+
     }
   }
 
@@ -844,18 +1086,31 @@ function docalc() {
   for (x = 0; x < 2; x++) {
     if (totalchelatoramount[x] > 0) {
       for (y = 0; y < 2; y++) {
-        if (totalmetalamount[y] > 0) {
-          totalchelatoramount_component.push({
-            name: metalnames[y] + "-" + chelatornames[x],
-            Kd: cleanfloat(Kd[y][x]),
-            "Low Limit": cleanfloat(Kd[y][x] / S10),
-            "High Limit": cleanfloat(Kd[y][x] * S10),
-          });
+        if (totalmetalamount[y] > 0 && (showKd || showHighLimit || showLowLimit)) {
+          const chelatorAmountComponent = {};
+
+          chelatorAmountComponent.name = metalnames[y] + "-" + chelatornames[x];
+
+          if (showKd) {
+              chelatorAmountComponent.Kd = cleanfloat(Kd[y][x]);
+          }
+
+          if (showLowLimit) {
+              chelatorAmountComponent["Low Limit"] = cleanfloat(Kd[y][x] / S10);
+          }
+
+          if (showHighLimit) {
+              chelatorAmountComponent["High Limit"] = cleanfloat(Kd[y][x] * S10);
+          }
+
+          if (Object.keys(chelatorAmountComponent).length > 0) {
+              totalchelatoramount_component.push(chelatorAmountComponent);
+          }
+
         }
       }
     }
   }
-  console.log(t,totalchelatoramount_component )
   result_array.push({
     general_info: {
       pH: pH,
@@ -867,35 +1122,19 @@ function docalc() {
     totalchelatoramount_component: totalchelatoramount_component,
   });
 
-  var outputDiv = document.getElementById("outputDiv");
+  var outputDiv = document.getElementById("output-content");
   outputDiv.replaceChildren();
-  var titleElement = document.createElement("div");
-    titleElement.className = "output-title";
-    titles = {
-      name: "Name",
-      totalamount: "Total",
-      freeamount: "Free",
-      bound: "Final pCa (-log10[free])",
-    }
-    for (const key in titles) {
-      var valueNode = document.createElement("span");
-      valueNode.textContent = titles[key];
-      titleElement.appendChild(valueNode);
-    }
-    outputDiv.appendChild(titleElement);
 
   for (var i = 0; i < result_array.length; i++) {
     var result = result_array[i];
     var section = document.createElement("div");
 
     var divElement = document.createElement("div");
-    divElement.className = "output-div";
+    divElement.className = "output-section";
 
 
     for (var key in result) {
       var valueElement = document.createElement("div");
-      valueElement.className = "output-value";
-      if ( key !== "totalchelatoramount_component") {
         if (
           key === "metal_and_chelator"
 
@@ -904,12 +1143,26 @@ function docalc() {
 
           for (var j = 1; j < components.length; j++) {
             var componentValueElement = document.createElement("div");
+            componentValueElement.className = "output-rows";
             for (const key in components[j]) {
               var componentValueNode = document.createElement("span");
               componentValueNode.textContent = components[j][key];
               componentValueElement.appendChild(componentValueNode);
             }
-            valueElement.appendChild(componentValueElement);
+            divElement.appendChild(componentValueElement);
+          }
+        }
+        else if (key === "totalchelatoramount_component" && (showKd || showHighLimit || showLowLimit)) {
+          var components = result[key];
+          for (var j = 0; j < components.length; j++) {
+            var componentValueElement = document.createElement("div");
+            componentValueElement.className = "output-rows";
+            for (const key in components[j]) {
+              var componentValueNode = document.createElement("span");
+              componentValueNode.textContent = components[j][key];
+              componentValueElement.appendChild(componentValueNode);
+            }
+            divElement.appendChild(componentValueElement);
           }
         }
         // else {
@@ -926,7 +1179,6 @@ function docalc() {
         //   }
         //   valueElement.appendChild(componentValueElement);
         // }
-      }
 
       divElement.appendChild(section);
       divElement.appendChild(valueElement);
@@ -936,12 +1188,22 @@ function docalc() {
   }
 
 
-  //document.WMXC2.answer.value = s;
+  //document.getElementById("answer.value = s;
 }
 
 function downloadOutput() {
   var workbook = XLSX.utils.book_new();
   var worksheet_data = [[]];
+  showName = document.getElementById('showName').checked
+  showTotal = document.getElementById('showTotal').checked
+  showFree = document.getElementById('showFree').checked
+  showBound = document.getElementById('showBound').checked
+  showPBound = document.getElementById('showPBound').checked
+  showFinalpCa = document.getElementById('showFinalpCa').checked;
+  showKd = document.getElementById('showKd').checked
+  showLowLimit = document.getElementById('showLowLimit').checked
+  showHighLimit = document.getElementById('showHighLimit').checked
+
 
   for (var j = 0; j < result_array.length; j++) {
     worksheet_data.push(
@@ -958,30 +1220,63 @@ function downloadOutput() {
 
     for (var i = 0; i < result_array[j]["metal_and_chelator"].length; i++) {
       var metal_data = result_array[j]["metal_and_chelator"][i];
-      worksheet_data.push([
-        metal_data.name,
-        cleanfloat(metal_data.totalamount),
-        cleanfloat(metal_data.freeamount),
-        cleanfloat(metal_data.bound),
-        cleanfloat(metal_data.pbound),
-      ]);
+      const row = [];
+
+      if (showName) {
+          row.push(metal_data.name);
+      }
+
+      if (showTotal) {
+          row.push(cleanfloat(metal_data.totalamount));
+      }
+
+      if (showFree) {
+          row.push(cleanfloat(metal_data.freeamount));
+      }
+
+      if (showBound) {
+          row.push(cleanfloat(metal_data.bound));
+      }
+
+      if (showPBound) {
+          row.push(cleanfloat(metal_data.pbound));
+      }
+      if (showFinalpCa){
+          row.push(cleanfloat(metal_data.finalpCa));
+      }
+
+
+      if (row.length > 0) {
+          worksheet_data.push(row);
+      }
     }
 
     worksheet_data.push([]);
+    if (showKd || showLowLimit || showHighLimit){
+      for (
+        var i = 0;
+        i < result_array[j]["totalchelatoramount_component"].length;
+        i++
+      ) {
+        var component_data = result_array[j]["totalchelatoramount_component"][i];
+        const row = [];
+        row.push(component_data.name);
+        if (showKd) {
+            row.push(cleanfloat(component_data.Kd));
+        }
+        if (showLowLimit) {
+            row.push(cleanfloat(component_data["Low Limit"]));
+        }
+        if (showHighLimit) {
+            row.push(cleanfloat(component_data["High Limit"]));
+        }
+        if (row.length > 0) {
+            worksheet_data.push(row);
+        }
+      }
 
-    for (
-      var i = 0;
-      i < result_array[j]["totalchelatoramount_component"].length;
-      i++
-    ) {
-      var component_data = result_array[j]["totalchelatoramount_component"][i];
-      worksheet_data.push([
-        component_data.name,
-        cleanfloat(component_data.Kd),
-        cleanfloat(component_data["Low Limit"]),
-        cleanfloat(component_data["High Limit"]),
-      ]);
     }
+
   }
 
   var worksheet = XLSX.utils.aoa_to_sheet(worksheet_data);

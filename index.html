@@ -43,7 +43,14 @@
                 <option value="NIST"> NIST database #46 v8</option>
                 <option value="Schoenmakers" selected>Theo Schoenmakers' Chelator</option>
                 <option value="Custom">Write your own constants</option>
+                <option value="Upload"> Upload your own constants</option>
+
               </select>
+              <div id="fileInputContainer" style="display: none;">
+                <input type="file" id="fileInput" />
+                <button onclick="readFile()">Read File</button>
+                <div id="output"></div>
+            </div>
               <b>Select unit</b>
               <select name="unit_MT1" onchange="updateUnit('MT1')">
                 <option value="M">M</option>

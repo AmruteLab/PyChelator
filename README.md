@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <body>
-  <h1>Metal-Chelator Complex Calculator</h1>
+  <h1>PyChelator: a web tool for metal-chelator calculations</h1>
   <h2>Description:</h2>
-  <p>maxchelator.js is a custom JavaScript code that facilitates the calculation and display of chelator-metal complex information based on specified parameters. It serves as a helpful tool for researchers, scientists, and professionals working with metal-chelator interactions who need to obtain critical data related to these complexes.</p>
+  <p>Pychelator serves as a helpful tool for researchers, scientists, and professionals working with metal-chelator interactions who need to obtain critical data related to these complexes. It is developed by employing Python programming language and the well-established algorithms of <a href="https://somapp.ucdmc.ucdavis.edu/pharmacology/bers/maxchelator/" target="_blank">Maxchelator</a></p>
 
   <h2>Features:</h2>
   <ul>
@@ -15,8 +15,8 @@
   </ul>
 
   <h2>Flexibility and Customization:</h2>
-  <p>maxchelator.js is designed to be flexible, allowing users to adjust the code to fit their specific needs. Additionally, the library is complemented by a Python script (maxchelator.py) that users can utilize for further analysis and customization.</p>
-  <p>Users are encouraged to modify the Python script (maxchelator.py) according to their unique requirements, enabling them to integrate maxchelator.js with their existing Python-based workflows and projects.</p>
+  <p>PyChelator is designed to be flexible, allowing users to adjust the code to fit their specific needs. Additionally, the library is complemented by a Python script that users can utilize for further analysis and customization.</p>
+  <p>Users are encouraged to modify the Python script according to their unique requirements, enabling them to integrate maxchelator.js with their existing Python-based workflows and projects.</p>
 
   <h2>How to Use:</h2>
   <ol>
@@ -26,11 +26,11 @@
   </ol>
 
   <h2>Compatibility:</h2>
-  <p>maxchelator.js is designed to work with modern web browsers and supports JavaScript-based web applications. It is versatile and can be integrated into various web projects related to metal-chelator interactions.</p>
+  <p>PyChelator is designed to work with modern web browsers and supports JavaScript-based web applications. It is versatile and can be integrated into various web projects related to metal-chelator interactions.</p>
  <h2>Run the Script:</h2>
   <p>Try out the maxchelator.js script on Google Colab: <a href="https://colab.research.google.com/drive/11u4w6PD4U_Y3j8kLM70c_TW6IkRYz5OF?usp=sharing" target="_blank">Open in Google Colab</a></p>
   
   <h2>Disclaimer:</h2>
-  <p>While maxchelator.js aims to provide accurate and useful data, users are advised to validate the results obtained from the code with experimental data and consult domain experts for critical applications.</p>
+  <p>While PyChelator aims to provide accurate and useful data, users are advised to validate the results obtained from the code with experimental data and consult domain experts for critical applications.</p>
 </body>
 </html>

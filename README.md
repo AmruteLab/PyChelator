@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <body>
-  <h1>maxchelator.js - Chelator-Metal Complex Information Calculator</h1>
+  <h1>Metal-Chelator Complex Calculator</h1>
   <h2>Description:</h2>
   <p>maxchelator.js is a custom JavaScript code that facilitates the calculation and display of chelator-metal complex information based on specified parameters. It serves as a helpful tool for researchers, scientists, and professionals working with metal-chelator interactions who need to obtain critical data related to these complexes.</p>
 

@@ -8,20 +8,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chemical Constants Calculator</title>
     <style>
-        input[type="button"] {
-        padding: 10px 20px;
-        background-color: #35689a;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
+
+        .tooltip-container {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
         }
+
+        .tooltip-container .circle {
+            width: 15px;
+            height: 15px;
+            background-color: #3498db;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+
+        .tooltip-container .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: #3498db;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip-container:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        input[type="button"] {
+            padding: 10px 20px;
+            background-color: #35689a;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
         input[type="text"] {
             padding: 8px;
             border: 1px solid #ccc;
             border-radius: 4px;
             width: max-content;
-            }
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
@@ -286,13 +328,25 @@
                 <label for="deltaMetalChelator2">Enter four values for second delta metal-chelator constant:</label>
                 <input type="text" id="deltaMetalChelator2" placeholder="second metal-chelator constant 2.2">
               </div>
+
+              <div class="custom-field">
+                <label for="namesOfChelators">Enter Chelator Names:</label>
+                <input type="text" id="namesOfChelators" placeholder="ATP, EGTA">
+              </div>
+              <div class="custom-field">
+                <label for="namesOfMetals">Enter Metal Names:</label>
+                <input type="text" id="namesOfMetals" placeholder="Ca2, Mg2">
+              </div>
+
           <input value="Submit and Download" name="processit" onclick="submitConstants()" type="button">
+          <input value="Load Sample Constants" name="load" onclick="loadSampleConstants()" type="button">
           <button onclick="closeModal()">Close</button>
         </div>
       </td>
 
     <div id="left-panel">
-        <h2>PyChelator</h2>
+        <h2>PyChelator </h2>
+        <h3>metal-chelator calculations</h3>
         <div>
         <form name="WMXC2">
 
@@ -305,7 +359,7 @@
                 checked="checked"
                 id="free_metals"
             />
-            <label for="free_metals"> metal(s) </label>
+            <label for="free_metals"> free metal(s) </label>
             <input
                 name="TYPECALC"
                 value="T"
@@ -318,24 +372,30 @@
 
         </div>
         <div>
-            <span class="input-label"> Constants:</span>
+            <span class="input-label"> Constants:  <div class="tooltip-container">
+                <div class="circle">i</div>
+                <span class="tooltiptext">This is information!</span>
+            </div>
+        </span>
 
             <select name="constantsSource" id="constantsSource" onchange="updateConstants()">
-                <option value="NIST"> NIST database #46 v8</option>
-                <option value="Schoenmakers" selected>Theo Schoenmakers' Chelator</option>
-                <option value="Custom">Write your own constants</option>
-                <option value="Upload"> Upload your own constants</option>
+                <option value="NIST" selected> NIST database #46 v8</option>
+                <option value="Schoenmakers">Theo Schoenmakers' Chelator</option>
+                <option value="Custom">Write your constants</option>
+                <option value="Upload"> Upload your constants</option>
             </select>
         </div>
         <div>
-            <p>
-               <span class="input-label"> Unit:</span>
-               <span class="input-option"> <select name="unit_MT1" onchange="updateUnit('MT1')">
-                <option value="M">M</option>
-                <option value="mM">mM</option>
-                <option value="uM">uM</option>
-                <option value="nM">nM</option>
-            </select></span>
+        <p>
+            <span class="input-label"> Input unit:</span>
+            <span class="input-option">
+                <select id="unit_MT1" name="unit_MT1" onchange="updateUnit('MT1')">
+                    <option value="M">M</option>
+                    <option value="mM">mM</option>
+                    <option value="uM">uM</option>
+                    <option value="nM">nM</option>
+                </select>
+        </span>
 
             </p>
             <p>
@@ -353,13 +413,18 @@
                 </span>
             </p>
             <p>
-                <span class="input-label">Ionic:</span>
+                <span class="input-label">Ionic strength: <span class="tooltip-container">
+                        <span class="circle">i</span>
+                        <span class="tooltiptext">This is information!</span>
+                    </span>
+                </span>
                 <span class="input-option"><input name="IO" id="IO" value="0.165" type="text" />
-                    N</span>
+                    N
+                </span>
             </p>
         </div>
         <div class="options-checkbox">
-            Show:
+            Show in report:
             <label>
                 <input type="checkbox" checked id="showName"> Name
             </label>
@@ -376,7 +441,7 @@
                 <input type="checkbox" id="showBound"> Bound
             </label>
             <label>
-                <input type="checkbox" checked id="showFinalpCa"> Final pCa
+                <input type="checkbox" checked id="showFinalpCa"> -log10[free]
             </label>
             <label>
                 <input type="checkbox" id="showKd"> Kd
@@ -387,6 +452,8 @@
             <label>
                 <input type="checkbox" id="showHighLimit"> High Limit
             </label>
+            <label>
+                <input type="checkbox" id="showIonicStrength"> Ionic strength
         </div>
     </div>
     <div id="right-panel">
@@ -430,7 +497,7 @@
               <span id="free">Free</span>
               <span id="pbound">pbound</span>
               <span id="bound">bound</span>
-              <span id="finalpCa">Final pCa (-log10[free])</span>
+              <span id="finalpCa"> -log10[free]</span>
 
             </div>
             <div id="output-content">

@@ -119,6 +119,25 @@ KHML[1] = new Array(1);
 unit_used = "M";
 
 
+function loadSampleConstants(){
+  document.getElementById("customEt").value = data["NIST"]["Et"];
+  document.getElementById("customEi").value = data["NIST"]["Ei"];
+  document.getElementById("hydrogen1").value = data["NIST"]["h1"];
+  document.getElementById("hydrogen2").value = data["NIST"]["h2"];
+  document.getElementById("hydrogen3").value = data["NIST"]["h3"];
+  document.getElementById("hydrogen4").value = data["NIST"]["h4"];
+  document.getElementById("deltaH1").value = data["NIST"]["dh1"];
+  document.getElementById("deltaH2").value = data["NIST"]["dh2"];
+  document.getElementById("deltaH3").value = data["NIST"]["dh3"];
+  document.getElementById("deltaH4").value = data["NIST"]["dh4"];
+  document.getElementById("metal1").value = data["NIST"]["mc"];
+  document.getElementById("deltaMetal1").value = data["NIST"]["dmc"];
+  document.getElementById("metalchelator2").value = data["NIST"]["mhc"];
+  document.getElementById("deltaMetalChelator2").value = data["NIST"]["dmhc"];
+  document.getElementById("namesOfMetals").value = metalnames;
+  document.getElementById("namesOfChelators").value = chelatornames;
+}
+
 function submitConstants(downloadFile=true){
   Et = parseFloat(document.getElementById("customEt").value);
   Ei = parseFloat(document.getElementById("customEi").value);
@@ -187,6 +206,16 @@ function submitConstants(downloadFile=true){
 
   VaC = [3,3];
   VaM = [2,2];
+  chelator_values = document.getElementById("namesOfChelators").value.split(",").map(value =>
+    value.trim());
+  metal_values = document.getElementById("namesOfMetals").value.split(",").map(value =>
+      value.trim());
+  if (chelator_values.length == 2 ){
+     chelatornames = chelator_values
+  }
+  if(metal_values.length == 2){
+    metalnames = metal_values
+  }
   if (downloadFile){
     createAndDownloadConstants()
 
@@ -211,7 +240,9 @@ function createAndDownloadConstants(){
       "mhc": mhc,
       "dmhc": dmhc,
       "VaC": VaC,
-      "VaM": VaM
+      "VaM": VaM,
+      "chelatornames": chelatornames,
+      "metalnames": metalnames
     }
   };
 
@@ -330,6 +361,9 @@ function readFile() {
           dmhc = custom_constants_copy.dmhc;
           VaC = custom_constants_copy.VaC;
           VaM = custom_constants_copy.VaM;
+          chelatornames = custom_constants_copy.chelatornames;
+          metalnames = custom_constants_copy.metalnames;
+          loadnames()
         closeSecondModal()
 
 
@@ -346,7 +380,6 @@ function readFile() {
   } else {
     outputDiv.textContent = 'Please select a file.';
   }
-  console.log('sdfgsdgv')
 }
 
 
@@ -367,7 +400,7 @@ function convertToUnit(value, selectedUnit) {
 
 function updateUnit(fieldName) {
   // Get the selected unit
-  var selectedUnit = document.forms["WMXC2"]["unit_" + fieldName].value;
+  var selectedUnit = document.getElementById('unit_' + fieldName).value;
 
   // Update the unit displayed next to the input field
   var unitElements = document.getElementsByClassName("unit");
@@ -626,6 +659,7 @@ function updateDisplay() {
   const showPBound = document.getElementById('showPBound').checked;
   const showBound = document.getElementById('showBound').checked;
   const showFinalpCa = document.getElementById('showFinalpCa').checked;
+  const showIonicStrength = document.getElementById('showIonicStrength').checked;
 
   // Update display based on checkbox state
   nameElement.style.display = showName ? 'inline' : 'none';
@@ -938,7 +972,7 @@ function docalc() {
     freeamount: "Free",
     bound: "Bound",
     pbound: "%Bound",
-    finalpCa: "Final pCa (-log10[free])",
+    finalpCa: "-log10[free]",
   });
   const showName = document.getElementById('showName').checked;
   const showTotal = document.getElementById('showTotal').checked;
@@ -949,6 +983,8 @@ function docalc() {
   const showKd = document.getElementById('showKd').checked;
   const showLowLimit = document.getElementById('showLowLimit').checked;
   const showHighLimit = document.getElementById('showHighLimit').checked;
+  const showIonicStrength = document.getElementById('showIonicStrength').checked;
+
 
   if (document.getElementById("free_metals").checked) {
     docalcfree();
@@ -958,7 +994,7 @@ function docalc() {
       if (totalmetalamount[i] > 0) {
         bound[i] = totalmetalamount[i] - freemetalamount[i];
         pbound[i] = (bound[i] / totalmetalamount[i]) * 100;
-        free_amount = convertToUnit(cleanfloat(freemetalamount[i]), unit_used)
+        free_amount = cleanfloat(freemetalamount[i])
         const metalObject = {};
 
         if (showName) {
@@ -966,7 +1002,7 @@ function docalc() {
         }
 
         if (showTotal) {
-            metalObject.totalamount = cleanfloat(totalmetalamount[i]);
+            metalObject.totalamount = convertToUnit(cleanfloat(totalmetalamount[i], unit_used));
         }
 
         if (showFree) {
@@ -974,11 +1010,11 @@ function docalc() {
         }
 
         if (showBound) {
-            metalObject.bound = cleanfloat(bound[i]);
+            metalObject.bound = cleanfloat(bound[i]), unit_used
         }
 
         if (showPBound) {
-            metalObject.pbound = cleanfloat(pbound[i]);
+            metalObject.pbound = cleanfloat(pbound[i]), unit_used
         }
 
         if (showFinalpCa) {
@@ -1000,7 +1036,7 @@ function docalc() {
       if (freemetalamount[i] > 0) {
         bound[i] = totalmetalamount[i] - freemetalamount[i];
         pbound[i] = (bound[i] / totalmetalamount[i]) * 100;
-        free_amount = convertToUnit(cleanfloat(freemetalamount[i]), unit_used)
+        free_amount = cleanfloat(freemetalamount[i])
         const metalObject = {};
 
         if (showName) {
@@ -1008,7 +1044,7 @@ function docalc() {
         }
 
         if (showTotal) {
-            metalObject.totalamount = cleanfloat(totalmetalamount[i]);
+            metalObject.totalamount = convertToUnit(cleanfloat(totalmetalamount[i]), unit_used)
         }
 
         if (showFree) {
@@ -1040,7 +1076,7 @@ function docalc() {
     if (totalchelatoramount[i] > 0) {
       cbound[i] = totalchelatoramount[i] - freechelatoramount[i];
       cpbound[i] = (cbound[i] / totalchelatoramount[i]) * 100;
-      free_amount = convertToUnit(cleanfloat(freechelatoramount[i]), unit_used)
+      free_amount = cleanfloat(freechelatoramount[i])
       const chelatorObject = {};
 
       if (showName) {
@@ -1186,9 +1222,6 @@ function docalc() {
 
     outputDiv.appendChild(divElement);
   }
-
-
-  //document.getElementById("answer.value = s;
 }
 
 function downloadOutput() {
@@ -1203,20 +1236,24 @@ function downloadOutput() {
   showKd = document.getElementById('showKd').checked
   showLowLimit = document.getElementById('showLowLimit').checked
   showHighLimit = document.getElementById('showHighLimit').checked
+  showIonicStrength = document.getElementById('showIonicStrength').checked;
 
 
   for (var j = 0; j < result_array.length; j++) {
     worksheet_data.push(
       [],
-      ["pH", "", "temperature", "ionic", "Ionic contribution [ABS]"]
+      ["pH", "temperature",  "Ionic contribution [ABS]"].concat(showIonicStrength ? ["ionic"] : [])
     );
+
     var data = result_array[j]["general_info"];
     worksheet_data.push([
       data["pH"],
       data["temperature"],
-      data["ionic"],
       data["Ionic contribution [ABS]"],
     ]);
+    if (showIonicStrength) {
+      worksheet_data[worksheet_data.length - 1].push(data["ionic"]);
+    }
 
     for (var i = 0; i < result_array[j]["metal_and_chelator"].length; i++) {
       var metal_data = result_array[j]["metal_and_chelator"][i];
@@ -1242,7 +1279,14 @@ function downloadOutput() {
           row.push(cleanfloat(metal_data.pbound));
       }
       if (showFinalpCa){
+        if (i == 0){
+         row.push(metal_data.finalpCa);
+
+        }
+        else {
           row.push(cleanfloat(metal_data.finalpCa));
+
+        }
       }
 
 

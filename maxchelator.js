@@ -376,23 +376,23 @@ function readFile() {
       };
 
       file_text = reader.readAsText(file);
-
+      showPopup()
   } else {
     outputDiv.textContent = 'Please select a file.';
   }
 }
 
 
-function convertToUnit(value, selectedUnit) {
+function convertToM(value, selectedUnit) {
   switch (selectedUnit) {
     case "M":
       return value; // Already in M
     case "mM":
-      return value * 1000; // Convert to mM
+      return value / 1000; // Convert to mM
     case "uM":
-      return value * 1000000; // Convert to uM
+      return value / 1000000; // Convert to uM
     case "nM":
-      return value * 1000000000; // Convert to nM
+      return value / 1000000000; // Convert to nM
     default:
       return value; // Default to M
   }
@@ -738,10 +738,10 @@ function collectvalues() {
   ionic = parseFloat(document.getElementById("IO").value);
 
   if (document.getElementById("free_metals").checked) {
-    totalchelatoramount[0] = parseFloat(document.getElementById("AC1").value);
-    totalchelatoramount[1] = parseFloat(document.getElementById("AC2").value);
-    totalmetalamount[0] = parseFloat(document.getElementById("AMT1").value);
-    totalmetalamount[1] = parseFloat(document.getElementById("AMT2").value);
+    totalchelatoramount[0] = convertToM(parseFloat(document.getElementById("AC1").value), unit_used);
+    totalchelatoramount[1] = convertToM(parseFloat(document.getElementById("AC2").value), unit_used);
+    totalmetalamount[0] = convertToM(parseFloat(document.getElementById("AMT1").value), unit_used);
+    totalmetalamount[1] = convertToM(parseFloat(document.getElementById("AMT2").value), unit_used);
     for (i = 0; i < 2; i++) {
       freechelatoramount[i] = 0;
       freemetalamount[i] = 0;
@@ -749,34 +749,17 @@ function collectvalues() {
   }
 
   if (document.getElementById("total_metals").checked) {
-    totalchelatoramount[0] = parseFloat(document.getElementById("AC1").value);
-    totalchelatoramount[1] = parseFloat(document.getElementById("AC2").value);
-    freemetalamount[0] = parseFloat(document.getElementById("AMF1").value);
-    freemetalamount[1] = parseFloat(document.getElementById("AMF2").value);
+    totalchelatoramount[0] = convertToM(parseFloat(document.getElementById("AC1").value), unit_used);
+    totalchelatoramount[1] = convertToM(parseFloat(document.getElementById("AC2").value), unit_used);
+    freemetalamount[0] = convertToM(parseFloat(document.getElementById("AMF1").value), unit_used);
+    freemetalamount[1] = convertToM(parseFloat(document.getElementById("AMF2").value), unit_used);
     for (i = 0; i < 2; i++) {
       freechelatoramount[i] = 0;
       totalmetalamount[i] = 0;
     }
   }
-  totalchelatoramount = convertToM(totalchelatoramount, unit_used);
-  freemetalamount = convertToM(freemetalamount, unit_used);
-}
-
-function convertToM(values, selectedUnit) {
-  var conversionFactor = 1.0; // Default to M
-
-  if (selectedUnit === "mM") {
-    conversionFactor = 1.0e-3; // Convert mM to M
-  } else if (selectedUnit === "uM") {
-    conversionFactor = 1.0e-6; // Convert uM to M
-  } else if (selectedUnit === "nM") {
-    conversionFactor = 1.0e-9; // Convert nM to M
-  }
-
-  // Convert each value in the array to M
-  return values.map(function (value) {
-    return value * conversionFactor;
-  });
+  totalchelatoramount = totalchelatoramount
+  freemetalamount = freemetalamount
 }
 
 function docalcfree() {
@@ -1002,7 +985,7 @@ function docalc() {
         }
 
         if (showTotal) {
-            metalObject.totalamount = convertToUnit(cleanfloat(totalmetalamount[i], unit_used));
+            metalObject.totalamount = cleanfloat(totalmetalamount[i], unit_used);
         }
 
         if (showFree) {
@@ -1018,7 +1001,7 @@ function docalc() {
         }
 
         if (showFinalpCa) {
-            metalObject.finalpCa = convertToUnit(-Math.log10(free_amount), "M");
+            metalObject.finalpCa = -Math.log10(free_amount), "M";
         }
 
         if (Object.keys(metalObject).length > 0) {
@@ -1044,7 +1027,7 @@ function docalc() {
         }
 
         if (showTotal) {
-            metalObject.totalamount = convertToUnit(cleanfloat(totalmetalamount[i]), unit_used)
+            metalObject.totalamount = cleanfloat(totalmetalamount[i]), unit_used
         }
 
         if (showFree) {
@@ -1059,7 +1042,7 @@ function docalc() {
             metalObject.pbound = cleanfloat(pbound[i]);
         }
         if (showFinalpCa) {
-          metalObject.finalpCa = convertToUnit(-Math.log10(free_amount), "M");
+          metalObject.finalpCa = -Math.log10(free_amount), "M";
       }
 
         if (Object.keys(metalObject).length > 0) {
@@ -1084,7 +1067,7 @@ function docalc() {
       }
 
       if (showTotal) {
-          chelatorObject.totalamount = convertToUnit(cleanfloat(totalchelatoramount[i]), unit_used);
+          chelatorObject.totalamount = cleanfloat(totalchelatoramount[i]), unit_used;
       }
 
       if (showFree) {
@@ -1099,7 +1082,7 @@ function docalc() {
           chelatorObject.pbound = cleanfloat(cpbound[i]);
       }
       if (showFinalpCa) {
-        chelatorObject.finalpCa = convertToUnit(-Math.log10(free_amount), "M");
+        chelatorObject.finalpCa = -Math.log10(free_amount), "M";
     }
 
       if (Object.keys(chelatorObject).length > 0) {
@@ -1224,6 +1207,21 @@ function docalc() {
   }
 }
 
+function showPopup() {
+  var popupContainer = document.getElementById("popup-container");
+  popupContainer.style.display = "flex";
+
+  setTimeout(function() {
+    closePopup();
+  }, 3000); // Close the popup after 3 seconds
+}
+
+// Function to close the popup
+function closePopup() {
+  var popupContainer = document.getElementById("popup-container");
+  popupContainer.style.display = "none";
+}
+
 function downloadOutput() {
   var workbook = XLSX.utils.book_new();
   var worksheet_data = [[]];
@@ -1242,7 +1240,7 @@ function downloadOutput() {
   for (var j = 0; j < result_array.length; j++) {
     worksheet_data.push(
       [],
-      ["pH", "temperature",  "Ionic contribution [ABS]"].concat(showIonicStrength ? ["ionic"] : [])
+      ["pH", "temperature",  "Ionic contribution [ABS]"].concat(showIonicStrength ? ["Ionic strength"] : []),
     );
 
     var data = result_array[j]["general_info"];
@@ -1250,7 +1248,8 @@ function downloadOutput() {
       data["pH"],
       data["temperature"],
       data["Ionic contribution [ABS]"],
-    ]);
+    ], [],
+    );
     if (showIonicStrength) {
       worksheet_data[worksheet_data.length - 1].push(data["ionic"]);
     }
@@ -1312,7 +1311,13 @@ function downloadOutput() {
             row.push(cleanfloat(component_data["Low Limit"]));
         }
         if (showHighLimit) {
-            row.push(cleanfloat(component_data["High Limit"]));
+            if (i == 0){
+              row.push(component_data["High Limit"]);
+            }
+            else {
+              row.push(cleanfloat(component_data["High Limit"]));
+            }
+
         }
         if (row.length > 0) {
             worksheet_data.push(row);

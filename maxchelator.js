@@ -398,6 +398,21 @@ function convertToM(value, selectedUnit) {
   }
 }
 
+function convertToUnit(value, selectedUnit) {
+  switch (selectedUnit) {
+    case "M":
+      return value; // Already in M
+    case "mM":
+      return value * 1000; // Convert to mM
+    case "uM":
+      return value * 1000000; // Convert to uM
+    case "nM":
+      return value * 1000000000; // Convert to nM
+    default:
+      return value; // Default to M
+  }
+}
+
 function updateUnit(fieldName) {
   // Get the selected unit
   var selectedUnit = document.getElementById('unit_' + fieldName).value;
@@ -985,7 +1000,7 @@ function docalc() {
         }
 
         if (showTotal) {
-            metalObject.totalamount = cleanfloat(totalmetalamount[i], unit_used);
+            metalObject.totalamount = convertToUnit(cleanfloat(totalmetalamount[i]), unit_used);
         }
 
         if (showFree) {
@@ -993,15 +1008,15 @@ function docalc() {
         }
 
         if (showBound) {
-            metalObject.bound = cleanfloat(bound[i]), unit_used
+            metalObject.bound = cleanfloat(bound[i])
         }
 
         if (showPBound) {
-            metalObject.pbound = cleanfloat(pbound[i]), unit_used
+            metalObject.pbound = cleanfloat(pbound[i])
         }
 
         if (showFinalpCa) {
-            metalObject.finalpCa = -Math.log10(free_amount), "M";
+            metalObject.finalpCa = -Math.log10(free_amount);
         }
 
         if (Object.keys(metalObject).length > 0) {
@@ -1027,7 +1042,7 @@ function docalc() {
         }
 
         if (showTotal) {
-            metalObject.totalamount = cleanfloat(totalmetalamount[i]), unit_used
+            metalObject.totalamount = convertToUnit(cleanfloat(totalmetalamount[i]), unit_used)
         }
 
         if (showFree) {
@@ -1067,7 +1082,7 @@ function docalc() {
       }
 
       if (showTotal) {
-          chelatorObject.totalamount = cleanfloat(totalchelatoramount[i]), unit_used;
+        chelatorObject.totalamount = convertToUnit(cleanfloat(totalchelatoramount[i]), unit_used);
       }
 
       if (showFree) {
@@ -1082,7 +1097,7 @@ function docalc() {
           chelatorObject.pbound = cleanfloat(cpbound[i]);
       }
       if (showFinalpCa) {
-        chelatorObject.finalpCa = -Math.log10(free_amount), "M";
+        chelatorObject.finalpCa = -Math.log10(free_amount);
     }
 
       if (Object.keys(chelatorObject).length > 0) {

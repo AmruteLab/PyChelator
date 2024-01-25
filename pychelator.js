@@ -1266,7 +1266,7 @@ function downloadOutput() {
     ], [],
     );
     if (showIonicStrength) {
-      worksheet_data[worksheet_data.length - 1].push(data["ionic"]);
+      worksheet_data[worksheet_data.length - 2].push(data["ionic"]);
     }
 
     for (var i = 0; i < result_array[j]["metal_and_chelator"].length; i++) {

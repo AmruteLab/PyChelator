@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="pychelator.js"></script>
+    <link rel="stylesheet" href="pychelator.css">
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyChelator: Metal-chelator Calculations</title>
+</head>
+<body onLoad="setup()">
+<div id="container">
+    <td class="constants" id="constants" colspan="4" style="width: 100%;">
+        <!-- Second Modal -->
+        <div class="overlay" id="overlay2"></div>
+        <div class="modal" id="modal2">
+
+        <!-- File upload option -->
+        <div class="custom-field">
+            <label for="fileUpload">Upload Constants File:</label>
+            <div id="fileInputContainer">
+                <input type="file" id="fileInput" />
+                <div id="output"></div>
+            </div>
+        </div>
+
+        <input value="Submit" name="processit" onclick="readFile()" type="button">
+        <button onclick="closeSecondModal()">Close</button>
+        </div>
+        <!-- Modal -->
+
+        <div class="overlay" id="overlay1"></div>
+        <div class="modal" id="modal1">
+            <div class="custom-field">
+                <label for="customEt">Et:</label>
+                <input type="text" id="customEt" placeholder="Et">
+              </div>
+
+              <div class="custom-field">
+                <label for="customEi">Ei:</label>
+                <input type="text" id="customEi" placeholder="Ei">
+              </div>
+
+              <div class="custom-field">
+                <label for="hydrogen1">First hydrogen:</label>
+                <input type="text" id="hydrogen1" placeholder="first hydrogen constant for the chelators">
+              </div>
+
+              <div class="custom-field">
+                <label for="hydrogen2">Second hydrogen:</label>
+                <input type="text" id="hydrogen2" placeholder="second hydrogen constant for the chelators">
+              </div>
+
+              <div class="custom-field">
+                <label for="hydrogen3">Third hydrogen:</label>
+                <input type="text" id="hydrogen3" placeholder="third hydrogen constant for the chelators">
+              </div>
+
+              <div class="custom-field">
+                <label for="hydrogen4">Fourth hydrogen:</label>
+                <input type="text" id="hydrogen4" placeholder="fourth hydrogen constant for the chelators">
+              </div>
+
+              <div class="custom-field">
+                <label for="deltaH1">Delta H constant for H1:</label>
+                <input type="text" id="deltaH1" placeholder="delta H constant for H1">
+              </div>
+
+              <div class="custom-field">
+                <label for="deltaH2">Delta H constant for H2:</label>
+                <input type="text" id="deltaH2" placeholder="delta H constant for H2">
+              </div>
+
+              <div class="custom-field">
+                <label for="deltaH3">Delta H constant for H3:</label>
+                <input type="text" id="deltaH3" placeholder="delta H constant for H3">
+              </div>
+
+              <div class="custom-field">
+                <label for="deltaH4">Delta H constant for H4:</label>
+                <input type="text" id="deltaH4" placeholder="delta H constant for H4">
+              </div>
+
+              <div class="custom-field">
+                <label for="metal1">Enter four values for first metal-chelator constant:</label>
+                <input type="text" id="metal1" placeholder="eg., 3.69, 10.34, 4, 5.09">
+              </div>
+
+              <div class="custom-field">
+                <label for="deltaMetal1">Enter four values for delta metal-chelator constant:</label>
+                <input type="text" id="deltaMetal1" placeholder="eg., 3.69, 10.34, 4, 5.09">
+              </div>
+
+              <div class="custom-field">
+                <label for="metalchelator2">Enter four values for second metal-chelator constant:</label>
+                <input type="text" id="metalchelator2" placeholder="second metal-chelator constant 2.1">
+              </div>
+
+              <div class="custom-field">
+                <label for="deltaMetalChelator2">Enter four values for second delta metal-chelator constant:</label>
+                <input type="text" id="deltaMetalChelator2" placeholder="second metal-chelator constant 2.2">
+              </div>
+
+              <div class="custom-field">
+                <label for="namesOfChelators">Enter Chelator Names:</label>
+                <input type="text" id="namesOfChelators" placeholder="ATP, EGTA">
+              </div>
+              <div class="custom-field">
+                <label for="namesOfMetals">Enter Metal Names:</label>
+                <input type="text" id="namesOfMetals" placeholder="Ca2, Mg2">
+              </div>
+
+          <input value="Submit and Download" name="processit" onclick="submitConstants()" type="button">
+          <input value="Load Sample Constants" name="load" onclick="loadSampleConstants()" type="button">
+          <button onclick="closeModal()">Close</button>
+        </div>
+      </td>
+
+    <div id="left-panel">
+        <h2>PyChelator </h2>
+        <h3>Metal-chelator calculations</h3>
+        <div>
+        <form name="WMXC2">
+
+            Find:
+            <input
+                name="TYPECALC"
+                value="F"
+                onClick="tftoggle()"
+                type="radio"
+                checked="checked"
+                id="free_metals"
+            />
+            <label for="free_metals"> Free (M)  </label>
+            <input
+                name="TYPECALC"
+                value="T"
+                onClick="tftoggle()"
+                type="radio"
+                id="total_metals"
+            />
+            <label for="total_metals"> Total (M)</label>
+            </form>
+
+        </div>
+        <div>
+            <span class="input-label"> Constants:  <div class="tooltip-container">
+                <div class="circle">i</div>
+                <span class="tooltiptext">This is information!</span>
+            </div>
+        </span>
+
+            <select name="constantsSource" id="constantsSource" onchange="updateConstants()">
+                <option value="NIST" selected> NIST database #46 v8</option>
+                <option value="Schoenmakers">Theo Schoenmakers' Chelator</option>
+                <option value="Custom">Write your constants</option>
+                <option value="Upload"> Upload your constants</option>
+            </select>
+        </div>
+        <div>
+        <p>
+            <span class="input-label"> Input unit:</span>
+            <span class="input-option">
+                <select id="unit_MT1" name="unit_MT1" onchange="updateUnit('MT1')">
+                    <option value="M">M</option>
+                    <option value="mM">mM</option>
+                    <option value="uM">uM</option>
+                    <option value="nM">nM</option>
+                </select>
+        </span>
+
+            </p>
+            <p>
+                <span class="input-label">Temperature:</span>
+
+                <span class="input-option">
+                    <input name="TM" id="TM" value="37" type="text" /> C
+                </span>
+            </p>
+            <p>
+                <span class="input-label">pH:</span>
+
+                <span class="input-option">
+                    <input name="PH" id="PH" value="7.0" type="text" />
+                </span>
+            </p>
+            <p>
+                <span class="input-label">Ionic strength: <span class="tooltip-container">
+                        <span class="circle">i</span>
+                        <span class="tooltiptext">As described by Smith and Miller (1985) rather than formal ionic strength calculation!</span>
+                    </span>
+                </span>
+                <span class="input-option"><input name="IO" id="IO" value="0.165" type="text" />
+                    N
+                </span>
+            </p>
+        </div>
+        <div class="options-checkbox">
+            Show in report:
+            <label>
+                <input type="checkbox" checked id="showName"> Name
+            </label>
+            <label>
+                <input type="checkbox" checked id="showTotal"> Total
+            </label>
+            <label>
+                <input type="checkbox" checked id="showFree"> Free
+            </label>
+            <label>
+                <input type="checkbox" id="showPBound"> pBound
+            </label>
+            <label>
+                <input type="checkbox" id="showBound"> Bound
+            </label>
+            <label>
+                <input type="checkbox" checked id="showFinalpCa"> -log10[free]
+            </label>
+            <label>
+                <input type="checkbox" id="showKd"> Kd
+            </label>
+            <label>
+                <input type="checkbox" id="showLowLimit"> Low Limit
+            </label>
+            <label>
+                <input type="checkbox" id="showHighLimit"> High Limit
+            </label>
+            <label>
+                <input type="checkbox" id="showIonicStrength"> Ionic strength
+        </div>
+    </div>
+    <div id="right-panel">
+        <!-- Additional row -->
+        <div class="additional-row">
+                <div class="section">
+                    <div class="unit-container">
+                        <h3>Chelator</h3>
+                        <input value="ATP" name="CH1" size="7" maxlength="7" disabled="disabled" type="text" />
+                        <input name="AC1" id="AC1" size="10" maxlength="10" value="0" type="text" />
+                        <span class="unit">M</span>
+                        <br />
+                        <input value="EGTA" name="CH2" size="7" maxlength="7" disabled="disabled" type="text" />
+                        <input name="AC2" id="AC2" size="10" maxlength="10" value="0" type="text" />
+                        <span class="unit">M</span>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="unit-container">
+                        <h3>Free Metals</h3>
+                        <input value="Ca2" name="MT1" size="3" maxlength="3" disabled="disabled" type="text" />
+                        <input name="AMT1" size="10" maxlength="10" value="0" type="text" id="AMT1" />
+                        <span class="unit">M</span>
+                        <br />
+                        <input value="Mg2" name="MT2" size="3" maxlength="3" disabled="disabled" type="text" />
+                        <input name="AMT2" size="10" maxlength="10" value="0" type="text" id="AMT2" />
+                        <span class="unit">M</span>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="unit-container">
+                        <h3>Total Metals</h3>
+                        <input value="Ca2" name="MF1" size="3" maxlength="3" disabled="disabled" type="text" id="MF1" />
+                        <input name="AMF1" size="10" maxlength="10" value="0" type="text" id="AMF1" />
+                        <span class="unit">M</span>
+                        <br />
+                        <input value="Mg2" name="MF2" size="3" maxlength="3" disabled="disabled" type="text" id="MF2" />
+                        <input name="AMF2" size="10" maxlength="10" value="0" type="text" id="AMF2" />
+                        <span class="unit">M</span>
+                    </div>
+                </div>
+          </div>
+        <div id="outputDiv">
+            <form name="WMXC2">
+        </form>
+            <div class="output-title">
+              <span id="name">Name</span>
+              <span id="total">Total (M)</span>
+              <span id="free">Free (M) </span>
+              <span id="pbound">pbound</span>
+              <span id="bound">bound</span>
+              <span id="finalpCa"> -log10[free]</span>
+
+            </div>
+            <div id="output-content">
+
+
+            </div>
+    </div>
+    <div class="last-row">
+        <input
+        value="Calculate"
+        name="processit"
+        onClick="docalc()"
+        type="button"
+      />
+      <input
+        value="Download"
+        name="download"
+        onClick="downloadOutput()"
+        type="button"
+      />
+    </div>
+    <div id="popup-container" class="popup-container">
+        <div class="popup">
+          <span class="close" onclick="closePopup()">&times;</span>
+          <p>Constants Uploaded!</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

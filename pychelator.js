@@ -1000,7 +1000,7 @@ function docalc() {
         }
 
         if (showTotal) {
-            metalObject.totalamount = convertToUnit(cleanfloat(totalmetalamount[i]), unit_used);
+            metalObject.totalamount = cleanfloat(totalmetalamount[i]);
         }
 
         if (showFree) {
@@ -1042,7 +1042,7 @@ function docalc() {
         }
 
         if (showTotal) {
-            metalObject.totalamount = convertToUnit(cleanfloat(totalmetalamount[i]), unit_used)
+            metalObject.totalamount = cleanfloat(totalmetalamount[i])
         }
 
         if (showFree) {
@@ -1082,7 +1082,7 @@ function docalc() {
       }
 
       if (showTotal) {
-        chelatorObject.totalamount = convertToUnit(cleanfloat(totalchelatoramount[i]), unit_used);
+        chelatorObject.totalamount = cleanfloat(totalchelatoramount[i])
       }
 
       if (showFree) {

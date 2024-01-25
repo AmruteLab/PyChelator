@@ -1,0 +1,247 @@
+.additional-row {
+    display: flex;
+    justify-content: space-around;
+    background-color: #d9d9d9; /* Light grey background color for a professional look */
+
+}
+
+.section {
+    text-align: center;
+}
+
+.unit-container {
+    display: inline-block;
+}
+
+.popup-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    }
+
+    .popup {
+    background: #4CAF50; /* Green background color */
+    color: #fff; /* White text color */
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .close {
+    float: right;
+    cursor: pointer;
+    color: #fff; /* White text color for close button */
+    }
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.tooltip-container .circle {
+    width: 15px;
+    height: 15px;
+    background-color: #3498db;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+.tooltip-container .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #3498db;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip-container:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+input[type="button"] {
+    padding: 10px 20px;
+    background-color: #35689a;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: max-content;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    overflow: auto;
+    color: #495057;
+}
+
+#container {
+    display: flex;
+    overflow: auto;
+}
+
+#left-panel {
+    min-width: 400px;
+    min-height: 400px;
+    background-color: #35689a;
+    color: #ffffff;
+    padding: 20px;
+    box-sizing: border-box;
+    transition: width 0.3s;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+#right-panel {
+    flex: 1;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.input-label {
+    padding-top: 2rem;
+    display: inline-block;
+    width: 100px !important;
+}
+.input-option {
+    padding-top: 2rem;
+    display: inline-block;
+    width: 100px !important;
+}
+
+
+h2 {
+    color: white;
+}
+
+div {
+    margin-bottom: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #dee2e6;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #007bff;
+    color: #fff;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+input[type="text"] {
+    padding: 8px;
+    box-sizing: border-box;
+    width: 60px;
+}
+
+select {
+    padding: 8px;
+    box-sizing: border-box;
+}
+#outputDiv {
+    background-color: #f2f2f2; /* Grey background color */
+    max-height: 300px; /* Set a maximum height for the div */
+    min-height: 600px;
+    overflow-y: auto; /* Add a vertical scrollbar if needed */
+    }
+
+    .output-section {
+        border-bottom: 1px solid #ccc; /* Add a border between header and content */
+    }
+
+    .output-rows,
+    .output-title,
+    .output-rows {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    }
+    .output-rows span,
+    .output-title span,
+    .output-rows span {
+    flex: 1;
+    }
+
+    .custom-fields input {
+        width: -webkit-fill-available
+    }
+    .modal {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        z-index: 1000;
+        }
+
+        /* Style for the overlay/background behind the modal */
+        .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        }
+        #modal1 input[type="text"] {
+        width: max-content;
+        min-width: max-content;
+        box-sizing: border-box; /* Ensures that padding and border are included in the total width */
+    }
+    .options-checkbox label {
+    display: block;
+    margin-bottom: 10px;
+}

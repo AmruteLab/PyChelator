@@ -3,7 +3,7 @@
 <body>
   <h1>PyChelator: a web tool for metal-chelator calculations</h1>
   <h2>Description:</h2>
-  <p>Pychelator serves as a helpful tool for researchers, scientists, and professionals working with metal-chelator interactions who need to obtain critical data related to these complexes. PyChelator web tool is a modified version of the well-established <a href="[[https://somapp.ucdmc.ucdavis.edu/pharmacology/bers/maxchelator/](https://owamoosa.com/maxchelator/)](https://owamoosa.com/maxchelator/)" target="_blank">Maxchelator</a>, with new features explained below. PyChelator Colab is the Python-based Google Colaboratory notebook.</p>
+  <p>Pychelator serves as a helpful tool for researchers, scientists, and professionals working with metal-chelator interactions who need to obtain critical data related to these complexes. PyChelator web tool is a modified version of the well-established <a href="https://owamoosa.com/maxchelator/" target="_blank">Maxchelator</a>, with new features added as explained below. PyChelator Colab is the Python-based Google Colaboratory notebook that enables more flexibility and customization.</p>
 
   <h2>Features:</h2>
   <ul>

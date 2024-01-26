@@ -3,24 +3,25 @@
 <body>
   <h1>PyChelator: a web tool for metal-chelator calculations</h1>
   <h2>Description:</h2>
-  <p>Pychelator serves as a helpful tool for researchers, scientists, and professionals working with metal-chelator interactions who need to obtain critical data related to these complexes. It is developed by employing Python programming language and the well-established algorithms of <a href="https://somapp.ucdmc.ucdavis.edu/pharmacology/bers/maxchelator/" target="_blank">Maxchelator</a></p>
+  <p>Pychelator serves as a helpful tool for researchers, scientists, and professionals working with metal-chelator interactions who need to obtain critical data related to these complexes. PyChelator web tool is a modified version of the well-established <a href="https://somapp.ucdmc.ucdavis.edu/pharmacology/bers/maxchelator/" target="_blank">Maxchelator, with new features explained below. PyChelator Colab is the Python-based Google Colaboratory notebook.</a></p>
 
   <h2>Features:</h2>
   <ul>
-    <li><strong>Calculation of Chelator-Metal Complexes:</strong> PyChelator performs complex calculations involving chelators and metal ions, taking into account essential factors like pH, temperature, and ionic strength. This allows users to evaluate the binding of metal ions to chelators accurately.</li>
-    <li><strong>Structured Output:</strong> The code provides a comprehensive output, including the total amounts of chelators, free chelators, bound chelators, and the percentage of bound chelators. The results are structured in a way that makes them easy to understand.</li>
-    <li><strong>Dynamic HTML Display:</strong> PyChelator dynamically generates HTML elements, such as tables, to showcase the calculated data. This enables users to visualize the chelator-metal complex information in an organized and user-friendly manner directly on an HTML page.</li>
-     <li><strong>Downloadable Results:</strong> Users can download the calculated results in an Excel file format (xlsx) for further analysis and storage.</li>
+    <li><strong>Calculation of Chelator-Metal Complexes:</strong> PyChelator performs complex calculations involving chelators and metal ions, taking into account essential environmental parameters like pH, temperature, and ionic strength (the left panel).</li>
+     <li><strong>Selection of constants:</strong> Easily select the constants to be used from the dropdown in the left panel. Apart from the constants from NIST v.48 and Theo Schoenmakers’ Chelator, an option of manually writing the constants is available. The download option enables having a local json file of the entries which can be uploaded at a subsequent use. The presence of label fields for the metal and chelators enables the use of the calculator for any metal and chelators. </li>
+        <li><strong>Selection of input units:</strong> Convenient entry of chelator and metal concentrations in units ranging from Molar (M) to nano Molar range (M, mM, μM, and nM) (the left panel).</li>
+    <li><strong>Structured Output:</strong> The comprehensive output of parameters in Maxchelator was made selectable. An extra option for the logarithmic transformation of free metal concentration (-log10[free]) was included. The subsequent calculations are appended to the middle panel, downloadable as a single Excel file.</li>
 
   </ul>
 
   <h2>Flexibility and Customization:</h2>
   <p>PyChelator is designed to be flexible, allowing users to adjust the code to fit their specific needs. Additionally, the library is complemented by a Python script that users can utilize for further analysis and customization.</p>
   <p>Users are encouraged to modify the Python script according to their unique requirements, enabling them to integrate PyChelator with their existing Python-based workflows and projects.</p>
+  <p>Try out the PyChelator Colab on Google Colaboratory: <a href="https://colab.research.google.com/drive/11u4w6PD4U_Y3j8kLM70c_TW6IkRYz5OF?usp=sharing" target="_blank">Open in Google Colab</a></p>
 
   <h2>How to Use:</h2>
   <ol>
-    <li><strong>Set Parameters:</strong> Before performing calculations, set the necessary parameters, such as pH, temperature, and ionic strength. This ensures accurate results based on specific experimental conditions.</li>
+    <li><strong>Set Parameters:</strong> Before performing calculations, set the necessary parameters, such as pH, temperature, and ionic strength.</li>
     <li><strong>Execute Calculation:</strong> Invoke the provided docalc() function after setting the parameters. This function processes the data and stores the results in the totalchelatoramount_component array.</li>
     <li><strong>Display and Download the Results:</strong> Utilize the provided functions to dynamically create an HTML table and display the calculated chelator-metal complex information. The results will be presented in a clear and structured format for easy interpretation. Additionally, users can download the results as an Excel file for further analysis and storage.</li>
   </ol>
@@ -28,7 +29,7 @@
   <h2>Compatibility:</h2>
   <p>PyChelator is designed to work with modern web browsers and supports JavaScript-based web applications. It is versatile and can be integrated into various web projects related to metal-chelator interactions.</p>
  <h2>Run the Script:</h2>
-  <p>Try out the PyChelator on Google Colab: <a href="https://colab.research.google.com/drive/11u4w6PD4U_Y3j8kLM70c_TW6IkRYz5OF?usp=sharing" target="_blank">Open in Google Colab</a></p>
+  
   
   <h2>Disclaimer:</h2>
   <p>While PyChelator aims to provide accurate and useful data, users are advised to validate the results obtained from the code with experimental data and consult domain experts for critical applications.</p>

@@ -15,7 +15,7 @@
   </ul>
 
   <h2>Flexibility and Customization:</h2>
-  <p>PyChelator is designed to be flexible, allowing users to adjust the code to fit their specific needs. Additionally, the library is complemented by a Python script that users can utilize for further analysis and customization.</p>
+  <p>A Python script that users can utilize for further analysis and customization was composed.</p>
   <p>Users are encouraged to modify the Python script according to their unique requirements, enabling them to integrate PyChelator with their existing Python-based workflows and projects.</p>
   <p>Try out the PyChelator Colab on Google Colaboratory: <a href="https://colab.research.google.com/drive/11u4w6PD4U_Y3j8kLM70c_TW6IkRYz5OF?usp=sharing" target="_blank">Open in Google Colab</a></p>
 

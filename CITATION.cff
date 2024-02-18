@@ -1,4 +1,4 @@
-abstract: No description provided.
+abstract: PyChelator is a helpful tool for researchers, scientists, and professionals working with metal-chelator interactions who need to obtain critical data related to these complexes. As a web tool, it is a modified version of the well-established Maxchelator developed by Chris Patton and colleagues (Bers, Patton, and Nuccitelli, “A Practical Guide to the Preparation of Ca(2+) Buffers.”), with a few new features added as explained below. As a Python script, it offers more flexibility and customization, together with collaboration using the PyChelator Colab notebook.
 authors:
 - affiliation: Hannover Medical School
   family-names: Spahiu

@@ -2,6 +2,7 @@
 <html>
 <body>
   <h1>PyChelator: a web tool for metal-chelator calculations</h1>
+  <a href="https://doi.org/10.5281/zenodo.10674754"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.10674754.svg" alt="DOI"></a>
   <h2>Description:</h2>
   <p>Pychelator is a helpful tool for researchers, scientists, and professionals working with metal-chelator interactions who need to obtain critical data related to these complexes. As a web tool, it is a modified version of the well-established <a href="https://owamoosa.com/maxchelator/" target="_blank">Maxchelator</a> developed by Chris Patton and colleagues (Bers, Patton, and Nuccitelli, “A Practical Guide to the Preparation of Ca(2+) Buffers.”), with a few new features added as explained below. As a Python script, it offers more flexibility and customization, together with collaboration using the PyChelator Colab notebook.</p>
 

@@ -21,7 +21,6 @@
   <h2>Flexibility and Customization:</h2>
   <p>A Python script that users can utilize for further analysis and customization was composed.</p>
   <p>Users are encouraged to modify the Python script according to their unique requirements, enabling them to integrate PyChelator with their existing Python-based workflows and projects.</p>
-  <p>Try out the PyChelator Colab on Google Colaboratory: <a href="https://colab.research.google.com/drive/11u4w6PD4U_Y3j8kLM70c_TW6IkRYz5OF?usp=sharing" target="_blank">Open in Google Colab</a></p>
 
   <h2>Compatibility:</h2>
   <p>PyChelator is designed to work with modern web browsers and supports JavaScript-based web applications. It is versatile and can be integrated into various web projects related to metal-chelator interactions.</p>

@@ -1,8 +1,8 @@
 var chelatorNames = ['ATP', 'EGTA']
 var metalNames = ['Ca2', 'Mg2']
 var pH = 7.0;
-var temperature = 37; //initially set to constants temperature expected
-var ionicStrength = 0.165; //initially set to constants ionic strength expected
+var temperature = 25; //initially set to constants temperature expected
+var ionicStrength = 0.1; //initially set to constants ionic strength expected
 
 var data = {
   "NIST": {

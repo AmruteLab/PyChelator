@@ -32,83 +32,87 @@
 
         <div class="overlay" id="overlay1"></div>
         <div class="modal" id="modal1">
-            <div class="custom-field">
+
+               <div class="custom-field">            
+                 <label for="namesOfChelators">Ligands (L):</label>
+                 <input type="text" id="namesOfChelators" placeholder="L1,L2 (e.g., ATP, EGTA)">
+               </div>
+
+              <div class="custom-field">
+               <label for="namesOfMetals">Metals (M):</label>
+               <input type="text" id="namesOfMetals" placeholder="M1,M2 (e.g., Ca2, Mg2)">
+              </div>
+
+              <div class="custom-field">
                 <label for="customEt">Et:</label>
-                <input type="text" id="customEt" placeholder="Et">
+                <input type="text" id="customEt" placeholder="Temperature (e.g., 25)">
               </div>
 
               <div class="custom-field">
                 <label for="customEi">Ei:</label>
-                <input type="text" id="customEi" placeholder="Ei">
+                <input type="text" id="customEi" placeholder="Ionic Strength (e.g., 0.1)">
+              </div>
+              <hr>
+              <p>Enter comma-separated as: L1,L2</p>
+              <div class="custom-field">
+                <label for="hydrogen1">H1:</label>
+                <input type="text" id="hydrogen1" placeholder="e.g., 6.48,9.4">
               </div>
 
               <div class="custom-field">
-                <label for="hydrogen1">First hydrogen:</label>
-                <input type="text" id="hydrogen1" placeholder="first hydrogen constant for the chelators">
+                <label for="deltaH1">dH1:</label>
+                <input type="text" id="deltaH1" placeholder="e.g., 0.5,-5.6">
               </div>
 
               <div class="custom-field">
-                <label for="hydrogen2">Second hydrogen:</label>
-                <input type="text" id="hydrogen2" placeholder="second hydrogen constant for the chelators">
+                <label for="hydrogen2">H2:</label>
+                <input type="text" id="hydrogen2" placeholder="e.g., 3.99,8.79">
               </div>
 
               <div class="custom-field">
-                <label for="hydrogen3">Third hydrogen:</label>
-                <input type="text" id="hydrogen3" placeholder="third hydrogen constant for the chelators">
+                <label for="deltaH2">dH2:</label>
+                <input type="text" id="deltaH2" placeholder="e.g., -3.6,-5.6">
               </div>
 
               <div class="custom-field">
-                <label for="hydrogen4">Fourth hydrogen:</label>
-                <input type="text" id="hydrogen4" placeholder="fourth hydrogen constant for the chelators">
+                <label for="hydrogen3">H3:</label>
+                <input type="text" id="hydrogen3" placeholder="e.g., 1.9,2.7">
               </div>
 
               <div class="custom-field">
-                <label for="deltaH1">Delta H constant for H1:</label>
-                <input type="text" id="deltaH1" placeholder="delta H constant for H1">
+                <label for="deltaH3">dH3:</label>
+                <input type="text" id="deltaH3" placeholder="e.g., 2.3,-2.6">
               </div>
 
               <div class="custom-field">
-                <label for="deltaH2">Delta H constant for H2:</label>
-                <input type="text" id="deltaH2" placeholder="delta H constant for H2">
+                <label for="hydrogen4">H4:</label>
+                <input type="text" id="hydrogen4" placeholder="e.g., 0,0">
               </div>
 
               <div class="custom-field">
-                <label for="deltaH3">Delta H constant for H3:</label>
-                <input type="text" id="deltaH3" placeholder="delta H constant for H3">
+                <label for="deltaH4">dH4:</label>
+                <input type="text" id="deltaH4" placeholder="e.g., 0,0">
+              </div>
+              <hr>
+              <p>Enter comma-separated as: M1-L1,M1-L2,M2-L1,M2-L2</p>
+              <div class="custom-field">
+                <label for="metal1">ML:</label>
+                <input type="text" id="metal1" placeholder="e.g., 3.86,10.86,4.19,5.28">
               </div>
 
               <div class="custom-field">
-                <label for="deltaH4">Delta H constant for H4:</label>
-                <input type="text" id="deltaH4" placeholder="delta H constant for H4">
+                <label for="deltaMetal1">dML:</label>
+                <input type="text" id="deltaMetal1" placeholder="e.g., 3.2,-7.9,4.4,5.5">
               </div>
 
               <div class="custom-field">
-                <label for="metal1">Enter four values for first metal-chelator constant:</label>
-                <input type="text" id="metal1" placeholder="eg., 3.69, 10.34, 4, 5.09">
+                <label for="metalchelator2">MHL:</label>
+                <input type="text" id="metalchelator2" placeholder="e.g., 2.16,5.307,2.32,3.47">
               </div>
 
               <div class="custom-field">
-                <label for="deltaMetal1">Enter four values for delta metal-chelator constant:</label>
-                <input type="text" id="deltaMetal1" placeholder="eg., 3.69, 10.34, 4, 5.09">
-              </div>
-
-              <div class="custom-field">
-                <label for="metalchelator2">Enter four values for second metal-chelator constant:</label>
-                <input type="text" id="metalchelator2" placeholder="second metal-chelator constant 2.1">
-              </div>
-
-              <div class="custom-field">
-                <label for="deltaMetalChelator2">Enter four values for second delta metal-chelator constant:</label>
-                <input type="text" id="deltaMetalChelator2" placeholder="second metal-chelator constant 2.2">
-              </div>
-
-              <div class="custom-field">
-                <label for="namesOfChelators">Enter Chelator Names:</label>
-                <input type="text" id="namesOfChelators" placeholder="ATP, EGTA">
-              </div>
-              <div class="custom-field">
-                <label for="namesOfMetals">Enter Metal Names:</label>
-                <input type="text" id="namesOfMetals" placeholder="Ca2, Mg2">
+                <label for="deltaMetalChelator2">dMHL:</label>
+                <input type="text" id="deltaMetalChelator2" placeholder="e.g., 1.9,0,2.3,0">
               </div>
 
           <input value="Submit and Download" name="processit" onclick="submitConstants()" type="button">
@@ -147,15 +151,15 @@
         <div>
             <span class="input-label"> Constants:  <div class="tooltip-container">
                 <div class="circle">i</div>
-                <span class="tooltiptext">This is information!</span>
+                <span class="tooltiptext">Check Github repo for more</span>
             </div>
         </span>
 
             <select name="constantsSource" id="constantsSource" onchange="updateConstants()">
-                <option value="NIST" selected> NIST database #46 v8</option>
-                <option value="Schoenmakers">Theo Schoenmakers' Chelator</option>
-                <option value="Custom">Write your constants</option>
-                <option value="Upload"> Upload your constants</option>
+                <option value="NIST" selected> NIST #46 v8</option>
+                <option value="Schoenmakers">Chelator by Schoenmakers et al.</option>
+                <option value="Custom">Write custom constants</option>
+                <option value="Upload"> Upload constants</option>
             </select>
         </div>
         <div>
@@ -175,7 +179,7 @@
                 <span class="input-label">Temperature:</span>
 
                 <span class="input-option">
-                    <input name="TM" id="TM" value="37" type="text" /> C
+                    <input name="TM" id="TM" value="25" type="text" /> C
                 </span>
             </p>
             <p>
@@ -186,12 +190,12 @@
                 </span>
             </p>
             <p>
-                <span class="input-label">Ionic strength: <span class="tooltip-container">
+                <span class="input-label">Ionic strength (<i>I</i>e): <span class="tooltip-container">
                         <span class="circle">i</span>
-                        <span class="tooltiptext">As described by Smith and Miller (1985) rather than formal ionic strength calculation!</span>
+                        <span class="tooltiptext">Ionic equivalent <i>I</i>e=0.5&sum;C<sub>i</sub>|z<sub>i</i></sub>|</span>
                     </span>
                 </span>
-                <span class="input-option"><input name="IO" id="IO" value="0.165" type="text" />
+                <span class="input-option"><input name="IO" id="IO" value="0.1" type="text" />
                     N
                 </span>
             </p>
@@ -208,13 +212,16 @@
                 <input type="checkbox" checked id="showFree"> Free
             </label>
             <label>
+              <input type="checkbox" checked id="showFinalpCa"> -log<sub>10</sub>[free] <span class="tooltip-container">
+                <span class="circle">i</span>
+                <span class="tooltiptext">e.g., pCa for calcium</span>
+            </span>
+            </label>
+            <label>
                 <input type="checkbox" id="showPBound"> pBound
             </label>
             <label>
                 <input type="checkbox" id="showBound"> Bound
-            </label>
-            <label>
-                <input type="checkbox" checked id="showFinalpCa"> -log10[free]
             </label>
             <label>
                 <input type="checkbox" id="showKd"> Kd
@@ -280,7 +287,7 @@
               <span id="free">Free (M) </span>
               <span id="pbound">pbound</span>
               <span id="bound">bound</span>
-              <span id="finalpCa"> -log10[free]</span>
+              <span id="finalpCa"> -log<sub>10</sub>[free]</span>
 
             </div>
             <div id="output-content">

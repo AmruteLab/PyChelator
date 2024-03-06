@@ -35,6 +35,66 @@ var data = {
       "VaC": [3, 3],
       "VaM": [2, 2]
   },
+  "Fabiato": {
+    "Et": 20,
+    "Ei": 0.1,
+    "initialHydrogenConstants1": [6.956, 9.46],
+    "initialHydrogenConstants2": [4.101, 8.85],
+    "initialHydrogenConstants3": [0, 2.68],
+    "initialHydrogenConstants4": [0, 2],
+    "deltaHydrogenConstants1": [-0.5, -5.84],
+    "deltaHydrogenConstants2": [-4.1, -5.76],
+    "deltaHydrogenConstants3": [0, 0],
+    "deltaHydrogenConstants4": [0, 0],
+    "metalChelator": [
+        [3.993, 10.716],
+        [4.292, 5.21]
+    ],
+    "deltaMetalChelator": [
+        [-0.9, -8.38],
+        [2.6, 5.18]
+    ],
+    "mhc": [
+        [1.804, 5.33],
+        [2.698, 3.37]
+    ],
+    "dmhc": [
+        [-0.3, 0],
+        [3.4, 0]
+    ],
+    "VaC": [3, 3],
+    "VaM": [2, 2]
+  },
+  "Calcium": {
+    "Et": 20,
+    "Ei": 0.1,
+    "initialHydrogenConstants1": [6.495, 9.47],
+    "initialHydrogenConstants2": [4.06, 8.85],
+    "initialHydrogenConstants3": [0, 2.66],
+    "initialHydrogenConstants4": [0, 2],
+    "deltaHydrogenConstants1": [1.2, -5.8],
+    "deltaHydrogenConstants2": [0, -5.8],
+    "deltaHydrogenConstants3": [0, 0],
+    "deltaHydrogenConstants4": [0, 0],
+    "metalChelator": [
+        [3.7825, 10.97],
+        [4.0038, 5.21]
+    ],
+    "deltaMetalChelator": [
+        [-1, -8.1],
+        [4.5, 5]
+    ],
+    "mhc": [
+        [1.804,5.33],
+        [2.698,3.37]
+    ],
+    "dmhc": [
+        [0, 0],
+        [0, 0]
+    ],
+    "VaC": [3, 3],
+    "VaM": [2, 2]
+  },
   "Schoenmakers": {
       "Et": 37,
       "Ei": 0.165,

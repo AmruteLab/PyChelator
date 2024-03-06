@@ -44,23 +44,23 @@
               </div>
 
               <div class="custom-field">
-                <label for="customEt">Et:</label>
+                <label for="customEt">E<sub>t</sub>:</label>
                 <input type="text" id="customEt" placeholder="Temperature (e.g., 25)">
               </div>
 
               <div class="custom-field">
-                <label for="customEi">Ei:</label>
+                <label for="customEi">E<sub>i</sub>:</label>
                 <input type="text" id="customEi" placeholder="Ionic Strength (e.g., 0.1)">
               </div>
               <hr>
-              <p>Enter comma-separated as: L1,L2</p>
+              <p><b>Protonation constants (logK) & enthalpy (kcal/mol), comma-separated as: L1,L2</b></p>
               <div class="custom-field">
                 <label for="hydrogen1">H1:</label>
                 <input type="text" id="hydrogen1" placeholder="e.g., 6.48,9.4">
               </div>
 
               <div class="custom-field">
-                <label for="deltaH1">dH1:</label>
+                <label for="deltaH1">&#916H1:</label>
                 <input type="text" id="deltaH1" placeholder="e.g., 0.5,-5.6">
               </div>
 
@@ -70,7 +70,7 @@
               </div>
 
               <div class="custom-field">
-                <label for="deltaH2">dH2:</label>
+                <label for="deltaH2">&#916H2:</label>
                 <input type="text" id="deltaH2" placeholder="e.g., -3.6,-5.6">
               </div>
 
@@ -80,7 +80,7 @@
               </div>
 
               <div class="custom-field">
-                <label for="deltaH3">dH3:</label>
+                <label for="deltaH3">&#916H3:</label>
                 <input type="text" id="deltaH3" placeholder="e.g., 2.3,-2.6">
               </div>
 
@@ -90,18 +90,18 @@
               </div>
 
               <div class="custom-field">
-                <label for="deltaH4">dH4:</label>
+                <label for="deltaH4">&#916H4:</label>
                 <input type="text" id="deltaH4" placeholder="e.g., 0,0">
               </div>
               <hr>
-              <p>Enter comma-separated as: M1-L1,M1-L2,M2-L1,M2-L2</p>
+              <p><b>Stability constants (logK) & enthalpy (kcal/mol), as: M1-L1,M1-L2,M2-L1,M2-L2</b></p>
               <div class="custom-field">
                 <label for="metal1">ML:</label>
                 <input type="text" id="metal1" placeholder="e.g., 3.86,10.86,4.19,5.28">
               </div>
 
               <div class="custom-field">
-                <label for="deltaMetal1">dML:</label>
+                <label for="deltaMetal1">&#916ML:</label>
                 <input type="text" id="deltaMetal1" placeholder="e.g., 3.2,-7.9,4.4,5.5">
               </div>
 
@@ -111,7 +111,7 @@
               </div>
 
               <div class="custom-field">
-                <label for="deltaMetalChelator2">dMHL:</label>
+                <label for="deltaMetalChelator2">&#916MHL:</label>
                 <input type="text" id="deltaMetalChelator2" placeholder="e.g., 1.9,0,2.3,0">
               </div>
 
@@ -158,6 +158,8 @@
             <select name="constantsSource" id="constantsSource" onchange="updateConstants()">
                 <option value="NIST" selected> NIST #46 v8</option>
                 <option value="Schoenmakers">Chelator by Schoenmakers et al.</option>
+                <option value="Fabiato">SPECS by Fabiato</option>
+                <option value="Calcium">Calcium by Föhr et al.</option>
                 <option value="Custom">Write custom constants</option>
                 <option value="Upload"> Upload constants</option>
             </select>
@@ -233,7 +235,7 @@
                 <input type="checkbox" id="showHighLimit"> High Limit
             </label>
             <label>
-                <input type="checkbox" id="showIonicStrength"> Ionic strength
+                <input type="checkbox" id="showIonicStrength"> Ionic strength (<i>I</i>e)
         </div>
     </div>
     <div id="right-panel">

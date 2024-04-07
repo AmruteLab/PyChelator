@@ -3,7 +3,7 @@ var metalNames = ['Ca2', 'Mg2']
 var pH = 7.0;
 var temperature = 25; //initially set to constants temperature expected
 var ionicStrength = 0.1; //initially set to constants ionic strength expected
-
+var calculation_results = []
 var data = {
   "NIST": {
       "Et": 25,
@@ -774,15 +774,79 @@ function switchActiveState() {
   enableFields(ac1, ac2);
 }
 
+function ionicEquivalent(concentrations, charges, num_atoms) {
+  var sum_of_products = concentrations.reduce(function(sum, conc, index) {
+      return sum + Math.abs(conc) * Math.abs(charges[index]) * num_atoms[index];
+  }, 0);
+
+  var ionic_equivalent_value = 0.5 * sum_of_products;
+  return ionic_equivalent_value;
+}
+
+function closeIonicModal(){
+  document.getElementById("iePopup").style.display = "none";
+}
+
+function openIonicModal(){
+  document.getElementById("iePopup").style.display = "block";
+}
+
+function calculateAndStoreIonicEquivalent() {
+  var buffer_name = document.getElementById("m_buffer-name").value;
+  var ions = document.getElementById("m_ions").value.split(',');
+  var concentrations = document.getElementById("m_concentrations").value.split(',').map(parseFloat);
+  var charges = document.getElementById("m_charges").value.split(',');
+  var num_atoms = document.getElementById("m_num-atoms").value.split(',');
+
+  var ionic_equivalent_value = ionicEquivalent(concentrations, charges, num_atoms);
+
+  calculation_results.push({
+      "Buffer Name": buffer_name,
+      "Ions": ions.join(', '),
+      "Ionic Equivalent (mM)": ionic_equivalent_value,
+      "Concentrations (mM)": concentrations.join(', '),
+      "Charges": charges.join(', '),
+      "Number of Atoms": num_atoms.join(', ')
+  });
+
+  document.getElementById("m_result").innerHTML = "";
+  var result_output = document.createElement("div");
+  result_output.innerHTML = "<p>Buffer Name: " + buffer_name + "</p>" +
+        "<p>Ions: " + ions.join(', ') + "</p>" +
+        "<p>Ionic Equivalent: " + ionic_equivalent_value + " mM</p>" +
+        "<button onclick='closeModalAndChangeName(\"m\")'>Send to Pychelator</button>";
+  document.getElementById("m_result").appendChild(result_output);
+}
+
+function closeModalAndChangeName() {
+  calculateAndStoreIonicEquivalent()
+  if (calculation_results.length > 0) {
+        // Get the last element of calculation_results array
+        var lastElement = calculation_results[calculation_results.length - 1];
+
+        // Check if "Ionic Equivalent (mM)" property exists in the last element
+        if (lastElement.hasOwnProperty("Ionic Equivalent (mM)")) {
+            // Return the value of "Ionic Equivalent (mM)" property
+            document.getElementById("IO").value = lastElement["Ionic Equivalent (mM)"];
+        } else {
+            // If "Ionic Equivalent (mM)" property does not exist, return null or handle accordingly
+            return null;
+        }
+    }
+    closeIonicModal()
+}
+
 function collectValues() {
   var i;
   pH = parseFloat(document.getElementById("PH").value);
   temperature = parseFloat(document.getElementById("TM").value);
   ionicStrength = parseFloat(document.getElementById("IO").value);
+  AC1purity = parseFloat(document.getElementById("AC1purity").value) / 100;
+  AC2purity = parseFloat(document.getElementById("AC2purity").value) / 100;
 
   if (document.getElementById("free_metals").checked) {
-    totalChelatorAmount[0] = convertToM(parseFloat(document.getElementById("AC1").value), unit_used);
-    totalChelatorAmount[1] = convertToM(parseFloat(document.getElementById("AC2").value), unit_used);
+    totalChelatorAmount[0] = convertToM(parseFloat(document.getElementById("AC1").value) * AC1purity, unit_used);
+    totalChelatorAmount[1] = convertToM(parseFloat(document.getElementById("AC2").value)* AC2purity, unit_used);
     totalMetalAmount[0] = convertToM(parseFloat(document.getElementById("AMT1").value), unit_used);
     totalMetalAmount[1] = convertToM(parseFloat(document.getElementById("AMT2").value), unit_used);
     for (i = 0; i < 2; i++) {
@@ -792,8 +856,8 @@ function collectValues() {
   }
 
   if (document.getElementById("total_metals").checked) {
-    totalChelatorAmount[0] = convertToM(parseFloat(document.getElementById("AC1").value), unit_used);
-    totalChelatorAmount[1] = convertToM(parseFloat(document.getElementById("AC2").value), unit_used);
+    totalChelatorAmount[0] = convertToM(parseFloat(document.getElementById("AC1").value)* AC1purity, unit_used);
+    totalChelatorAmount[1] = convertToM(parseFloat(document.getElementById("AC2").value)* AC2purity, unit_used);
     freeMetalAmount[0] = convertToM(parseFloat(document.getElementById("AMF1").value), unit_used);
     freeMetalAmount[1] = convertToM(parseFloat(document.getElementById("AMF2").value), unit_used);
     for (i = 0; i < 2; i++) {
@@ -991,7 +1055,6 @@ function calculateAndDisplayFreeMetals(checkboxes, metal_names_string) {
         pbound[i] = (bound[i] / totalMetalAmount[i]) * 100;
         free_amount = cleanFloat(freeMetalAmount[i])
         const metalObject = {};
-
         if (checkboxes.showName) {
             metalObject.name = metalNames[i];
         }
@@ -1173,7 +1236,6 @@ function prepareTotalChelatorAmountComponent(checkboxes) {
       for (y = 0; y < 2; y++) {
         if (totalMetalAmount[y] > 0 && (checkboxes.showKd || checkboxes.showHighLimit || checkboxes.showLowLimit)) {
           const chelatorAmountComponent = {};
-
           chelatorAmountComponent.name = metalNames[y] + "-" + chelatorNames[x];
 
           if (checkboxes.showKd) {
@@ -1222,7 +1284,11 @@ function getCheckboxValues() {
     showKd: document.getElementById('showKd').checked,
     showLowLimit: document.getElementById('showLowLimit').checked,
     showHighLimit: document.getElementById('showHighLimit').checked,
-    showIonicStrength: document.getElementById('showIonicStrength').checked
+    showIonicStrength: document.getElementById('showIonicStrength').checked,
+    includeMetal1: document.getElementById('includeMetal1').checked,
+    includeMetal2: document.getElementById("includeMetal2").checked,
+    includeLigand1: document.getElementById("includeLigand1").checked,
+    includeLigand2: document.getElementById("includeLigand2").checked
   };
 }
 
@@ -1260,14 +1326,18 @@ function displayOutput(checkboxes) {
           var components = result[key];
 
           for (var j = 1; j < components.length; j++) {
+            if ((j === 1 && checkboxes.includeMetal1) || (j === 2 && checkboxes.includeMetal2) || (j === 3 && checkboxes.includeLigand1) || (j === 4 && checkboxes.includeLigand2)) {
               var componentValueElement = createOutputRow(components[j]);
               valueElement.appendChild(componentValueElement);
+            }
           }
       } else if (key === "totalChelatorAmount_component" && (checkboxes.showKd || checkboxes.showHighLimit || checkboxes.showLowLimit)) {
           var components = result[key];
           for (var j = 0; j < components.length; j++) {
+            if ((j === 1 && checkboxes.includeMetal1) || (j === 2 && checkboxes.includeMetal2) || (j === 3 && checkboxes.includeLigand1) || (j === 4 && checkboxes.includeLigand2)) {
               var componentValueElement = createOutputRow(components[j]);
               valueElement.appendChild(componentValueElement);
+            }
           }
       }
 
@@ -1305,6 +1375,24 @@ function closePopup() {
   var popupContainer = document.getElementById("popup-container");
   popupContainer.style.display = "none";
 }
+
+function downloadIeResults() {
+  // Create a new workbook
+  var wb = XLSX.utils.book_new();
+
+  // Convert calculation_results to worksheet
+  var ws = XLSX.utils.json_to_sheet(calculation_results);
+
+  // Add the worksheet to the workbook
+  XLSX.utils.book_append_sheet(wb, ws, "Results");
+
+  // Generate the filename with current timestamp
+  var filename = "ionic_equivalent_results_" + new Date().toISOString().slice(0,19).replace(/:/g, "-") + ".xlsx";
+
+  // Save the workbook to a file
+  XLSX.writeFile(wb, filename);
+}
+
 
 function downloadOutput() {
   var workbook = XLSX.utils.book_new();

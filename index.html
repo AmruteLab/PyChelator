@@ -34,92 +34,136 @@
         <div class="overlay" id="overlay1"></div>
         <div class="modal" id="modal1">
 
-               <div class="custom-field">            
-                 <label for="namesOfChelators">Ligands (L):</label>
-                 <input type="text" id="namesOfChelators" placeholder="L1,L2 (e.g., ATP, EGTA)">
-               </div>
-
+          <div class="input-container">
               <div class="custom-field">
-               <label for="namesOfMetals">Metals (M):</label>
-               <input type="text" id="namesOfMetals" placeholder="M1,M2 (e.g., Ca2, Mg2)">
+                  <label for="namesOfChelators">Ligands (L):</label>
+                  <input type="text" id="namesOfChelators" placeholder="L1,L2 (e.g., ATP, EGTA)">
               </div>
 
               <div class="custom-field">
-                <label for="customEt">E<sub>t</sub>:</label>
-                <input type="text" id="customEt" placeholder="Temperature (e.g., 25)">
+                  <label for="namesOfMetals">Metals (M):</label>
+                  <input type="text" id="namesOfMetals" placeholder="M1,M2 (e.g., Ca2, Mg2)">
+              </div>
+          </div>
+
+          <div class="input-container">
+              <div class="custom-field">
+                  <label for="customEt">E<sub>t</sub>:</label>
+                  <input type="text" id="customEt" placeholder="Temperature (e.g., 25)">
               </div>
 
               <div class="custom-field">
-                <label for="customEi">E<sub>i</sub>:</label>
-                <input type="text" id="customEi" placeholder="Ionic Strength (e.g., 0.1)">
+                  <label for="customEi">E<sub>i</sub>:</label>
+                  <input type="text" id="customEi" placeholder="Ionic Strength (e.g., 0.1)">
               </div>
-              <hr>
-              <p><b>Protonation constants (logK) & enthalpy (kcal/mol), comma-separated as: L1,L2</b></p>
+          </div>
+
+          <hr>
+
+          <div class="input-container">
               <div class="custom-field">
-                <label for="hydrogen1">H1:</label>
-                <input type="text" id="hydrogen1" placeholder="e.g., 6.48,9.4">
+                  <label for="hydrogen1">H1:</label>
+                  <input type="text" id="hydrogen1" placeholder="e.g., 6.48,9.4">
               </div>
 
               <div class="custom-field">
-                <label for="deltaH1">&#916H1:</label>
-                <input type="text" id="deltaH1" placeholder="e.g., 0.5,-5.6">
+                  <label for="deltaH1">&#916H1:</label>
+                  <input type="text" id="deltaH1" placeholder="e.g., 0.5,-5.6">
+              </div>
+          </div>
+
+          <div class="input-container">
+              <div class="custom-field">
+                  <label for="hydrogen2">H2:</label>
+                  <input type="text" id="hydrogen2" placeholder="e.g., 3.99,8.79">
               </div>
 
               <div class="custom-field">
-                <label for="hydrogen2">H2:</label>
-                <input type="text" id="hydrogen2" placeholder="e.g., 3.99,8.79">
+                  <label for="deltaH2">&#916H2:</label>
+                  <input type="text" id="deltaH2" placeholder="e.g., -3.6,-5.6">
+              </div>
+          </div>
+
+          <div class="input-container">
+              <div class="custom-field">
+                  <label for="hydrogen3">H3:</label>
+                  <input type="text" id="hydrogen3" placeholder="e.g., 1.9,2.7">
               </div>
 
               <div class="custom-field">
-                <label for="deltaH2">&#916H2:</label>
-                <input type="text" id="deltaH2" placeholder="e.g., -3.6,-5.6">
+                  <label for="deltaH3">&#916H3:</label>
+                  <input type="text" id="deltaH3" placeholder="e.g., 2.3,-2.6">
+              </div>
+          </div>
+
+          <div class="input-container">
+              <div class="custom-field">
+                  <label for="hydrogen4">H4:</label>
+                  <input type="text" id="hydrogen4" placeholder="e.g., 0,0">
               </div>
 
               <div class="custom-field">
-                <label for="hydrogen3">H3:</label>
-                <input type="text" id="hydrogen3" placeholder="e.g., 1.9,2.7">
+                  <label for="deltaH4">&#916H4:</label>
+                  <input type="text" id="deltaH4" placeholder="e.g., 0,0">
+              </div>
+          </div>
+
+          <hr>
+
+          <div class="input-container">
+              <div class="custom-field">
+                  <label for="metal1">ML:</label>
+                  <input type="text" id="metal1" placeholder="e.g., 3.86,10.86,4.19,5.28">
               </div>
 
               <div class="custom-field">
-                <label for="deltaH3">&#916H3:</label>
-                <input type="text" id="deltaH3" placeholder="e.g., 2.3,-2.6">
+                  <label for="deltaMetal1">&#916ML:</label>
+                  <input type="text" id="deltaMetal1" placeholder="e.g., 3.2,-7.9,4.4,5.5">
+              </div>
+          </div>
+
+          <div class="input-container">
+              <div class="custom-field">
+                  <label for="metalchelator2">MHL:</label>
+                  <input type="text" id="metalchelator2" placeholder="e.g., 2.16,5.307,2.32,3.47">
               </div>
 
               <div class="custom-field">
-                <label for="hydrogen4">H4:</label>
-                <input type="text" id="hydrogen4" placeholder="e.g., 0,0">
+                  <label for="deltaMetalChelator2">&#916MHL:</label>
+                  <input type="text" id="deltaMetalChelator2" placeholder="e.g., 1.9,0,2.3,0">
               </div>
-
-              <div class="custom-field">
-                <label for="deltaH4">&#916H4:</label>
-                <input type="text" id="deltaH4" placeholder="e.g., 0,0">
-              </div>
-              <hr>
-              <p><b>Stability constants (logK) & enthalpy (kcal/mol), as: M1-L1,M1-L2,M2-L1,M2-L2</b></p>
-              <div class="custom-field">
-                <label for="metal1">ML:</label>
-                <input type="text" id="metal1" placeholder="e.g., 3.86,10.86,4.19,5.28">
-              </div>
-
-              <div class="custom-field">
-                <label for="deltaMetal1">&#916ML:</label>
-                <input type="text" id="deltaMetal1" placeholder="e.g., 3.2,-7.9,4.4,5.5">
-              </div>
-
-              <div class="custom-field">
-                <label for="metalchelator2">MHL:</label>
-                <input type="text" id="metalchelator2" placeholder="e.g., 2.16,5.307,2.32,3.47">
-              </div>
-
-              <div class="custom-field">
-                <label for="deltaMetalChelator2">&#916MHL:</label>
-                <input type="text" id="deltaMetalChelator2" placeholder="e.g., 1.9,0,2.3,0">
-              </div>
+          </div>
 
           <input value="Submit and Download" name="processit" onclick="submitConstants()" type="button">
           <input value="Load Sample Constants" name="load" onclick="loadSampleConstants()" type="button">
           <button onclick="closeModal()">Close</button>
+
+
         </div>
+        <div id="iePopup" class="popup">
+          <div id="m_form-container">
+              <div class="ionic-modal">
+                  <h1>Ionic Equivalent Calculator</h1>
+                  <h2><i>I</i>e=0.5∑C<sub>i</sub>|z<sub>i</sub>|</h2>
+                  <label for="m_buffer-name">Buffer Name (optional):</label>
+                  <input type="text" id="m_buffer-name" placeholder="e.g., Buffer A">
+                  <label for="m_ions">Ions (comma-separated, optional):</label>
+                  <input type="text" id="m_ions" placeholder="e.g., Na+, Cl-">
+                  <label for="m_concentrations">Concentrations (comma-separated, mM):</label>
+                  <input type="text" id="m_concentrations" placeholder="e.g., 25, 25">
+                  <label for="m_charges">Charges (comma-separated):</label>
+                  <input type="text" id="m_charges" placeholder="e.g., 1, -1">
+                  <label for="m_num-atoms">Number of atoms (comma-separated):</label>
+                  <input type="text" id="m_num-atoms" placeholder="e.g., 1, 1">
+                  <button id="calculateBtn" onClick="calculateAndStoreIonicEquivalent()" type="button">Calculate</button>
+                  <div id="m_result"></div>
+                  <button id="downloadBtn" onClick="downloadIeResults()" type="button">Download All Results</button>
+              </div>
+          </div>
+          <button id="closePopupBtn" onClick="closeIonicModal()" class="popup-close">Close</button>
+      </div>
+
+
       </td>
 
     <div id="left-panel">
@@ -201,43 +245,60 @@
                 <span class="input-option"><input name="IO" id="IO" value="0.1" type="text" />
                     N
                 </span>
+                <button id="calculateIeBtn" onClick="openIonicModal()">Calculate Ie</button>
             </p>
         </div>
         <div class="options-checkbox">
-            Show in report:
-            <label>
-                <input type="checkbox" checked id="showName"> Name
-            </label>
-            <label>
-                <input type="checkbox" checked id="showTotal"> Total
-            </label>
-            <label>
-                <input type="checkbox" checked id="showFree"> Free
-            </label>
-            <label>
+          Show in report:
+          <label>
+              <input type="checkbox" checked id="showName"> Name
+          </label>
+          <label>
+              <input type="checkbox" checked id="showTotal"> Total
+          </label>
+          <label>
+              <input type="checkbox" checked id="showFree"> Free
+          </label>
+          <label>
               <input type="checkbox" checked id="showFinalpCa"> -log<sub>10</sub>[free] <span class="tooltip-container">
-                <span class="circle">i</span>
-                <span class="tooltiptext">e.g., pCa for calcium</span>
-            </span>
+                  <span class="circle">i</span>
+                  <span class="tooltiptext">e.g., pCa for calcium</span>
+              </span>
+          </label>
+          <label>
+              <input type="checkbox" id="showPBound"> pBound
+          </label>
+          <label>
+              <input type="checkbox" id="showBound"> Bound
+          </label>
+          <label>
+              <input type="checkbox" id="showKd"> Kd
+          </label>
+          <label>
+              <input type="checkbox" id="showLowLimit"> Low Limit
+          </label>
+          <label>
+              <input type="checkbox" id="showHighLimit"> High Limit
+          </label>
+          <label>
+              <input type="checkbox" id="showIonicStrength"> Ionic strength (<i>I</i>e)
+          </label>
+          <div class="metal-ligand-container">
+            <label>
+                <input type="checkbox" checked id="includeMetal1"> Metal1
             </label>
             <label>
-                <input type="checkbox" id="showPBound"> pBound
+                <input type="checkbox" checked id="includeMetal2"> Metal2
             </label>
             <label>
-                <input type="checkbox" id="showBound"> Bound
+                <input type="checkbox" checked id="includeLigand1"> Ligand1
             </label>
             <label>
-                <input type="checkbox" id="showKd"> Kd
+                <input type="checkbox" checked id="includeLigand2"> Ligand2
             </label>
-            <label>
-                <input type="checkbox" id="showLowLimit"> Low Limit
-            </label>
-            <label>
-                <input type="checkbox" id="showHighLimit"> High Limit
-            </label>
-            <label>
-                <input type="checkbox" id="showIonicStrength"> Ionic strength (<i>I</i>e)
         </div>
+      </div>
+
     </div>
     <div id="right-panel">
         <!-- Additional row -->
@@ -248,10 +309,12 @@
                         <input value="ATP" name="CH1" size="7" maxlength="7" disabled="disabled" type="text" />
                         <input name="AC1" id="AC1" size="10" maxlength="10" value="0" type="text" />
                         <span class="unit">M</span>
+                        <span class="purity"> with <input name="AC1purity" id="AC1purity" size="10" maxlength="10" value="100" type="text" /> % purity  </span>
                         <br />
                         <input value="EGTA" name="CH2" size="7" maxlength="7" disabled="disabled" type="text" />
                         <input name="AC2" id="AC2" size="10" maxlength="10" value="0" type="text" />
                         <span class="unit">M</span>
+                        <span class="purity"> with <input name="AC2purity" id="AC2purity" size="10" maxlength="10" value="100" type="text" /> % purity  </span>
                     </div>
                 </div>
 

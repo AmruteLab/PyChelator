@@ -49,12 +49,12 @@
           <div class="input-container">
               <div class="custom-field">
                   <label for="customEt">E<sub>t</sub>:</label>
-                  <input type="text" id="customEt" placeholder="Temperature (e.g., 25)">
+                  <input type="text" id="customEt" placeholder="Temperature (e.g., 25°C)">
               </div>
 
               <div class="custom-field">
                   <label for="customEi">E<sub>i</sub>:</label>
-                  <input type="text" id="customEi" placeholder="Ionic Strength (e.g., 0.1)">
+                  <input type="text" id="customEi" placeholder="Ionic Strength (e.g., 0.1 M)">
               </div>
           </div>
 
@@ -147,11 +147,11 @@
                   <h3><i>I</i>e=0.5∑C<sub>i</sub>|z<sub>i</sub>|</h3>
                   <label for="m_buffer-name">Buffer Name (optional):</label>
                   <input type="text" id="m_buffer-name" placeholder="e.g., Buffer A">
-                  <label for="m_ions">Ions (comma-separated, optional):</label>
-                  <input type="text" id="m_ions" placeholder="e.g., Na+, Cl-">
+                  <label for="m_ions">Ion Names (comma-separated, optional):</label>
+                  <input type="text" id="m_ions" placeholder="e.g., Na, Cl">
                   <label for="m_concentrations">Concentration of ions (comma-separated, mM):</label>
                   <input type="text" id="m_concentrations" placeholder="e.g., 25, 25">
-                  <label for="m_charges">Charge of ions (comma-separated):</label>
+                  <label for="m_charges">Charges of ions (comma-separated):</label>
                   <input type="text" id="m_charges" placeholder="e.g., 1, -1">
                   <label for="m_num-atoms">Number of atoms (comma-separated):</label>
                   <input type="text" id="m_num-atoms" placeholder="e.g., 1, 1">
@@ -226,7 +226,7 @@
                 <span class="input-label">Temperature:</span>
 
                 <span class="input-option">
-                    <input name="TM" id="TM" value="25" type="text" /> C
+                    <input name="TM" id="TM" value="25" type="text" /> °C
                 </span>
             </p>
             <p>
@@ -242,7 +242,7 @@
                         <span class="tooltiptext">Ionic equivalent <i>I</i>e=0.5&sum;C<sub>i</sub>|z<sub>i</i></sub>|</span>
                     </span>
                 </span>
-                <span class="input-option"><input name="IO" id="IO" value="0.1" type="text" />
+                <span class="input-option"><input name="IO" id="IO" value="100" type="text" />
                     mM
                 </span>
                 <button id="calculateIeBtn" onClick="openIonicModal()">Calculate <i>I</i>e</button>

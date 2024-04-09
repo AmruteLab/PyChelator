@@ -840,7 +840,7 @@ function collectValues() {
   var i;
   pH = parseFloat(document.getElementById("PH").value);
   temperature = parseFloat(document.getElementById("TM").value);
-  ionicStrength = parseFloat(document.getElementById("IO").value);
+  ionicStrength = parseFloat(document.getElementById("IO").value) / 1000;
   AC1purity = parseFloat(document.getElementById("AC1purity").value) / 100;
   AC2purity = parseFloat(document.getElementById("AC2purity").value) / 100;
 

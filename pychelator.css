@@ -114,6 +114,15 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
+    .popup-upload {
+        background: #4CAF50;
+        color: #495057; /* White text color */
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
     .close {
     float: right;
     cursor: pointer;

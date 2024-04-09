@@ -1,5 +1,5 @@
 var chelatorNames = ['ATP', 'EGTA']
-var metalNames = ['Ca2', 'Mg2']
+var metalNames = ['Ca²⁺', 'Mg²⁺']
 var pH = 7.0;
 var temperature = 25; //initially set to constants temperature expected
 var ionicStrength = 0.1; //initially set to constants ionic strength expected

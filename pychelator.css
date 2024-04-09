@@ -39,7 +39,7 @@
 }
 
 .popup {
-    width: 80%;
+    width: 30%;
     margin: 0 auto;
     background-color: white;
     display: none;
@@ -308,7 +308,7 @@ select {
         width: -webkit-fill-available
     }
     .modal {
-        width: 80%;
+        width: 50%;
         margin: 0 auto;
         background-color: #f4f4f4;
         display: none;

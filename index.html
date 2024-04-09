@@ -42,7 +42,7 @@
 
               <div class="custom-field">
                   <label for="namesOfMetals">Metals (M):</label>
-                  <input type="text" id="namesOfMetals" placeholder="M1,M2 (e.g., Ca2, Mg2)">
+                  <input type="text" id="namesOfMetals" placeholder="M1,M2 (e.g., Ca²⁺, Mg²⁺)">
               </div>
           </div>
 
@@ -59,7 +59,7 @@
           </div>
 
           <hr>
-
+          <p><b>Protonation constants (logK) & enthalpy (kcal/mol), comma-separated as: L1,L2</b></p>
           <div class="input-container">
               <div class="custom-field">
                   <label for="hydrogen1">H1:</label>
@@ -109,7 +109,7 @@
           </div>
 
           <hr>
-
+          <p><b>Stability constants (logK) & enthalpy (kcal/mol), as: M1-L1,M1-L2,M2-L1,M2-L2</b></p>
           <div class="input-container">
               <div class="custom-field">
                   <label for="metal1">ML:</label>
@@ -144,14 +144,14 @@
           <div id="m_form-container">
               <div class="ionic-modal">
                   <h1>Ionic Equivalent Calculator</h1>
-                  <h2><i>I</i>e=0.5∑C<sub>i</sub>|z<sub>i</sub>|</h2>
+                  <h3><i>I</i>e=0.5∑C<sub>i</sub>|z<sub>i</sub>|</h3>
                   <label for="m_buffer-name">Buffer Name (optional):</label>
                   <input type="text" id="m_buffer-name" placeholder="e.g., Buffer A">
                   <label for="m_ions">Ions (comma-separated, optional):</label>
                   <input type="text" id="m_ions" placeholder="e.g., Na+, Cl-">
-                  <label for="m_concentrations">Concentrations (comma-separated, mM):</label>
+                  <label for="m_concentrations">Concentration of ions (comma-separated, mM):</label>
                   <input type="text" id="m_concentrations" placeholder="e.g., 25, 25">
-                  <label for="m_charges">Charges (comma-separated):</label>
+                  <label for="m_charges">Charge of ions (comma-separated):</label>
                   <input type="text" id="m_charges" placeholder="e.g., 1, -1">
                   <label for="m_num-atoms">Number of atoms (comma-separated):</label>
                   <input type="text" id="m_num-atoms" placeholder="e.g., 1, 1">
@@ -237,7 +237,7 @@
                 </span>
             </p>
             <p>
-                <span class="input-label">Ionic strength (<i>I</i>e): <span class="tooltip-container">
+                <span class="input-label">Ionic (<i>I</i>e): <span class="tooltip-container">
                         <span class="circle">i</span>
                         <span class="tooltiptext">Ionic equivalent <i>I</i>e=0.5&sum;C<sub>i</sub>|z<sub>i</i></sub>|</span>
                     </span>
@@ -245,7 +245,7 @@
                 <span class="input-option"><input name="IO" id="IO" value="0.1" type="text" />
                     mM
                 </span>
-                <button id="calculateIeBtn" onClick="openIonicModal()">Calculate Ie</button>
+                <button id="calculateIeBtn" onClick="openIonicModal()">Calculate <i>I</i>e</button>
             </p>
         </div>
         <div class="options-checkbox">
@@ -265,7 +265,23 @@
                   <span class="tooltiptext">e.g., pCa for calcium</span>
               </span>
           </label>
-          <label>
+          <div class="metal-ligand-container">
+            <label>
+                <input type="checkbox" checked id="includeMetal1"> Metal1 (e.g. Ca²⁺)
+            </label>
+            <label>
+                <input type="checkbox" checked id="includeMetal2"> Metal2 (e.g. Mg²⁺)
+            </label>
+            <label>
+                <input type="checkbox" checked id="includeLigand1"> Ligand1 (e.g. ATP)
+            </label>
+            <label>
+                <input type="checkbox" checked id="includeLigand2"> Ligand2 (e.g. EGTA)
+            </label>
+            <label>
+              <input type="checkbox" id="showIonicStrength"> Ionic strength (<i>I</i>e)
+            </label>
+            <label>
               <input type="checkbox" id="showPBound"> pBound
           </label>
           <label>
@@ -280,22 +296,6 @@
           <label>
               <input type="checkbox" id="showHighLimit"> High Limit
           </label>
-          <label>
-              <input type="checkbox" id="showIonicStrength"> Ionic strength (<i>I</i>e)
-          </label>
-          <div class="metal-ligand-container">
-            <label>
-                <input type="checkbox" checked id="includeMetal1"> Metal1
-            </label>
-            <label>
-                <input type="checkbox" checked id="includeMetal2"> Metal2
-            </label>
-            <label>
-                <input type="checkbox" checked id="includeLigand1"> Ligand1
-            </label>
-            <label>
-                <input type="checkbox" checked id="includeLigand2"> Ligand2
-            </label>
         </div>
       </div>
 
@@ -309,23 +309,28 @@
                         <input value="ATP" name="CH1" size="7" maxlength="7" disabled="disabled" type="text" />
                         <input name="AC1" id="AC1" size="10" maxlength="10" value="0" type="text" />
                         <span class="unit">M</span>
-                        <span class="purity"> with <input name="AC1purity" id="AC1purity" size="10" maxlength="10" value="100" type="text" /> % purity  </span>
+                        <span class="purity"> with <input name="AC1purity" id="AC1purity" size="10" maxlength="10" value="100" type="text" /> % purity  <span class="tooltip-container">
+                          <span class="circle">i</span>
+                          <span class="tooltiptext">As measured or labelled by the company</span></span> 
                         <br />
                         <input value="EGTA" name="CH2" size="7" maxlength="7" disabled="disabled" type="text" />
                         <input name="AC2" id="AC2" size="10" maxlength="10" value="0" type="text" />
                         <span class="unit">M</span>
-                        <span class="purity"> with <input name="AC2purity" id="AC2purity" size="10" maxlength="10" value="100" type="text" /> % purity  </span>
+                        <span class="purity"> with <input name="AC2purity" id="AC2purity" size="10" maxlength="10" value="100" type="text" /> % purity  <span class="tooltip-container">
+                          <span class="circle">i</span>
+                          <span class="tooltiptext">As measured or labelled by the company</span> </span> 
+                      </span>
                     </div>
                 </div>
 
                 <div class="section">
                     <div class="unit-container">
                         <h3>Total Metals</h3>
-                        <input value="Ca2" name="MT1" size="3" maxlength="3" disabled="disabled" type="text" />
+                        <input value="Ca²⁺" name="MT1" size="3" maxlength="3" disabled="disabled" type="text" />
                         <input name="AMT1" size="10" maxlength="10" value="0" type="text" id="AMT1" />
                         <span class="unit">M</span>
                         <br />
-                        <input value="Mg2" name="MT2" size="3" maxlength="3" disabled="disabled" type="text" />
+                        <input value="Mg²⁺" name="MT2" size="3" maxlength="3" disabled="disabled" type="text" />
                         <input name="AMT2" size="10" maxlength="10" value="0" type="text" id="AMT2" />
                         <span class="unit">M</span>
                     </div>
@@ -334,11 +339,11 @@
                 <div class="section">
                     <div class="unit-container">
                         <h3>Free Metals</h3>
-                        <input value="Ca2" name="MF1" size="3" maxlength="3" disabled="disabled" type="text" id="MF1" />
+                        <input value="Ca²⁺" name="MF1" size="3" maxlength="3" disabled="disabled" type="text" id="MF1" />
                         <input name="AMF1" size="10" maxlength="10" value="0" type="text" id="AMF1" />
                         <span class="unit">M</span>
                         <br />
-                        <input value="Mg2" name="MF2" size="3" maxlength="3" disabled="disabled" type="text" id="MF2" />
+                        <input value="Mg²⁺" name="MF2" size="3" maxlength="3" disabled="disabled" type="text" id="MF2" />
                         <input name="AMF2" size="10" maxlength="10" value="0" type="text" id="AMF2" />
                         <span class="unit">M</span>
                     </div>

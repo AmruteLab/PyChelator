@@ -215,7 +215,7 @@ function submitConstants(downloadFile=true){
     parseFloat(h3_values[1]), parseFloat(h3_values[2])
   ]
   h4_values = document.getElementById("hydrogen4").value.split(",").map(value => value.trim());
-  h4 = [
+  initialHydrogenConstants4 = [
     parseFloat(h4_values[0]), parseFloat(h4_values[1]),
     parseFloat(h4_values[1]), parseFloat(h4_values[2])
   ]

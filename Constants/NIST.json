@@ -1,0 +1,108 @@
+{
+  "NIST": {
+    "Et": 25,
+    "Ei": 0.1,
+    "initialHydrogenConstants1": [
+      6.48,
+      9.4,
+      9.4,
+      null
+    ],
+    "initialHydrogenConstants2": [
+      3.99,
+      8.79,
+      8.79,
+      null
+    ],
+    "initialHydrogenConstants3": [
+      1.9,
+      2.7,
+      2.7,
+      null
+    ],
+    "initialHydrogenConstants4": [
+      0,
+      0
+    ],
+    "deltaHydrogenConstants1": [
+      0.5,
+      -5.6,
+      -5.6,
+      null
+    ],
+    "deltaHydrogenConstants2": [
+      -3.6,
+      -5.6,
+      -5.6,
+      null
+    ],
+    "deltaHydrogenConstants3": [
+      2.3,
+      -2.6,
+      -2.6,
+      null
+    ],
+    "deltaHydrogenConstants4": [
+      0,
+      0,
+      0,
+      null
+    ],
+    "metalChelator": [
+      [
+        3.86,
+        10.86
+      ],
+      [
+        4.19,
+        5.28
+      ]
+    ],
+    "deltaMetalChelator": [
+      [
+        3.2,
+        -7.9
+      ],
+      [
+        4.4,
+        5.5
+      ]
+    ],
+    "mhc": [
+      [
+        2.16,
+        5.307
+      ],
+      [
+        2.32,
+        3.47
+      ]
+    ],
+    "dmhc": [
+      [
+        1.9,
+        0
+      ],
+      [
+        2.3,
+        0
+      ]
+    ],
+    "VaC": [
+      3,
+      3
+    ],
+    "VaM": [
+      2,
+      2
+    ],
+    "chelatorNames": [
+      "ATP",
+      "EGTA"
+    ],
+    "metalNames": [
+      "Ca²⁺",
+      "Mg²⁺"
+    ]
+  }
+}

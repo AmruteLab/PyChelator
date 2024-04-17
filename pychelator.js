@@ -1412,7 +1412,7 @@ function downloadOutput() {
   for (var j = 0; j < result_array.length; j++) {
     worksheet_data.push(
       [],
-      ["pH", "temperature",  "Ionic contribution [ABS]"].concat(showIonicStrength ? ["Ionic strength"] : []),
+      ["pH", "Temperature (°C)",  "Ionic contribution [ABS]"].concat(showIonicStrength ? ["Input Ionic Strength (M)"] : []),
     );
 
     var data = result_array[j]["general_info"];

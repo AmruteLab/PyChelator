@@ -2,7 +2,7 @@ var chelatorNames = ['ATP', 'EGTA']
 var metalNames = ['Ca²⁺', 'Mg²⁺']
 var pH = 7.0;
 var temperature = 25; //initially set to constants temperature expected
-var ionicStrength = 0.1; //initially set to constants ionic strength expected
+var ionicStrength = 100; //initially set to constants ionic strength expected
 var calculation_results = []
 var data = {
   "NIST": {
@@ -702,7 +702,6 @@ function updateDisplay() {
   const showPBound = document.getElementById('showPBound').checked;
   const showBound = document.getElementById('showBound').checked;
   const showFinalpCa = document.getElementById('showFinalpCa').checked;
-  const showIonicStrength = document.getElementById('showIonicStrength').checked;
 
   // Update display based on checkbox state
   nameElement.style.display = showName ? 'inline' : 'none';
@@ -1284,7 +1283,6 @@ function getCheckboxValues() {
     showKd: document.getElementById('showKd').checked,
     showLowLimit: document.getElementById('showLowLimit').checked,
     showHighLimit: document.getElementById('showHighLimit').checked,
-    showIonicStrength: document.getElementById('showIonicStrength').checked,
     includeMetal1: document.getElementById('includeMetal1').checked,
     includeMetal2: document.getElementById("includeMetal2").checked,
     includeLigand1: document.getElementById("includeLigand1").checked,
@@ -1406,13 +1404,12 @@ function downloadOutput() {
   showKd = document.getElementById('showKd').checked
   showLowLimit = document.getElementById('showLowLimit').checked
   showHighLimit = document.getElementById('showHighLimit').checked
-  showIonicStrength = document.getElementById('showIonicStrength').checked;
 
 
   for (var j = 0; j < result_array.length; j++) {
     worksheet_data.push(
       [],
-      ["pH", "temperature",  "Ionic contribution [ABS]"].concat(showIonicStrength ? ["Ionic strength"] : []),
+      ["pH", "temperature",  "Ionic contribution [ABS]"].concat(["Ionic strength"]),
     );
 
     var data = result_array[j]["general_info"];
@@ -1422,9 +1419,7 @@ function downloadOutput() {
       data["Ionic contribution [ABS]"],
     ], [],
     );
-    if (showIonicStrength) {
-      worksheet_data[worksheet_data.length - 2].push(data["ionicStrength"]);
-    }
+    worksheet_data[worksheet_data.length - 2].push(data["ionicStrength"]);
 
     for (var i = 0; i < result_array[j]["metal_and_chelator"].length; i++) {
       var metal_data = result_array[j]["metal_and_chelator"][i];

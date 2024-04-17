@@ -1250,6 +1250,7 @@ function prepareTotalChelatorAmountComponent(checkboxes) {
           }
 
           if (Object.keys(chelatorAmountComponent).length > 0) {
+              debugger
               totalChelatorAmount_component.push(chelatorAmountComponent);
           }
 
@@ -1332,7 +1333,7 @@ function displayOutput(checkboxes) {
       } else if (key === "totalChelatorAmount_component" && (checkboxes.showKd || checkboxes.showHighLimit || checkboxes.showLowLimit)) {
           var components = result[key];
           for (var j = 0; j < components.length; j++) {
-            if ((j === 1 && checkboxes.includeMetal1) || (j === 2 && checkboxes.includeMetal2) || (j === 3 && checkboxes.includeLigand1) || (j === 4 && checkboxes.includeLigand2)) {
+            if ((j === 1 && checkboxes.includeMetal1) || (j === 2 && checkboxes.includeMetal2) || (j === 3 && checkboxes.includeLigand1) || (j === 4 && checkboxes.includeLigand2) ||  j === 0) {
               var componentValueElement = createOutputRow(components[j]);
               valueElement.appendChild(componentValueElement);
             }

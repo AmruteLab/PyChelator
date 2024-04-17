@@ -1,0 +1,108 @@
+{
+  "Calcium": {
+    "Et": 20,
+    "Ei": 0.1,
+    "initialHydrogenConstants1": [
+      6.495,
+      9.47,
+      9.47,
+      null
+    ],
+    "initialHydrogenConstants2": [
+      4.06,
+      8.85,
+      8.85,
+      null
+    ],
+    "initialHydrogenConstants3": [
+      0,
+      2.66,
+      2.66,
+      null
+    ],
+    "initialHydrogenConstants4": [
+      0,
+      0
+    ],
+    "deltaHydrogenConstants1": [
+      1.2,
+      -5.8,
+      -5.8,
+      null
+    ],
+    "deltaHydrogenConstants2": [
+      0,
+      -5.8,
+      -5.8,
+      null
+    ],
+    "deltaHydrogenConstants3": [
+      0,
+      0,
+      0,
+      null
+    ],
+    "deltaHydrogenConstants4": [
+      0,
+      0,
+      0,
+      null
+    ],
+    "metalChelator": [
+      [
+        3.7825,
+        10.97
+      ],
+      [
+        4.0038,
+        5.21
+      ]
+    ],
+    "deltaMetalChelator": [
+      [
+        -1,
+        -8.1
+      ],
+      [
+        4.5,
+        5
+      ]
+    ],
+    "mhc": [
+      [
+        1.804,
+        5.33
+      ],
+      [
+        2.698,
+        3.37
+      ]
+    ],
+    "dmhc": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ]
+    ],
+    "VaC": [
+      3,
+      3
+    ],
+    "VaM": [
+      2,
+      2
+    ],
+    "chelatorNames": [
+      "ATP",
+      "EGTA"
+    ],
+    "metalNames": [
+      "Ca²⁺",
+      "Mg²⁺"
+    ]
+  }
+}

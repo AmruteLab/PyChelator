@@ -1,0 +1,108 @@
+{
+  "Schoenmakers": {
+    "Et": 37,
+    "Ei": 0.165,
+    "initialHydrogenConstants1": [
+      6.39,
+      9.22,
+      9.22,
+      null
+    ],
+    "initialHydrogenConstants2": [
+      3.8,
+      8.65,
+      8.65,
+      null
+    ],
+    "initialHydrogenConstants3": [
+      1.9,
+      2.58,
+      2.58,
+      null
+    ],
+    "initialHydrogenConstants4": [
+      0,
+      0
+    ],
+    "deltaHydrogenConstants1": [
+      -2.1,
+      -26.5,
+      -26.5,
+      null
+    ],
+    "deltaHydrogenConstants2": [
+      -17.15,
+      -20.4,
+      -20.4,
+      null
+    ],
+    "deltaHydrogenConstants3": [
+      0,
+      -10,
+      -10,
+      null
+    ],
+    "deltaHydrogenConstants4": [
+      0,
+      0,
+      0,
+      null
+    ],
+    "metalChelator": [
+      [
+        3.69,
+        10.34
+      ],
+      [
+        4,
+        5.09
+      ]
+    ],
+    "deltaMetalChelator": [
+      [
+        -3.8,
+        -33.2
+      ],
+      [
+        10.9,
+        21
+      ]
+    ],
+    "mhc": [
+      [
+        1.94,
+        5.1
+      ],
+      [
+        2.07,
+        3.13
+      ]
+    ],
+    "dmhc": [
+      [
+        -1.6,
+        0
+      ],
+      [
+        14.2,
+        0
+      ]
+    ],
+    "VaC": [
+      3,
+      3
+    ],
+    "VaM": [
+      2,
+      2
+    ],
+    "chelatorNames": [
+      "ATP",
+      "EGTA"
+    ],
+    "metalNames": [
+      "Ca²⁺",
+      "Mg²⁺"
+    ]
+  }
+}

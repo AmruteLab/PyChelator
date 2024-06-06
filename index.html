@@ -14,6 +14,57 @@
 </head>
 <body onLoad="setup()">
 <div id="container">
+    <div id="popup-tabs" class="popup-tabs">
+        <div class="popup-content">
+          <span class="close" onclick="closePopupTabs()">&times;</span>
+          <div class="tab">
+            <button class="tablinks" onclick="openTab(event, 'tab1')">Example free Ca 2+ calculation</button>
+            <button class="tablinks" onclick="openTab(event, 'tab2')">Example manual entry of stability constants</button>
+          </div>
+
+          <div id="tab1" class="tabcontent">
+            <h2>Example free Ca 2+ calculation</h2>
+            <p>Solution A having pH 7.4, ionic equivalent 100 mM at 4°C, and containing:</p>
+            <ul>
+              <li>5 mM EGTA (98% purity)</li>
+              <li>1 mM CaCl2</li>
+              <li>2 mM MgATP (97% purity)</li>
+              <li>2 mM MgCl2</li>
+            </ul>
+            <p>Steps for free Ca 2+ calculation in PyChelator:</p>
+            <ol>
+              <li>In the Constants dropdown, keep the default NIST database constants, or choose another preferred source.</li>
+              <li>Select mM as Input unit.</li>
+              <li>Write the Temperature as 4°C.</li>
+              <li>Write the pH as 7.4.</li>
+              <li>Write the Ionic (Ie) equivalent as 100 mM. If you do not know the ionic equivalent, you can calculate by using the Calculate Ie.</li>
+              <li>Select the parameters to Show in report, in this case we will keep it at defaults.</li>
+              <li>Using the top panel, write the Chelator concentration of ATP to 2 mM and EGTA to 5 mM. Also, write the Total metals given to the solution; Ca²⁺ as 2 mM and Mg²⁺ as 4 mM?</li>
+              <li>Click Calculate. You can copy the Free (M) concentration for Ca²⁺ (1.678e-8 M) or the -log10[free] (pCa of 7.7752). Alternatively, click Download to have a local copy of the results.</li>
+            </ol>
+          </div>
+
+          <div id="tab2" class="tabcontent">
+            <h2>Example manual entry of stability constants</h2>
+            <p>Let’s use the constants for Zinc and Calcium buffered using EDTA and EGTA, from Neumaier et al. 2017.</p>
+            <p>Steps for manual entry of constants in PyChelator:</p>
+            <ol>
+              <li>Under the Constants dropdown, find Write custom constants</li>
+              <li>Write the Ligands (L1, L2) comma-separated as: EDTA, EGTA.</li>
+              <li>Write the Metals (M1, M2) comma-separated as: Zn, Ca.</li>
+              <li>Write the temperature that the constants were determined (Et) in °C: 20.</li>
+              <li>Write the ionic equivalent that the constants were determined (Ei) in mM: 100.</li>
+              <li>Write the protonation constant H1 (logK) for L1 and L2: 10.3, 9.5</li>
+              <li>Write the ΔH1 enthalpy (kcal/mol) for H1 for L1 and L2: -5.6, -5.9</li>
+              <li>Repeat steps 6 and 7 for all protonation constants.</li>
+              <li>Write the stability constant ML (logK) for M1-L1,M1-L2,M2-L1,M2-L2: 16.6, 12.7, 10.7, 10.9</li>
+              <li>Write the ΔML enthalpy (kcal/mol) for M1-L1,M1-L2,M2-L1,M2-L2: -4.7, -4.3, -6.1, -8.4</li>
+              <li>Repeat Steps 9 and 10 for MHL and ΔMHL, respectively.</li>
+              <li>Download the JSON file. You can use this file the next time using the command Upload constants under Constants dropdown.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
     <td class="constants" id="constants" colspan="4" style="width: 100%;">
         <!-- Second Modal -->
         <div class="overlay" id="overlay2"></div>
@@ -169,7 +220,7 @@
       </td>
 
     <div id="left-panel">
-        <h2>PyChelator v1.0 </h2>
+        <h2>PyChelator v1.0  <span class="doc-icon" onclick="openPopup()">&#128195;</span> </h2>
         <h3>Metal-chelator calculations</h3>
         <div>
         <form name="WMXC2">
@@ -226,17 +277,21 @@
             </p>
             <p>
                 <span class="input-label">Temperature:</span>
-
                 <span class="input-option">
-                    <input name="TM" id="TM" value="25" type="text" /> °C
+                    <input name="TM" id="TM" value="25" type="number" min="0" max="40" /> °C
                 </span>
             </p>
             <p>
+                <span id="tempRangeError" class="error-message" style="display:none;">Temperature must be between 0°C and 40°C</span>
+            </p>
+            <p>
                 <span class="input-label">pH:</span>
-
                 <span class="input-option">
-                    <input name="PH" id="PH" value="7.0" type="text" />
+                    <input name="PH" id="PH" value="7.0" type="number" min="0" max="14" step="0.1" />
                 </span>
+            </p>
+            <p>
+                <span id="pHRangeError" class="error-message" style="display:none;">pH must be between 0 and 14</span>
             </p>
             <p>
                 <span class="input-label">Ionic (<i>I</i>e): <span class="tooltip-container">
@@ -244,10 +299,13 @@
                         <span class="tooltiptext">Ionic equivalent <i>I</i>e=0.5&sum;C<sub>i</sub>|z<sub>i</i></sub>|</span>
                     </span>
                 </span>
-                <span class="input-option"><input name="IO" id="IO" value="100" type="text" />
-                    mM
+                <span class="input-option">
+                    <input name="IO" id="IO" value="100" type="number" min="0" max="500" /> mM
                 </span>
                 <button id="calculateIeBtn" onClick="openIonicModal()">Calculate <i>I</i>e</button>
+            </p>
+            <p>
+                <span id="ionicRangeError" class="error-message" style="display:none;">Ionic concentration must be between 0 mM and 500 mM</span>
             </p>
         </div>
         <div class="options-checkbox">

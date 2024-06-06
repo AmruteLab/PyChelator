@@ -1132,9 +1132,9 @@ function calculateAndDisplayTotalMetals(checkboxes, metal_names_string) {
 }
 
 function docalc() {
+  if (validateInputs()) { return}
   var t = []; //putting together the final output
   var metal_names_string = [];
-
   // Update constants
   updateConstants(openModalBool=false);
 
@@ -1526,4 +1526,66 @@ function saveAsExcelFile(buffer, fileName) {
   link.href = url;
   link.download = fileName;
   link.click();
+}
+
+function validateInputs() {
+  var errorsPresent = false
+  var temp = parseFloat(document.getElementById("TM").value);
+  var pH = parseFloat(document.getElementById("PH").value);
+  var ionic = parseFloat(document.getElementById("IO").value);
+
+  var tempError = document.getElementById("tempRangeError");
+  var pHError = document.getElementById("pHRangeError");
+  var ionicError = document.getElementById("ionicRangeError");
+
+  if (temp < 0 || temp > 40) {
+      tempError.style.display = "inline";
+      errorsPresent = errorsPresent || true
+  } else {
+      tempError.style.display = "none";
+      errorsPresent = errorsPresent || false
+  }
+
+  if (pH < 0 || pH > 14) {
+      pHError.style.display = "inline";
+      errorsPresent = errorsPresent || true
+  } else {
+      pHError.style.display = "none";
+      errorsPresent = errorsPresent || false
+  }
+
+  if (ionic < 0 || ionic > 500) {
+      ionicError.style.display = "inline";
+      errorsPresent = errorsPresent || true
+  } else {
+      ionicError.style.display = "none";
+      errorsPresent = errorsPresent || false
+  }
+  return errorsPresent
+}
+
+function openPopup() {
+  document.getElementById("popup-tabs").style.display = "block";
+  openTab(event, 'tab1')
+}
+
+function closePopupTabs() {
+  document.getElementById("popup-tabs").style.display = "none";
+}
+
+function openTab(evt, tabName) {
+  var i, tabcontent, tablinks;
+
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " active";
 }

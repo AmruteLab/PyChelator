@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LKDPNXKFMR"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-LKDPNXKFMR');
+    </script>
     <script src="pychelator.js"></script>
     <link rel="stylesheet" href="pychelator.css">
     <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PyChelator: Metal-chelator Calculations</title>
+    <title>PyChelator: Metal chelator calculations</title>
     <meta name="description" content="PyChelator performs metal chelator calculations taking into account pH, temperature, and ionic strength, using the algorithms of Maxchelator. Python based PyChelator Colab notebook is also provided.">
     <meta name="keywords" content="metal, chelator, calcium, egta, fabiato, maxchelator, python, javascript">
     <meta name="google-site-verification" content="5GzaYXH87VpG9VvQGPOJyhmJMa22v-QaaxlUqzE6ptg" />
@@ -89,12 +98,12 @@
 
           <div class="input-container">
               <div class="custom-field">
-                  <label for="namesOfChelators">Ligands (L):</label>
+                  <label for="namesOfChelators">Ligands (L1, L2):</label>
                   <input type="text" id="namesOfChelators" placeholder="L1,L2 (e.g., ATP, EGTA)">
               </div>
 
               <div class="custom-field">
-                  <label for="namesOfMetals">Metals (M):</label>
+                  <label for="namesOfMetals">Metals (M1, M2):</label>
                   <input type="text" id="namesOfMetals" placeholder="M1,M2 (e.g., Ca²⁺, Mg²⁺)">
               </div>
           </div>
@@ -220,8 +229,8 @@
       </td>
 
     <div id="left-panel">
-        <h2>PyChelator v1.0  <span class="doc-icon" onclick="openPopup()">&#128195;</span> </h2>
-        <h3>Metal-chelator calculations</h3>
+        <h2>PyChelator v1.1 <span class="doc-icon" onclick="openPopup()">&#128195;</span> </h2>
+        <h3>Metal chelator calculations</h3>
         <div>
         <form name="WMXC2">
 

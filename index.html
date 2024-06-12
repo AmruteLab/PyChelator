@@ -29,6 +29,7 @@
           <div class="tab">
             <button class="tablinks" onclick="openTab(event, 'tab1')">Example free Ca 2+ calculation</button>
             <button class="tablinks" onclick="openTab(event, 'tab2')">Example manual entry of stability constants</button>
+            <button class="tablinks" onclick="openTab(event, 'tab3')">Stability constant references</button>
           </div>
 
           <div id="tab1" class="tabcontent">
@@ -55,7 +56,7 @@
 
           <div id="tab2" class="tabcontent">
             <h2>Example manual entry of stability constants</h2>
-            <p>Let’s use the constants for Zinc and Calcium buffered using EDTA and EGTA, from Neumaier et al. 2017.</p>
+            <p>Let’s use the constants for Zinc and Calcium buffered using EDTA and EGTA, from  <a href="https://onlinelibrary.wiley.com/doi/full/10.1111/apha.12988" target="_blank">Neumaier et al. 2017.</a></p>
             <p>Steps for manual entry of constants in PyChelator:</p>
             <ol>
               <li>Under the Constants dropdown, find Write custom constants</li>
@@ -72,6 +73,19 @@
               <li>Download the JSON file. You can use this file the next time using the command Upload constants under Constants dropdown.</li>
             </ol>
           </div>
+
+          <div id="tab3" class="tabcontent">
+            <h2>Stability constant references</h2>
+            <p></p>
+            <p></p>
+            <ol>
+              <li>NIST: The National Institute of Standards and Technology Database #46 v8. Used in <a href="https://owamoosa.com/maxchelator/" target="_blank">MaxChelator</a></li>
+              <li>Chelator by Schoenmakers et al. Used in MaxChelator. <a href="https://web.math.princeton.edu/~sswang/GECI/CHELATOR_biotechniques12_870.pdf" target="_blank">Ref</a></li>
+              <li>SPECS by Fabiato. Taken from <a href="https://www.sciencedirect.com/science/article/pii/001048259598886I" target="_blank">Fujushiro et al. 1995</a> and compared to the reported constants in <a href="https://owamoosa.com/maxchelator/" target="_blank">McGuigan et al.</a>. The ATP ML and MHL constants were temperature corrected to 20°C.</li>
+              <li>Calcium by Föhr et al. <a href="https://www.sciencedirect.com/science/article/abs/pii/007668799321014Y" target="_blank">Ref</a></li>
+            </ol>
+          </div>
+
         </div>
       </div>
     <td class="constants" id="constants" colspan="4" style="width: 100%;">
@@ -229,8 +243,8 @@
       </td>
 
     <div id="left-panel">
-        <h2>PyChelator v1.1 <span class="doc-icon" onclick="openPopup()">&#128195;</span> </h2>
-        <h3>Metal chelator calculations</h3>
+        <h2>PyChelator v1.1 </h2>
+        <h3>Metal chelator calculations - <span class="doc-icon" onclick="openPopup()">&#128195; Docs</span></h3>
         <div>
         <form name="WMXC2">
 
@@ -258,12 +272,12 @@
         <div>
             <span class="input-label"> Constants:  <div class="tooltip-container">
                 <div class="circle">i</div>
-                <span class="tooltiptext">Check Github repo for more</span>
+                <span class="tooltiptext">Check Docs and Github repo for more</span>
             </div>
         </span>
 
             <select name="constantsSource" id="constantsSource" onchange="updateConstants()">
-                <option value="NIST" selected> NIST #46 v8</option>
+                <option value="NIST" selected>NIST</option>
                 <option value="Schoenmakers">Chelator by Schoenmakers et al.</option>
                 <option value="Fabiato">SPECS by Fabiato</option>
                 <option value="Calcium">Calcium by Föhr et al.</option>

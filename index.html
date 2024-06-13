@@ -27,39 +27,40 @@
         <div class="popup-content">
           <span class="close" onclick="closePopupTabs()">&times;</span>
           <div class="tab">
-            <button class="tablinks" onclick="openTab(event, 'tab1')">Example free Ca 2+ calculation</button>
-            <button class="tablinks" onclick="openTab(event, 'tab2')">Example manual entry of stability constants</button>
-            <button class="tablinks" onclick="openTab(event, 'tab3')">Stability constant references</button>
+            <button class="tablinks" onclick="openTab(event, 'tab1')">Find Free Mode - Example</button>
+            <button class="tablinks" onclick="openTab(event, 'tab2')">Manual entry of stability constants - Example</button>
+            <button class="tablinks" onclick="openTab(event, 'tab3')">Build-in stability constants</button>
           </div>
 
           <div id="tab1" class="tabcontent">
-            <h2>Example free Ca 2+ calculation</h2>
-            <p>Solution A having pH 7.4, ionic equivalent 100 mM at 4°C, and containing:</p>
+            <h2>Find Free Mode - Example Calcium calculation</h2>
+            <p>Solution A with a pH 7.4, ionic equivalent 100 mM at 20°C containing:</p>
             <ul>
               <li>5 mM EGTA (98% purity)</li>
               <li>1 mM CaCl2</li>
               <li>2 mM MgATP (97% purity)</li>
               <li>2 mM MgCl2</li>
             </ul>
-            <p>Steps for free Ca 2+ calculation in PyChelator:</p>
+            <p>Steps for free Calcium calculation in PyChelator:</p>
             <ol>
-              <li>In the Constants dropdown, keep the default NIST database constants, or choose another preferred source.</li>
+              <li>From "Constants" dropdown, select the preferred constants' source (ex.NIST)</li>
               <li>Select mM as Input unit.</li>
-              <li>Write the Temperature as 4°C.</li>
+              <li>Write the Temperature as 20°C.</li>
               <li>Write the pH as 7.4.</li>
-              <li>Write the Ionic (Ie) equivalent as 100 mM. If you do not know the ionic equivalent, you can calculate by using the Calculate Ie.</li>
-              <li>Select the parameters to Show in report, in this case we will keep it at defaults.</li>
-              <li>Using the top panel, write the Chelator concentration of ATP to 2 mM and EGTA to 5 mM. Also, write the Total metals given to the solution; Ca²⁺ as 2 mM and Mg²⁺ as 4 mM?</li>
-              <li>Click Calculate. You can copy the Free (M) concentration for Ca²⁺ (1.678e-8 M) or the -log10[free] (pCa of 7.7752). Alternatively, click Download to have a local copy of the results.</li>
+              <li>Write the Ionic (Ie) equivalent as 100 mM. If you do not know the ionic equivalent, you can calculate by using the "Calculate Ie" button.</li>
+              <li>Select the parameters to "Show in report", or keep defaults.</li>
+              <li>Using the top panel, write the Chelator concentration of ATP to 2 mM (97% purity), and EGTA to 5 mM (98% purity).</li>
+              <li>Write the Total metals given to the solution; Ca²⁺ as 2 mM and Mg²⁺ as 4 mM</li>
+              <li>Click Calculate. You can copy the Free (M) concentration for Ca²⁺ or the -log10[free]. Alternatively, click Download to have a local copy of the results.</li>
             </ol>
           </div>
 
           <div id="tab2" class="tabcontent">
-            <h2>Example manual entry of stability constants</h2>
-            <p>Let’s use the constants for Zinc and Calcium buffered using EDTA and EGTA, from  <a href="https://onlinelibrary.wiley.com/doi/full/10.1111/apha.12988" target="_blank">Neumaier et al. 2017.</a></p>
+            <h2>Manual entry of stability constants - Example</h2>
+            <p>Using the stability constants for Zinc and Calcium buffered using EDTA and EGTA, from  <a href="https://onlinelibrary.wiley.com/doi/full/10.1111/apha.12988" target="_blank">Neumaier et al. 2017.</a></p>
             <p>Steps for manual entry of constants in PyChelator:</p>
             <ol>
-              <li>Under the Constants dropdown, find Write custom constants</li>
+              <li>From "Constants" dropdown, select "Write custom constants"</li>
               <li>Write the Ligands (L1, L2) comma-separated as: EDTA, EGTA.</li>
               <li>Write the Metals (M1, M2) comma-separated as: Zn, Ca.</li>
               <li>Write the temperature that the constants were determined (Et) in °C: 20.</li>
@@ -79,10 +80,10 @@
             <p></p>
             <p></p>
             <ol>
-              <li>NIST: The National Institute of Standards and Technology Database #46 v8. Used in <a href="https://owamoosa.com/maxchelator/" target="_blank">MaxChelator</a></li>
-              <li>Chelator by Schoenmakers et al. Used in MaxChelator. <a href="https://web.math.princeton.edu/~sswang/GECI/CHELATOR_biotechniques12_870.pdf" target="_blank">Ref</a></li>
-              <li>SPECS by Fabiato. Taken from <a href="https://www.sciencedirect.com/science/article/pii/001048259598886I" target="_blank">Fujushiro et al. 1995</a> and compared to the reported constants in <a href="https://owamoosa.com/maxchelator/" target="_blank">McGuigan et al.</a>. The ATP ML and MHL constants were temperature corrected to 20°C.</li>
-              <li>Calcium by Föhr et al. <a href="https://www.sciencedirect.com/science/article/abs/pii/007668799321014Y" target="_blank">Ref</a></li>
+              <li>NIST: The National Institute of Standards and Technology Database #46 v8. These constants are used in <a href="https://owamoosa.com/maxchelator/" target="_blank">MaxChelator</a></li>
+              <li>Chelator by Schoenmakers et al. These constants are used in MaxChelator from <a href="https://web.math.princeton.edu/~sswang/GECI/CHELATOR_biotechniques12_870.pdf" target="_blank">Ref.</a></li>
+              <li>SPECS by Fabiato. Taken from <a href="https://www.sciencedirect.com/science/article/pii/001048259598886I" target="_blank">Fujushiro et al. 1995</a> and compared to the reported constants in <a href="https://owamoosa.com/maxchelator/" target="_blank">McGuigan et al.</a>. The ATP ML and MHL constants were corrected for 20°C.</li>
+              <li>Calcium by <a href="https://www.sciencedirect.com/science/article/abs/pii/007668799321014Y" target="_blank">Föhr et al. 1993</a></li>
             </ol>
           </div>
 
@@ -245,10 +246,11 @@
     <div id="left-panel">
         <h2>PyChelator v1.1 </h2>
         <h3>Metal chelator calculations - <span class="doc-icon" onclick="openPopup()">&#128195; Docs</span></h3>
+        <br>
         <div>
         <form name="WMXC2">
 
-            Find:
+            Find:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;         
             <input
                 name="TYPECALC"
                 value="F"
@@ -266,15 +268,16 @@
                 id="total_metals"
             />
             <label for="total_metals"> Total (M)</label>
-            </form>
-
+        </form>
         </div>
+<!-- Constants section -->        
         <div>
-            <span class="input-label"> Constants:  <div class="tooltip-container">
+            <span class="input-label"> Constants:  
+                <div class="tooltip-container">
                 <div class="circle">i</div>
                 <span class="tooltiptext">Check Docs and Github repo for more</span>
-            </div>
-        </span>
+                </div>
+            </span>
 
             <select name="constantsSource" id="constantsSource" onchange="updateConstants()">
                 <option value="NIST" selected>NIST</option>
@@ -285,6 +288,8 @@
                 <option value="Upload"> Upload constants</option>
             </select>
         </div>
+        <hr>
+<!-- Input unit section -->
         <div>
         <p>
             <span class="input-label"> Input unit:</span>
@@ -295,28 +300,28 @@
                     <option value="uM">uM</option>
                     <option value="nM">nM</option>
                 </select>
-        </span>
+            </span>
 
-            </p>
-            <p>
+        </p>
+        <p>
                 <span class="input-label">Temperature:</span>
                 <span class="input-option">
                     <input name="TM" id="TM" value="25" type="number" min="0" max="40" /> °C
                 </span>
-            </p>
-            <p>
+        </p>
+        <p>
                 <span id="tempRangeError" class="error-message" style="display:none;">Temperature must be between 0°C and 40°C</span>
-            </p>
-            <p>
+        </p>
+        <p>
                 <span class="input-label">pH:</span>
                 <span class="input-option">
                     <input name="PH" id="PH" value="7.0" type="number" min="0" max="14" step="0.1" />
                 </span>
-            </p>
-            <p>
+        </p>
+        <p>
                 <span id="pHRangeError" class="error-message" style="display:none;">pH must be between 0 and 14</span>
-            </p>
-            <p>
+        </p>
+        <p>
                 <span class="input-label">Ionic (<i>I</i>e): <span class="tooltip-container">
                         <span class="circle">i</span>
                         <span class="tooltiptext">Ionic equivalent <i>I</i>e=0.5&sum;C<sub>i</sub>|z<sub>i</i></sub>|</span>
@@ -326,60 +331,70 @@
                     <input name="IO" id="IO" value="100" type="number" min="0" max="500" /> mM
                 </span>
                 <button id="calculateIeBtn" onClick="openIonicModal()">Calculate <i>I</i>e</button>
-            </p>
-            <p>
-                <span id="ionicRangeError" class="error-message" style="display:none;">Ionic concentration must be between 0 mM and 500 mM</span>
-            </p>
+        </p>
+        <p>
+                <span id="ionicRangeError" class="error-message" style="display:none;">Ionic equivalents must be between 0 mM and 500 mM</span>
+        </p>
         </div>
-        <div class="options-checkbox">
-          Show in report:
-          <label>
-              <input type="checkbox" checked id="showName"> Name
-          </label>
-          <label>
-              <input type="checkbox" checked id="showTotal"> Total
-          </label>
-          <label>
-              <input type="checkbox" checked id="showFree"> Free
-          </label>
-          <label>
-              <input type="checkbox" checked id="showFinalpCa"> -log<sub>10</sub>[free] <span class="tooltip-container">
-                  <span class="circle">i</span>
-                  <span class="tooltiptext">e.g., pCa for calcium</span>
-              </span>
-          </label>
-          <div class="metal-ligand-container">
-            <label>
-                <input type="checkbox" checked id="includeMetal1"> Metal1 (e.g. Ca²⁺)
-            </label>
-            <label>
-                <input type="checkbox" checked id="includeMetal2"> Metal2 (e.g. Mg²⁺)
-            </label>
-            <label>
-                <input type="checkbox" checked id="includeLigand1"> Ligand1 (e.g. ATP)
-            </label>
-            <label>
-                <input type="checkbox" checked id="includeLigand2"> Ligand2 (e.g. EGTA)
-            </label>
-            <label>
-              <input type="checkbox" id="showPBound"> pBound
-          </label>
-          <label>
-              <input type="checkbox" id="showBound"> Bound
-          </label>
-          <label>
-              <input type="checkbox" id="showKd"> Kd
-          </label>
-          <label>
-              <input type="checkbox" id="showLowLimit"> Low Limit
-          </label>
-          <label>
-              <input type="checkbox" id="showHighLimit"> High Limit
-          </label>
-        </div>
-      </div>
+        <hr>
+<!-- Checkbox section -->
 
+<!-- Checkbox section -->
+        <div class="options-checkbox-container">
+        <p>Show in report:</p>
+        <div class="options-checkbox">
+            <div class="column">
+              <label>
+                <input type="checkbox" checked id="showName"> Name
+              </label>
+              <label>
+                <input type="checkbox" checked id="showTotal"> Total
+              </label>
+              <label>
+                <input type="checkbox" checked id="showFree"> Free
+             </label>
+              <label>
+                <input type="checkbox" checked id="showFinalpCa"> -log<sub>10</sub>[free] 
+                <span class="tooltip-container">
+                <span class="circle">i</span>
+                <span class="tooltiptext">e.g., pCa for calcium</span>
+                </span>
+              </label>
+              <label>
+                <input type="checkbox" checked id="includeMetal1"> Metal1 (e.g. Ca²⁺)
+              </label>
+              <label>
+                <input type="checkbox" checked id="includeMetal2"> Metal2 (e.g. Mg²⁺)
+              </label>
+              <label>
+                <input type="checkbox" checked id="includeLigand1"> Ligand1 (e.g. ATP)
+              </label>
+              <label>
+                <input type="checkbox" checked id="includeLigand2"> Ligand2 (e.g. EGTA)
+              </label>
+            </div>
+            <div class="column">
+              <label>
+                <input type="checkbox" id="showPBound"> pBound
+              </label>
+              <label>
+                <input type="checkbox" id="showBound"> Bound
+              </label>
+              <label>
+                <input type="checkbox" id="showKd"> Kd
+              </label>
+              <label>
+                <input type="checkbox" id="showLowLimit"> Low Limit
+              </label>
+              <label>
+                <input type="checkbox" id="showHighLimit"> High Limit
+              </label>
+            </div>
+        </div>
+        </div>
+        <div style="height: 40px;"></div>
     </div>
+<!-- Right panel start -->   
     <div id="right-panel">
         <!-- Additional row -->
         <div class="additional-row">

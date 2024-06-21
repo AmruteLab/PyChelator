@@ -20,7 +20,7 @@
 # Available constants files:
 If you would like to contribute constants to the repository, or report problems, please write an Issue.
 
-An extensive table of constants is available in [MaxChelator Constants](https://somapp.ucdmc.ucdavis.edu/pharmacology/bers/maxchelator/xlsconstants.htm).
+An extensive table of constants is available in [MaxChelator Constants](https://somapp.ucdmc.ucdavis.edu/pharmacology/bers/maxchelator/xlsconstants.htm). 
 
 ## Ca2+ and Mg2+ ions:
 | Number    | Ligands |JSON File |Reference |Comments|
@@ -33,4 +33,4 @@ An extensive table of constants is available in [MaxChelator Constants](https://
 ## Zn2+ and Ca2+ ions:
 | Number    | Ligands |JSON File |Reference |Comments|
 |:-----:    | :-----  |:-----  |:----- |:-----  |
-|     1     | EDTA, EGTA |[NEUMAIER1](NEUMAIER1.json)  |   |  Used in [Neumaier et al. 2017](https://onlinelibrary.wiley.com/doi/full/10.1111/apha.12988) |
+|     5    |EGTA, EDTA |[Zn-Ca and EDTA-EGTA](ZnCa_EDTAEGTA.json)  |   |   |

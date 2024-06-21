@@ -34,7 +34,7 @@
 
           <div id="tab1" class="tabcontent">
             <h2>Find Free Mode - Example Calcium calculation</h2>
-            <p>Solution A with a pH 7.4, ionic equivalent 100 mM at 20°C containing:</p>
+            <p>Solution A with a pH 7.4 with ionic equivalent 100 mM at 20°C containing:</p>
             <ul>
               <li>5 mM EGTA (98% purity)</li>
               <li>1 mM CaCl2</li>
@@ -57,7 +57,7 @@
 
           <div id="tab2" class="tabcontent">
             <h2>Manual entry of stability constants - Example</h2>
-            <p>Using the stability constants for Zinc and Calcium buffered using EDTA and EGTA, from  <a href="https://onlinelibrary.wiley.com/doi/full/10.1111/apha.12988" target="_blank">Neumaier et al. 2017.</a></p>
+            <p>Using the stability constants for Zinc and Calcium buffered using EDTA and EGTA, from  <a href="https://www.semanticscholar.org/paper/NIST-Critically-Selected-Stability-Constants-of-Smith-Martell/4d1e936ecb2cd7c641ada4f9db589ad5b50072ba" target="_blank">NIST Critical Stability Constants</a>. A useful table of frequently used chelators and metals can also be found under <a href="https://owamoosa.com/maxchelator/xlsconstants.htm" target="_blank">Maxchelator</a>.</p>
             <p>Steps for manual entry of constants in PyChelator:</p>
             <ol>
               <li>From "Constants" dropdown, select "Write custom constants"</li>
@@ -245,7 +245,7 @@
 
     <div id="left-panel">
         <h2>PyChelator v1.1 </h2>
-        <h3>Metal chelator calculations - <span class="doc-icon" onclick="openPopup()">&#128195; Docs</span></h3>
+        <h3>Metal chelator calculations - <span class="doc-icon" onclick="openPopup()">&#128195; Tutorial </span></h3>
         <br>
         <div>
         <form name="WMXC2">
@@ -375,7 +375,7 @@
             </div>
             <div class="column">
               <label>
-                <input type="checkbox" id="showPBound"> pBound
+                <input type="checkbox" id="showPBound"> % Bound
               </label>
               <label>
                 <input type="checkbox" id="showBound"> Bound
@@ -451,8 +451,8 @@
               <span id="name">Name</span>
               <span id="total">Total (M)</span>
               <span id="free">Free (M) </span>
-              <span id="pbound">pbound</span>
-              <span id="bound">bound</span>
+              <span id="pbound">% Bound</span>
+              <span id="bound">Bound</span>
               <span id="finalpCa"> -log<sub>10</sub>[free]</span>
 
             </div>

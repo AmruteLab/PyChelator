@@ -1,21 +1,40 @@
-abstract: PyChelator is a helpful tool for researchers, scientists, and professionals working with metal-chelator interactions who need to obtain critical data related to these complexes. As a web tool, it is a modified version of the well-established Maxchelator developed by Chris Patton and colleagues (Bers, Patton, and Nuccitelli, “A Practical Guide to the Preparation of Ca(2+) Buffers.”), with a few new features added as explained below. As a Python script, it offers more flexibility and customization, together with collaboration using the PyChelator Colab notebook.
-authors:
-- affiliation: Hannover Medical School
-  family-names: Spahiu
-  given-names: Emrulla
-  orcid: 0000-0003-3251-026X
-- affiliation: Verto Health
-  family-names: Kastrati
-  given-names: Esra
-- affiliation: Hannover Medical School
-  family-names: Amrute-Nayak
-  given-names: Mamta
 cff-version: 1.2.0
-date-released: '2024-02-18'
-doi: 10.5281/zenodo.10674754
-license:
-- gpl-2.0-only
-repository-code: https://github.com/AmruteLab/PyChelator/tree/v1.0
-title: 'AmruteLab/PyChelator: v1.0'
+title: >-
+  PyChelator: a Python-based Colab and web application for
+  metal chelator calculations
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
 type: software
-version: v1.0
+authors:
+  - given-names: Emrulla
+    family-names: Spahiu
+    email: spahiu.emrulla@mh-hannover.de
+    orcid: 'https://orcid.org/0000-0003-3251-026X'
+    affiliation: >-
+      Institute of Molecular and Cell Physiology, Hannover
+      Medical School
+  - given-names: Esra
+    family-names: Kastrati
+    email: esra.kastrati6@gmail.com
+    affiliation: 'Lassonde School of Engineering, York University'
+  - affiliation: >-
+      Institute of Molecular and Cell Physiology, Hannover
+      Medical School
+    email: Amrute.Mamta@mh-hannover.de
+    given-names: Mamta
+    family-names: Amrute-Nayak
+identifiers:
+  - type: doi
+    value: 10.1186/s12859-024-05858-8
+repository-code: 'https://github.com/AmruteLab/PyChelator'
+url: 'https://amrutelab.github.io/PyChelator/'
+keywords:
+  - ' Metal'
+  - Chelator
+  - PyChelator
+  - Web application
+  - Python
+  - Calcium
+  - EGTA
+license: GPL-2.0-only

@@ -7,8 +7,78 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-LKDPNXKFMR');
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org/",
+        "@type": "SoftwareApplication",
+        "name": "PyChelator",
+        "applicationCategory": ["Web application", "Script"],
+        "discussionUrl": "https://github.com/AmruteLab/PyChelator/discussions",
+        "downloadUrl": "https://zenodo.org/doi/10.5281/zenodo.10674753",
+        "isAccessibleForFree": "True",
+        "citation": {
+            "@type": "CreativeWork",
+            "name": "PyChelator: a Python-based Colab and web application for metal chelator calculations",
+            "url": "https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-024-05858-8",
+            "sameAs": "https://doi.org/10.1186/s12859-024-05858-8"
+        },
+        "description": "Pychelator is a helpful tool for researchers, scientists, and professionals working with metal-chelator interactions who need to obtain critical data related to these complexes. PyChelator Colab offers the Python version and extensive new features of the well-established Maxchelator developed by Chris Patton and colleagues. The JavaScript version is served in Github Pages PyChelator Web.",
+        "url": "https://amrutelab.github.io/PyChelator/",
+        "featureList": ["http://edamontology.org/operation_3645", "http://edamontology.org/operation_3438"],
+        "softwareVersion": "1.1.0",
+        "operatingSystem": "Any",
+        "softwareHelp": {
+            "@type": "CreativeWork",
+            "Name": "Help Page",
+            "url": "https://amrutelab.github.io/PyChelator/",
+            "description": "Tutorial popup"
+        },
+        "dateCreated": "2023-07-23",
+        "dateModified": "2024-07-24",
+        "Keywords": ["http://edamontology.org/topic_3307", "metal", "chelator", "PyChelator", "web application", "python", "calcium", "EGTA", "ligand", "colab", "maxchelator"],
+        "license": [{
+            "@type": "CreativeWork",
+            "name": "GPL-2.0",
+            "url": "https://www.gnu.org/licenses/old-licenses/gpl-2.0-standalone.html",
+            "description": "GNU GENERAL PUBLIC LICENSE"
+        }],
+        "publisher": [{
+            "@type": "Organization",
+            "name": "MHH",
+            "description": "Hannover Medical School"
+        },
+        {
+            "@type": "Person",
+            "name": "Emrulla Spahiu",
+            "email": "spahiu.emrulla@mh‑hannover.de"
+        },
+        {
+            "@type": "Person",
+            "name": "Esra Kastrati",
+            "email": "esra.kastrati6@gmail.com"
+        },
+        {
+            "@type": "Person",
+            "name": "Mamta Amrute‑Nayak",
+            "email": "amrute.mamta@mh‑hannover.de"
+        }
+        ],
+        "potentialAction": {
+            "@type": "ControlAction",
+            "object": {
+                "@type": "Dataset",
+                "additionalType": ["http://edamontology.org/data_2140", "http://edamontology.org/data_3108"],
+                "description": "input"
+            },
+            "result": {
+                "@type": "Dataset",
+                "additionalType": ["http://edamontology.org/format_2331", "http://edamontology.org/data_2048", "http://edamontology.org/format_3620"],
+                "description": "output"
+            }
+        }
+    }
     </script>
     <script src="pychelator.js"></script>
     <link rel="stylesheet" href="pychelator.css">
@@ -244,7 +314,7 @@
       </td>
 
     <div id="left-panel">
-        <h2>PyChelator v1.1 </h2>
+        <h2>PyChelator v1.1.0 </h2>
         <h3>Metal chelator calculations - <span class="doc-icon" onclick="openPopup()">&#128195; Tutorial </span></h3>
         <br>
         <div>
@@ -487,6 +557,12 @@
         Home
       </a>
     </div>
+    <div class="citation-row" style="text-align: left; margin-top: 20px;">
+      Published in: <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-024-05858-8" target="_blank">BMC Bionformatics</a>.
+    </div>
+    <div class="new-row" style="clear: both; text-align: left; margin-top: 10px;">
+      If you find an error or have suggestions, please file an issue or add a discussion in our <a href="https://github.com/AmruteLab/PyChelator/discussions" target="_blank">GitHub</a>.
+    </div>
     <div id="popup-container" class="popup-container">
         <div class="popup-upload">
           <span class="close" onclick="closePopup()">&times;</span>
@@ -494,6 +570,5 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>

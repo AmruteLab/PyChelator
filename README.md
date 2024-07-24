@@ -10,7 +10,7 @@ Pychelator is a helpful tool for researchers, scientists, and professionals work
 ## Features:
 - Calculation of Metal Chelator Complexes: PyChelator performs complex calculations involving chelators and metal ions, taking into account essential environmental parameters like pH, temperature, and ionic strength (the left panel).
 
-- Selection of constants: Easily select the constants to be used from the dropdown menu located in the left panel. Available stability constants are sourced from the National Institute of Standards and Technology ‘NIST’ <sup>[2](#2)</sup>, ‘SPECS’ by Fabiato <sup>[31](#3)</sup>, ‘Chelator’ by Schoenmakers et al. <sup>[4](#4)</sup>, and ‘Calcium’ by Föhr et al. <sup>[5](#5)</sup>. Users can also manually input the constants. The download feature allows users to obtain a local JSON file containing the entries, facilitating the subsequent use by uploading the constants. Equipped with input fields for metal and chelator names, a versatile use of the calculator is allowed for a broader range of applications.
+- Selection of constants: Easily select the constants to be used from the dropdown menu located in the left panel. Available stability constants are sourced from the National Institute of Standards and Technology ‘NIST’ <sup>[2](#2)</sup>, ‘SPECS’ by Fabiato <sup>[3](#3)</sup>, ‘Chelator’ by Schoenmakers et al. <sup>[4](#4)</sup>, and ‘Calcium’ by Föhr et al. <sup>[5](#5)</sup>. Users can also manually input the constants. The download feature allows users to obtain a local JSON file containing the entries, facilitating the subsequent use by uploading the constants. Equipped with input fields for metal and chelator names, a versatile use of the calculator is allowed for a broader range of applications.
 
 - Selection of input units: Convenient entry of chelator and metal concentrations in units ranging from Molar (M) to nano Molar range (M, mM, μM, and nM) (the left panel).
 
@@ -74,7 +74,7 @@ While PyChelator aims to provide accurate and useful data, users are advised to 
 Spahiu, E., Kastrati, E. & Amrute-Nayak, M. PyChelator: a Python-based Colab and web application for metal chelator calculations. BMC Bioinformatics 25, 239 (2024).[https://doi.org/10.1186/s12859-024-05858-8](https://doi.org/10.1186/s12859-024-05858-8)
   
 > [!IMPORTANT]  
-> To contribute to this software, please open a [Discussion] (https://github.com/AmruteLab/PyChelator/discussions) or file an [Issue] (https://github.com/AmruteLab/PyChelator/issues)
+> To contribute to this software, please open a [Discussion] or file an [Issue] in this Github repository.
 
 ## References:
   

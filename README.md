@@ -3,7 +3,6 @@
 <a href="https://colab.research.google.com/github/AmruteLab/PyChelator/blob/main/PyChelator_Colab.ipynb" target="_parent">
 <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/> </a>
 [![FAIR checklist badge](https://fairsoftwarechecklist.net/badge.svg)](https://fairsoftwarechecklist.net/v0.2?f=31&a=32113&i=32322&r=123)
-[![Curated with FAIRshare](https://raw.githubusercontent.com/fairdataihub/FAIRshare/main/badge.svg)](https://fairdataihub.org/fairshare)
 
 ## Description:
 Pychelator is a helpful tool for researchers, scientists, and professionals working with metal-chelator interactions who need to obtain critical data related to these complexes. PyChelator Colab offers the Python version and extensive new features of the well-established [Maxchelator](https://owamoosa.com/maxchelator/) developed by Chris Patton and colleagues <sup>[1](#1)</sup>. The JavaScript version is served in Github Pages [PyChelator Web](https://amrutelab.github.io/PyChelator/).

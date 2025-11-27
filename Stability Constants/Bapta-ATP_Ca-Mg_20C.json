@@ -1,0 +1,110 @@
+{
+  "CUSTOM": {
+    "Et": 20,
+    "Ei": 0.1,
+    "initialHydrogenConstants1": [
+      6.47,
+      6.372,
+      6.372,
+      null
+    ],
+    "initialHydrogenConstants2": [
+      4.03,
+      5.491,
+      5.491,
+      null
+    ],
+    "initialHydrogenConstants3": [
+      1.87,
+      3.26,
+      3.26,
+      null
+    ],
+    "initialHydrogenConstants4": [
+      0,
+      2.2,
+      2.2,
+      null
+    ],
+    "deltaHydrogenConstants1": [
+      0.5,
+      -4,
+      -4,
+      null
+    ],
+    "deltaHydrogenConstants2": [
+      -3.6,
+      -3,
+      -3,
+      null
+    ],
+    "deltaHydrogenConstants3": [
+      2.3,
+      0,
+      0,
+      null
+    ],
+    "deltaHydrogenConstants4": [
+      0,
+      0,
+      0,
+      null
+    ],
+    "metalChelator": [
+      [
+        3.82,
+        6.97
+      ],
+      [
+        4.19,
+        1.77
+      ]
+    ],
+    "deltaMetalChelator": [
+      [
+        3.2,
+        0
+      ],
+      [
+        4.4,
+        0
+      ]
+    ],
+    "mhc": [
+      [
+        2.14,
+        0
+      ],
+      [
+        2.32,
+        0
+      ]
+    ],
+    "dmhc": [
+      [
+        1.9,
+        0
+      ],
+      [
+        2.3,
+        0
+      ]
+    ],
+    "VaC": [
+      3,
+      3
+    ],
+    "VaM": [
+      2,
+      2
+    ],
+    "chelatorNames": [
+      "ATP",
+      "Bapta"
+    ],
+    "metalNames": [
+      "Ca2",
+      "Mg2"
+    ]
+  }
+}

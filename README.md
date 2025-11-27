@@ -1,11 +1,19 @@
-# PyChelator v1.1.0: a Python-based Colab and web application for metal chelator calculations
+# PyChelator v1.2.0: a Python-based Colab and web application for metal chelator calculations
 <a href="https://doi.org/10.5281/zenodo.10674753"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.10674753.svg" alt="DOI"></a> 
 <a href="https://colab.research.google.com/github/AmruteLab/PyChelator/blob/main/PyChelator_Colab.ipynb" target="_parent">
 <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/> </a>
 [![FAIR checklist badge](https://fairsoftwarechecklist.net/badge.svg)](https://fairsoftwarechecklist.net/v0.2?f=31&a=32113&i=32322&r=123)
 
+## Publication:
+PyChelator: a Python-based Colab and web application for metal chelator calculations. 
+<br/> Spahiu, E. [![ORCID logo](https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png)](https://orcid.org/0000-0003-3251-026X), Kastrati, E. & Amrute-Nayak, M.  BMC Bioinformatics 25, 239 (2024).  [https://doi.org/10.1186/s12859-024-05858-8](https://doi.org/10.1186/s12859-024-05858-8)
+
+> [!IMPORTANT]  
+To contribute to this software, please open a [Discussion] or file an [Issue] in this Github repository.
+PyChelator: a Python-based Colab and web application for metal chelator calculations
+
 ## Description:
-Pychelator is a helpful tool for researchers, scientists, and professionals working with metal-chelator interactions who need to obtain critical data related to these complexes. PyChelator Colab offers the Python version and extensive new features of the well-established [Maxchelator](https://owamoosa.com/maxchelator/) developed by Chris Patton and colleagues <sup>[1](#1)</sup>. The JavaScript version is served in Github Pages [PyChelator Web](https://amrutelab.github.io/PyChelator/).
+Pychelator is a helpful tool for researchers, scientists, and professionals working with metal-chelator interactions who need to obtain critical data related to these complexes. While PyChelator Colab offers the Python version, the web application is based on JavaScript and is served through Github Pages. Most calculations are based on [Maxchelator](https://owamoosa.com/maxchelator/) developed by Chris Patton and colleagues <sup>[1](#1)</sup>.
 
 ## Features:
 - Calculation of Metal Chelator Complexes: PyChelator performs complex calculations involving chelators and metal ions, taking into account essential environmental parameters like pH, temperature, and ionic strength (the left panel).
@@ -21,8 +29,6 @@ Pychelator is a helpful tool for researchers, scientists, and professionals work
 - Structured Output: The output are structured for selectability. An extra option for the logarithmic transformation of free metal concentration (-log10[free]) is incorporated. The subsequent calculations are appended to the middle panel and can be conveniently downloaded as a single Excel file.
 
 - Arbitrary precision arithmetic: The built-in Python Decimal module in Colab offers user-defined precision in the decimal place calculations
-
-
 
 ## Find Free Mode - Example:
 > [!NOTE] 
@@ -64,17 +70,27 @@ Steps for manual entry of constants in PyChelator:
 11. Repeat Steps 9 and 10 for MHL and ΔMHL, respectively.
 12. Download the JSON file. You can use this file the next time using the command Upload constants under Constants dropdown.
 
-## Compatibility:
-PyChelator is designed to work with modern web browsers and supports JavaScript-based web applications. PyChelator Colab is versatile and can be integrated into various web projects related to metal-chelator interactions.
+## Compatibility - Prerequisites/Dependencies:
+PyChelator is designed to work with modern web browsers and supports JavaScript-based web applications. PyChelator Colab is versatile and can be integrated into various web projects related to metal-chelator interactions and does not need dependancies/prerequisites to be installed separately.
 
 ## Disclaimer:
 While PyChelator aims to provide accurate and useful data, users are advised to validate the results obtained from the code with experimental data and consult the experts for critical applications.
 
-## Citation:
-Spahiu, E., Kastrati, E. & Amrute-Nayak, M. PyChelator: a Python-based Colab and web application for metal chelator calculations. BMC Bioinformatics 25, 239 (2024).[https://doi.org/10.1186/s12859-024-05858-8](https://doi.org/10.1186/s12859-024-05858-8)
-  
-> [!IMPORTANT]  
-> To contribute to this software, please open a [Discussion] or file an [Issue] in this Github repository.
+## Available constants:
+
+An extensive table of constants is available in [MaxChelator Constants](https://somapp.ucdmc.ucdavis.edu/pharmacology/bers/maxchelator/xlsconstants.htm). 
+
+| Metals | Ligands |JSON File |Reference |Comments|
+| :----- | :-----  |:-----  |:----- |:-----  |
+| Ca2+, Mg2+ |EGTA, ATP |[NIST](NIST.json) | [NIST46](https://www.nist.gov/srd/nist46)  | Used in [MaxChelator](https://owamoosa.com/maxchelator/)|
+| Ca2+, Mg2+ |EGTA, ATP |[Chelator](Chelator.json)  | [Schoenmakers et al.](https://repository.ubn.ru.nl/bitstream/handle/2066/249805/249805.pdf?sequence=1) | Used in [MaxChelator](https://owamoosa.com/maxchelator/)  |
+| Ca2+, Mg2+ |EGTA, ATP |[Fabiato](Fabiato.json)   | Based on [Fujushiro et al. 1995](https://www.sciencedirect.com/science/article/pii/001048259598886I) and compared to [McGuigan et al.](https://www.sciencedirect.com/science/article/pii/S0079610717300512?via%3Dihub) | The ATP ML and MHL constants were temperature corrected to 20°C.   
+| Ca2+, Mg2+ |EGTA, ATP |[Calcium](Calcium.json)  | [Föhr et al.](https://www.sciencedirect.com/science/chapter/bookseries/abs/pii/007668799321014Y?via%3Dihub)  |   |
+| Ca2+, Mg2+ |BAPTA, ATP |[Bapta-ATP_Ca-Mg](Bapta-ATP_Ca-Mg_20C.json)  | [NIST46](https://www.nist.gov/srd/nist46)  | Bapta constants (20°C) taken from [MaxChelator](https://owamoosa.com/maxchelator/xlsconstants.htm), NIST constants of ATP were adapted from 25°C to 20°C  |
+| Zn2+, Ca2+ |EGTA, EDTA |[Zn-Ca and EDTA-EGTA](ZnCa_EDTAEGTA.json)  | [Neumaier et al.](https://onlinelibrary.wiley.com/doi/10.1111/apha.12988)  |  |
+
+If you would like to contribute constants to the repository, or report problems, please write an Issue.
+
 
 ## References:
   

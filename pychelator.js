@@ -33,67 +33,73 @@ var data = {
           [2.3, 0]
       ],
       "VaC": [3, 3],
-      "VaM": [2, 2]
+      "VaM": [2, 2],
+      "chelatorNames": ['ATP', 'EGTA'],
+      "metalNames": ['Ca²⁺', 'Mg²⁺']
   },
   "Fabiato": {
-    "Et": 20,
-    "Ei": 0.1,
-    "initialHydrogenConstants1": [6.956, 9.46],
-    "initialHydrogenConstants2": [4.101, 8.85],
-    "initialHydrogenConstants3": [0, 2.68],
-    "initialHydrogenConstants4": [0, 2],
-    "deltaHydrogenConstants1": [-0.5, -5.84],
-    "deltaHydrogenConstants2": [-4.1, -5.76],
-    "deltaHydrogenConstants3": [0, 0],
-    "deltaHydrogenConstants4": [0, 0],
-    "metalChelator": [
-        [3.993, 10.716],
-        [4.292, 5.21]
-    ],
-    "deltaMetalChelator": [
-        [-0.9, -8.38],
-        [2.6, 5.18]
-    ],
-    "mhc": [
-        [1.804, 5.33],
-        [2.698, 3.37]
-    ],
-    "dmhc": [
-        [-0.3, 0],
-        [3.4, 0]
-    ],
-    "VaC": [3, 3],
-    "VaM": [2, 2]
+      "Et": 20,
+      "Ei": 0.1,
+      "initialHydrogenConstants1": [6.956, 9.46],
+      "initialHydrogenConstants2": [4.101, 8.85],
+      "initialHydrogenConstants3": [0, 2.68],
+      "initialHydrogenConstants4": [0, 2],
+      "deltaHydrogenConstants1": [-0.5, -5.84],
+      "deltaHydrogenConstants2": [-4.1, -5.76],
+      "deltaHydrogenConstants3": [0, 0],
+      "deltaHydrogenConstants4": [0, 0],
+      "metalChelator": [
+          [3.993, 10.716],
+          [4.292, 5.21]
+      ],
+      "deltaMetalChelator": [
+          [-0.9, -8.38],
+          [2.6, 5.18]
+      ],
+      "mhc": [
+          [1.804, 5.33],
+          [2.698, 3.37]
+      ],
+      "dmhc": [
+          [-0.3, 0],
+          [3.4, 0]
+      ],
+      "VaC": [3, 3],
+      "VaM": [2, 2],
+      "chelatorNames": ['ATP', 'EGTA'],
+      "metalNames": ['Ca²⁺', 'Mg²⁺']
   },
   "Calcium": {
-    "Et": 20,
-    "Ei": 0.1,
-    "initialHydrogenConstants1": [6.495, 9.47],
-    "initialHydrogenConstants2": [4.06, 8.85],
-    "initialHydrogenConstants3": [0, 2.66],
-    "initialHydrogenConstants4": [0, 2],
-    "deltaHydrogenConstants1": [1.2, -5.8],
-    "deltaHydrogenConstants2": [0, -5.8],
-    "deltaHydrogenConstants3": [0, 0],
-    "deltaHydrogenConstants4": [0, 0],
-    "metalChelator": [
-        [3.7825, 10.97],
-        [4.0038, 5.21]
-    ],
-    "deltaMetalChelator": [
-        [-1, -8.1],
-        [4.5, 5]
-    ],
-    "mhc": [
-        [1.804,5.33],
-        [2.698,3.37]
-    ],
-    "dmhc": [
-        [0, 0],
-        [0, 0]
-    ],
-    "VaC": [3, 3],
-    "VaM": [2, 2]
+      "Et": 20,
+      "Ei": 0.1,
+      "initialHydrogenConstants1": [6.495, 9.47],
+      "initialHydrogenConstants2": [4.06, 8.85],
+      "initialHydrogenConstants3": [0, 2.66],
+      "initialHydrogenConstants4": [0, 2],
+      "deltaHydrogenConstants1": [1.2, -5.8],
+      "deltaHydrogenConstants2": [0, -5.8],
+      "deltaHydrogenConstants3": [0, 0],
+      "deltaHydrogenConstants4": [0, 0],
+      "metalChelator": [
+          [3.7825, 10.97],
+          [4.0038, 5.21]
+      ],
+      "deltaMetalChelator": [
+          [-1, -8.1],
+          [4.5, 5]
+      ],
+      "mhc": [
+          [1.804,5.33],
+          [2.698,3.37]
+      ],
+      "dmhc": [
+          [0, 0],
+          [0, 0]
+      ],
+      "VaC": [3, 3],
+      "VaM": [2, 2],
+      "chelatorNames": ['ATP', 'EGTA'],
+      "metalNames": ['Ca²⁺', 'Mg²⁺']
   },
   "Schoenmakers": {
       "Et": 37,
@@ -123,7 +129,73 @@ var data = {
           [14.2, 0]
       ],
       "VaC": [3, 3],
-      "VaM": [2, 2]
+      "VaM": [2, 2],
+      "chelatorNames": ['ATP', 'EGTA'],
+      "metalNames": ['Ca²⁺', 'Mg²⁺']
+  },
+  "Bapta-ATP_Ca-Mg": {
+      "Et": 20,
+      "Ei": 0.1,
+      "initialHydrogenConstants1": [6.47,6.372],
+      "initialHydrogenConstants2": [4.03,5.491],
+      "initialHydrogenConstants3": [1.87,3.26],
+      "initialHydrogenConstants4": [0,2.2],
+      "deltaHydrogenConstants1": [0.5,-4],
+      "deltaHydrogenConstants2": [-3.6,-3],
+      "deltaHydrogenConstants3": [2.3,0],
+      "deltaHydrogenConstants4": [0,0],
+      "metalChelator": [
+          [3.82,6.97],
+          [4.19,1.77]
+      ],
+      "deltaMetalChelator": [
+          [3.2,0],
+          [4.4,0]
+      ],
+      "mhc": [
+          [2.14,0],
+          [2.32,0]
+      ],
+      "dmhc": [
+          [1.9,0],
+          [2.3,0]
+      ],
+      "VaC": [3, 3],
+      "VaM": [2, 2],
+      "chelatorNames": ['ATP', 'BAPTA'],
+      "metalNames": ['Ca²⁺', 'Mg²⁺']
+  },
+  "Zn-Ca_EDTA-EGTA": {
+      "Et": 20,
+      "Ei": 0.1,
+      "initialHydrogenConstants1": [10.3,9.5],
+      "initialHydrogenConstants2": [6.2,8.9],
+      "initialHydrogenConstants3": [2.7,2.7],
+      "initialHydrogenConstants4": [2.0,1.9],
+      "deltaHydrogenConstants1": [-5.6,-5.9],
+      "deltaHydrogenConstants2": [-4.2,-5.8],
+      "deltaHydrogenConstants3": [1.5,-2.6],
+      "deltaHydrogenConstants4": [0.3,-0.4],
+      "metalChelator": [
+          [16.6,12.7],
+          [10.7,10.9]
+      ],
+      "deltaMetalChelator": [
+          [-4.7,-4.3],
+          [-6.1,-8.4]
+      ],
+      "mhc": [
+          [0,0],
+          [0,0]
+      ],
+      "dmhc": [
+          [0,0],
+          [0,0]
+      ],
+      "VaC": [3, 3],
+      "VaM": [2, 2],
+      "chelatorNames": ['EDTA', 'EGTA'],
+      "metalNames": ['Zn²⁺', 'Ca²⁺']
   }
 };
 
@@ -339,7 +411,6 @@ function updateConstants(openModalBool = true) {
   var selectElement = document.getElementById("constantsSource");
   var selectedOption = selectElement.value;
 
-  // Assuming you have selectedOption defined earlier
   if (selectedOption === "Custom") {
     if (openModalBool == true){
       openModal()
@@ -347,94 +418,126 @@ function updateConstants(openModalBool = true) {
     else {
       submitConstants(downloadFile=false)
     }
-
   }
   else if (selectedOption === "Upload"){
     if(openModalBool){
       openSecondModal()
     }
+    else {
+      // RELOAD constants from the uploaded file
+      if (custom_constants_copy) {
+        Et = custom_constants_copy.Et;
+        Ei = custom_constants_copy.Ei;
+        initialHydrogenConstants1 = JSON.parse(JSON.stringify(custom_constants_copy.initialHydrogenConstants1));
+        initialHydrogenConstants2 = JSON.parse(JSON.stringify(custom_constants_copy.initialHydrogenConstants2));
+        initialHydrogenConstants3 = JSON.parse(JSON.stringify(custom_constants_copy.initialHydrogenConstants3));
+        initialHydrogenConstants4 = JSON.parse(JSON.stringify(custom_constants_copy.initialHydrogenConstants4));
+        deltaHydrogenConstants1 = JSON.parse(JSON.stringify(custom_constants_copy.deltaHydrogenConstants1));
+        deltaHydrogenConstants2 = JSON.parse(JSON.stringify(custom_constants_copy.deltaHydrogenConstants2));
+        deltaHydrogenConstants3 = JSON.parse(JSON.stringify(custom_constants_copy.deltaHydrogenConstants3));
+        deltaHydrogenConstants4 = JSON.parse(JSON.stringify(custom_constants_copy.deltaHydrogenConstants4));
+        metalChelator = JSON.parse(JSON.stringify(custom_constants_copy.metalChelator));
+        deltaMetalChelator = JSON.parse(JSON.stringify(custom_constants_copy.deltaMetalChelator));
+        mhc = JSON.parse(JSON.stringify(custom_constants_copy.mhc));
+        dmhc = JSON.parse(JSON.stringify(custom_constants_copy.dmhc));
+        VaC = JSON.parse(JSON.stringify(custom_constants_copy.VaC));
+        VaM = JSON.parse(JSON.stringify(custom_constants_copy.VaM));
+        chelatorNames = JSON.parse(JSON.stringify(custom_constants_copy.chelatorNames));
+        metalNames = JSON.parse(JSON.stringify(custom_constants_copy.metalNames));
+        loadNames(); // Update UI
+      }
+    }
   }
-
   else {
-    // Load and parse the JSON file using jQuery
     if (selectedOption in data) {
       constants_copy = JSON.parse(JSON.stringify(data[selectedOption]));
+      
+      // CREATE DEEP COPIES for all arrays
       Et = constants_copy.Et;
       Ei = constants_copy.Ei;
-      initialHydrogenConstants1 = constants_copy.initialHydrogenConstants1;
-      initialHydrogenConstants2 = constants_copy.initialHydrogenConstants2;
-      initialHydrogenConstants3 = constants_copy.initialHydrogenConstants3;
-      initialHydrogenConstants4 = constants_copy.initialHydrogenConstants4;
-      deltaHydrogenConstants1 = constants_copy.deltaHydrogenConstants1;
-      deltaHydrogenConstants2 = constants_copy.deltaHydrogenConstants2;
-      deltaHydrogenConstants3 = constants_copy.deltaHydrogenConstants3;
-      deltaHydrogenConstants4 = constants_copy.deltaHydrogenConstants4;
-      metalChelator = constants_copy.metalChelator;
-      deltaMetalChelator = constants_copy.deltaMetalChelator;
-      mhc = constants_copy.mhc;
-      dmhc = constants_copy.dmhc;
-      VaC = constants_copy.VaC;
-      VaM = constants_copy.VaM;
+      initialHydrogenConstants1 = JSON.parse(JSON.stringify(constants_copy.initialHydrogenConstants1));
+      initialHydrogenConstants2 = JSON.parse(JSON.stringify(constants_copy.initialHydrogenConstants2));
+      initialHydrogenConstants3 = JSON.parse(JSON.stringify(constants_copy.initialHydrogenConstants3));
+      initialHydrogenConstants4 = JSON.parse(JSON.stringify(constants_copy.initialHydrogenConstants4));
+      deltaHydrogenConstants1 = JSON.parse(JSON.stringify(constants_copy.deltaHydrogenConstants1));
+      deltaHydrogenConstants2 = JSON.parse(JSON.stringify(constants_copy.deltaHydrogenConstants2));
+      deltaHydrogenConstants3 = JSON.parse(JSON.stringify(constants_copy.deltaHydrogenConstants3));
+      deltaHydrogenConstants4 = JSON.parse(JSON.stringify(constants_copy.deltaHydrogenConstants4));
+      metalChelator = JSON.parse(JSON.stringify(constants_copy.metalChelator));
+      deltaMetalChelator = JSON.parse(JSON.stringify(constants_copy.deltaMetalChelator));
+      mhc = JSON.parse(JSON.stringify(constants_copy.mhc));
+      dmhc = JSON.parse(JSON.stringify(constants_copy.dmhc));
+      VaC = JSON.parse(JSON.stringify(constants_copy.VaC));
+      VaM = JSON.parse(JSON.stringify(constants_copy.VaM));
+      
+      // Load chelator and metal names if they exist in the data
+      if (constants_copy.chelatorNames) {
+        chelatorNames = JSON.parse(JSON.stringify(constants_copy.chelatorNames));
+      }
+      if (constants_copy.metalNames) {
+        metalNames = JSON.parse(JSON.stringify(constants_copy.metalNames));
+      }
+      
+      loadNames(); // Update UI with new names
+    }
   }
-}
 }
 
 function readFile() {
-
   const fileInput = document.getElementById('fileInput');
   const outputDiv = document.getElementById('output');
 
   const file = fileInput.files[0];
 
   if (file) {
-      const reader = new FileReader();
+    const reader = new FileReader();
 
-      reader.onload = function (e) {
+    reader.onload = function(e) {
+      try {
         outputDiv.textContent = e.target.result;
-      };
-      reader.addEventListener("load", function () {console.log("LOADED NOW") }. false)
-
-      reader.onload = function(e) {
+        
+        console.log("LOADED NOW");
+        
         customData = JSON.parse(e.target.result);
-        console.log(customData)
+        console.log(customData);
 
-        // Assuming 'selectedOption' is a variable containing the selected option
         if (customData && customData["CUSTOM"]) {
+          // Store the original data separately
           custom_constants_copy = JSON.parse(JSON.stringify(customData["CUSTOM"]));
 
-          // Assign values
-          Et = custom_constants_copy.Et;
-          Ei = custom_constants_copy.Ei;
-          initialHydrogenConstants1 = custom_constants_copy.initialHydrogenConstants1;
-          initialHydrogenConstants2 = custom_constants_copy.initialHydrogenConstants2;
-          initialHydrogenConstants3 = custom_constants_copy.initialHydrogenConstants3;
-          initialHydrogenConstants4 = custom_constants_copy.initialHydrogenConstants4;
-          deltaHydrogenConstants1 = custom_constants_copy.deltaHydrogenConstants1;
-          deltaHydrogenConstants2 = custom_constants_copy.deltaHydrogenConstants2;
-          deltaHydrogenConstants3 = custom_constants_copy.deltaHydrogenConstants3;
-          deltaHydrogenConstants4 = custom_constants_copy.deltaHydrogenConstants4;
-          metalChelator = custom_constants_copy.metalChelator;
-          deltaMetalChelator = custom_constants_copy.deltaMetalChelator;
-          mhc = custom_constants_copy.mhc;
-          dmhc = custom_constants_copy.dmhc;
-          VaC = custom_constants_copy.VaC;
-          VaM = custom_constants_copy.VaM;
-          chelatorNames = custom_constants_copy.chelatorNames;
-          metalNames = custom_constants_copy.metalNames;
-          loadNames()
-        closeSecondModal()
-
-
-        }
-        else {
+          // Create deep copies for arrays to prevent mutation
+          Et = JSON.parse(JSON.stringify(custom_constants_copy.Et));
+          Ei = JSON.parse(JSON.stringify(custom_constants_copy.Ei));
+          initialHydrogenConstants1 = JSON.parse(JSON.stringify(custom_constants_copy.initialHydrogenConstants1));
+          initialHydrogenConstants2 = JSON.parse(JSON.stringify(custom_constants_copy.initialHydrogenConstants2));
+          initialHydrogenConstants3 = JSON.parse(JSON.stringify(custom_constants_copy.initialHydrogenConstants3));
+          initialHydrogenConstants4 = JSON.parse(JSON.stringify(custom_constants_copy.initialHydrogenConstants4));
+          deltaHydrogenConstants1 = JSON.parse(JSON.stringify(custom_constants_copy.deltaHydrogenConstants1));
+          deltaHydrogenConstants2 = JSON.parse(JSON.stringify(custom_constants_copy.deltaHydrogenConstants2));
+          deltaHydrogenConstants3 = JSON.parse(JSON.stringify(custom_constants_copy.deltaHydrogenConstants3));
+          deltaHydrogenConstants4 = JSON.parse(JSON.stringify(custom_constants_copy.deltaHydrogenConstants4));
+          metalChelator = JSON.parse(JSON.stringify(custom_constants_copy.metalChelator));
+          deltaMetalChelator = JSON.parse(JSON.stringify(custom_constants_copy.deltaMetalChelator));
+          mhc = JSON.parse(JSON.stringify(custom_constants_copy.mhc));
+          dmhc = JSON.parse(JSON.stringify(custom_constants_copy.dmhc));
+          VaC = JSON.parse(JSON.stringify(custom_constants_copy.VaC));
+          VaM = JSON.parse(JSON.stringify(custom_constants_copy.VaM));
+          chelatorNames = JSON.parse(JSON.stringify(custom_constants_copy.chelatorNames));
+          metalNames = JSON.parse(JSON.stringify(custom_constants_copy.metalNames));
+          
+          loadNames();
+          closeSecondModal();
+        } else {
           outputDiv.textContent = 'Invalid file selected. Please ensure you choose the file downloaded during the creation of your custom constants.';
         }
+      } catch (error) {
+        console.error("Error parsing file:", error);
+        outputDiv.textContent = 'Error reading file. Please ensure it is a valid JSON file.';
+      }
+    };
 
-
-      };
-
-      file_text = reader.readAsText(file);
-      showPopup()
+    reader.readAsText(file);
+    showPopup();
   } else {
     outputDiv.textContent = 'Please select a file.';
   }
@@ -486,7 +589,7 @@ function updateHydrogenConstants(constantsArray, dhArray, index, VaCValue, Lf, L
   if (VaCValue > offset) {
       const K = constantsArray[index] + 2 * (VaCValue - offset) * 1 * (Lf - Lfp);
       constantsArray[index] =
-          K - (dhArray[index] / (Math.log(10) * 8.314e-3)) * (1 / (t + 273) - 1 / (Et + 273));
+          K + (dhArray[index] / 0.00457652) * ((1 / (Et + 273)) - (1 / (t + 273))); // same as NIST, different from Chelator
   }
 }
 
@@ -527,7 +630,7 @@ function updateMetalChelatorConstants(constantsArray, deltaArray, xIndex, yIndex
   if (VaCValue > offset) {
       let K = constantsArray[yIndex][xIndex] + 2 * (VaCValue - offset) * VaMValue * (Lf - Lfp);
       constantsArray[yIndex][xIndex] =
-          K - (deltaArray[yIndex][xIndex] / (Math.log(10) * 8.314e-3)) * (1 / (t + 273) - 1 / (Et + 273));
+          K + (deltaArray[yIndex][xIndex] / 0.00457652) * ((1 / (Et + 273)) - (1 / (t + 273))); // same as NIST, different from Chelator
 
       if (constantsArray[yIndex][xIndex] < 0) {
           constantsArray[yIndex][xIndex] = 0;
@@ -1133,8 +1236,13 @@ function calculateAndDisplayTotalMetals(checkboxes, metal_names_string) {
 
 function docalc() {
   if (validateInputs()) { return}
-  var t = []; //putting together the final output
+  
+  // Clear previous results
+  // result_array = [];
+  
+  var t = [];
   var metal_names_string = [];
+  
   // Update constants
   updateConstants(openModalBool=false);
 
@@ -1155,6 +1263,7 @@ function docalc() {
 
   // Check checkboxes for different displays
   const checkboxes = getCheckboxValues();
+  console.log("Checkboxes:", checkboxes);
 
   // Calculate and display results for free metals
   calculateAndDisplayFreeMetals(checkboxes, metal_names_string);
@@ -1162,7 +1271,7 @@ function docalc() {
   // Calculate and display results for total metals
   calculateAndDisplayTotalMetals(checkboxes, metal_names_string);
 
-  // Calculate ionic contribution
+  // Calculate ionic contribution - THIS CALCULATES cmcomplex1 and cmcomplex2
   calculateIonicContribution();
 
   // Calculate chelator objects
@@ -1174,8 +1283,13 @@ function docalc() {
   // Prepare total chelator amount component
   prepareTotalChelatorAmountComponent(checkboxes);
 
+  // calculate complexes
+  var complexes_data = calculateComplexes(checkboxes);
+  console.log("Complexes data returned:", complexes_data);
+
   // Generate result array
-  generateResultArray(t, metal_names_string);
+  generateResultArray(t, metal_names_string, complexes_data);
+  console.log("Result array:", result_array);
 
   // Display output
   displayOutput(checkboxes);
@@ -1218,6 +1332,52 @@ function calculateChelatorObjectsFromConstants(t, checkboxes) {
       }
     }
   }
+}
+
+// Calculate metal ligand complexes
+function calculateComplexes(checkboxes) {
+  console.log("calculateComplexes called, showComplexes:", checkboxes.showComplexes);
+  
+  var complexes = [];
+  
+  if (!checkboxes.showComplexes) {
+    console.log("Checkbox not checked, returning empty array");
+    return complexes;
+  }
+
+  // Header row
+  complexes.push({
+    name: "Complex",
+    concentration: "Concentration"
+  });
+
+  // Calculate complexes for each metal-chelator pair
+  for (var y = 0; y < 2; y++) {
+    for (var x = 0; x < 2; x++) {
+      console.log("Checking metal", y, "chelator", x);
+      console.log("totalMetalAmount[" + y + "]:", totalMetalAmount[y]);
+      console.log("totalChelatorAmount[" + x + "]:", totalChelatorAmount[x]);
+      console.log("cmcomplex2[" + y + "][" + x + "]:", cmcomplex2[y][x]);
+      console.log("cmcomplex1[" + y + "][" + x + "]:", cmcomplex1[y][x]);
+      
+      if (totalMetalAmount[y] > 0 && totalChelatorAmount[x] > 0) {
+        var complex_ML = cmcomplex2[y][x];
+        var complex_MHL = cmcomplex1[y][x];
+        var total_complex = complex_ML + complex_MHL;
+        
+        console.log("Total complex:", total_complex);
+        
+        var complexObject = {};
+        complexObject.name = metalNames[y] + "-" + chelatorNames[x];
+        complexObject.concentration = total_complex;
+        
+        complexes.push(complexObject);
+      }
+    }
+  }
+  
+  console.log("Final complexes array:", complexes);
+  return complexes;
 }
 
 // Helper method to prepare total chelator amount component
@@ -1287,12 +1447,13 @@ function getCheckboxValues() {
     includeMetal1: document.getElementById('includeMetal1').checked,
     includeMetal2: document.getElementById("includeMetal2").checked,
     includeLigand1: document.getElementById("includeLigand1").checked,
-    includeLigand2: document.getElementById("includeLigand2").checked
+    includeLigand2: document.getElementById("includeLigand2").checked,
+    showComplexes: document.getElementById('showComplexes').checked
   };
 }
 
 // Helper method to generate result array
-function generateResultArray(t, metal_names_string) {
+function generateResultArray(t, metal_names_string, complexes_data) {
   result_array.push({
     general_info: {
       pH: pH,
@@ -1301,6 +1462,7 @@ function generateResultArray(t, metal_names_string) {
       "Ionic contribution [ABS]": cleanFloat(ionContribution),
     },
     metal_and_chelator: metal_names_string.concat(t),
+    complexes: complexes_data,
     totalChelatorAmount_component: totalChelatorAmount_component,
   });
 }
@@ -1317,19 +1479,25 @@ function displayOutput(checkboxes) {
     var divElement = document.createElement("div");
     divElement.className = "output-section";
 
-
     for (var key in result) {
       var valueElement = document.createElement("div");
 
       if (key === "metal_and_chelator") {
           var components = result[key];
-
           for (var j = 1; j < components.length; j++) {
             if ((j === 1 && checkboxes.includeMetal1) || (j === 2 && checkboxes.includeMetal2) || (j === 3 && checkboxes.includeLigand1) || (j === 4 && checkboxes.includeLigand2)) {
               var componentValueElement = createOutputRow(components[j]);
               valueElement.appendChild(componentValueElement);
             }
           }
+          divElement.appendChild(valueElement);
+      } else if (key === "complexes" && checkboxes.showComplexes && result[key].length > 0) {
+          var components = result[key];
+          for (var j = 0; j < components.length; j++) {
+            var componentValueElement = createOutputRow(components[j]);
+            valueElement.appendChild(componentValueElement);
+          }
+          divElement.appendChild(valueElement);
       } else if (key === "totalChelatorAmount_component" && (checkboxes.showKd || checkboxes.showHighLimit || checkboxes.showLowLimit)) {
           var components = result[key];
           for (var j = 0; j < components.length; j++) {
@@ -1338,12 +1506,11 @@ function displayOutput(checkboxes) {
               valueElement.appendChild(componentValueElement);
             }
           }
+          divElement.appendChild(valueElement);
       }
+    }
 
-      divElement.appendChild(section);
-      divElement.appendChild(valueElement);
-  }
-
+    divElement.appendChild(section);
     outputDiv.appendChild(divElement);
   }
 }
@@ -1402,6 +1569,7 @@ function downloadOutput() {
   showBound = document.getElementById('showBound').checked
   showPBound = document.getElementById('showPBound').checked
   showFinalpCa = document.getElementById('showFinalpCa').checked;
+  showComplexes = document.getElementById('showComplexes').checked;
   showKd = document.getElementById('showKd').checked
   showLowLimit = document.getElementById('showLowLimit').checked
   showHighLimit = document.getElementById('showHighLimit').checked
@@ -1445,20 +1613,34 @@ function downloadOutput() {
       if (showPBound) {
           row.push(cleanFloat(metal_data.pbound));
       }
+      
       if (showFinalpCa){
         if (i == 0){
          row.push(metal_data.finalpCa);
-
         }
         else {
           row.push(cleanFloat(metal_data.finalpCa));
-
         }
       }
 
-
       if (row.length > 0) {
           worksheet_data.push(row);
+      }
+    }
+
+    // Add complexes section
+    if (showComplexes && result_array[j]["complexes"] && result_array[j]["complexes"].length > 0) {
+      worksheet_data.push([]);
+      for (var i = 0; i < result_array[j]["complexes"].length; i++) {
+        var complex_data = result_array[j]["complexes"][i];
+        const row = [];
+        row.push(complex_data.name);
+        if (i == 0) {
+          row.push(complex_data.concentration);
+        } else {
+          row.push(cleanFloat(complex_data.concentration));
+        }
+        worksheet_data.push(row);
       }
     }
 
@@ -1485,15 +1667,12 @@ function downloadOutput() {
             else {
               row.push(cleanFloat(component_data["High Limit"]));
             }
-
         }
         if (row.length > 0) {
             worksheet_data.push(row);
         }
       }
-
     }
-
   }
 
   var worksheet = XLSX.utils.aoa_to_sheet(worksheet_data);

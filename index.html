@@ -17,7 +17,7 @@
         "applicationCategory": ["Web application", "Script"],
         "discussionUrl": "https://github.com/AmruteLab/PyChelator/discussions",
         "downloadUrl": "https://zenodo.org/doi/10.5281/zenodo.10674753",
-        "identifier": ["https://pubmed.ncbi.nlm.nih.gov/39014298/", "https://identifiers.org/pubmed:39014298"],
+        "identifier": ["https://pubmed.ncbi.nlm.nih.gov/39014298/", "https://identifiers.org/pubmed:39014298", "https://bio.tools/pychelator", "https://research-software-directory.org/software/pychelator"],
         "isAccessibleForFree": "True",
         "citation": {
             "@type": "CreativeWork",
@@ -167,6 +167,8 @@
               <li>Chelator by Schoenmakers et al. These constants are used in MaxChelator from <a href="https://web.math.princeton.edu/~sswang/GECI/CHELATOR_biotechniques12_870.pdf" target="_blank">Ref.</a></li>
               <li>SPECS by Fabiato. Taken from <a href="https://www.sciencedirect.com/science/article/pii/001048259598886I" target="_blank">Fujushiro et al. 1995</a> and compared to the reported constants in <a href="https://owamoosa.com/maxchelator/" target="_blank">McGuigan et al.</a>. The ATP ML and MHL constants were corrected for 20°C.</li>
               <li>Calcium by <a href="https://www.sciencedirect.com/science/article/abs/pii/007668799321014Y" target="_blank">Föhr et al. 1993</a></li>
+              <li>Bapta-ATP_Ca-Mg. Bapta constants (20°C) taken from <a href="https://somapp.ucdmc.ucdavis.edu/pharmacology/bers/maxchelator/xlsconstants.htm" target="_blank">MaxChelator</a> , NIST constants of ATP were adapted from 25°C to 20°C</li>
+              <li>Zn-Ca_EDTA-EGTA. <a href="https://onlinelibrary.wiley.com/doi/10.1111/apha.12988" target="_blank">Neumaier et al.</a></li>
             </ol>
           </div>
 
@@ -327,7 +329,7 @@
       </td>
 
     <div id="left-panel">
-        <h2>PyChelator v1.1.0 </h2>
+        <h2>PyChelator v1.2.0 </h2>
         <h3>Metal chelator calculations - <span class="doc-icon" onclick="openPopup()">&#128195; Tutorial </span></h3>
         <br>
         <div>
@@ -358,20 +360,27 @@
             <span class="input-label"> Constants:  
                 <div class="tooltip-container">
                 <div class="circle">i</div>
-                <span class="tooltiptext">Check Docs and Github repo for more</span>
+                <span class="tooltiptext">Check Tutorial and Github Readme for more info</span>
                 </div>
             </span>
 
             <select name="constantsSource" id="constantsSource" onchange="updateConstants()">
-                <option value="NIST" selected>NIST</option>
-                <option value="Schoenmakers">Chelator by Schoenmakers et al.</option>
-                <option value="Fabiato">SPECS by Fabiato</option>
-                <option value="Calcium">Calcium by Föhr et al.</option>
-                <option value="Custom">Write custom constants</option>
-                <option value="Upload"> Upload constants</option>
+                <optgroup label="Calcium - Magnesium">
+                    <option value="NIST" selected>EGTA-ATP (NIST)</option>
+                    <option value="Schoenmakers">EGTA-ATP (Schoenmakers)</option>
+                    <option value="Fabiato">EGTA-ATP (Fabiato)</option>
+                    <option value="Calcium">EGTA-ATP (Föhr)</option>
+                    <option value="Bapta-ATP_Ca-Mg">BAPTA-ATP (NIST)</option>
+                </optgroup>
+                <optgroup label="Other">
+                    <option value="Zn-Ca_EDTA-EGTA">Zn-Ca_EDTA-EGTA</option>
+                    <option value="Custom">Write custom constants</option>
+                    <option value="Upload">Upload constants</option>
+                </optgroup>
             </select>
         </div>
         <hr>
+
 <!-- Input unit section -->
         <div>
         <p>
@@ -457,6 +466,9 @@
               </label>
             </div>
             <div class="column">
+              <label>
+                <input type="checkbox" id="showComplexes"> M-L Complexes
+              </label>              
               <label>
                 <input type="checkbox" id="showPBound"> % Bound
               </label>
